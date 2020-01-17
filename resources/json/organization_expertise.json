@@ -1,0 +1,192 @@
+{
+    "column1": {
+        "Agriculture & Forestry": [
+            "Animal",
+            "Blue Growth",
+            "Rural Renaissance",
+            "Sustainable Food Security"
+        ],
+        "Aquatic Resources": [
+            "Blue Growth",
+            "Fisheries",
+            "Marine & Coast"
+        ],
+        "Audiovisual Sector & Media": [
+            "Bridging culture and audiovisual content through digital, Cross-sectoral",
+            "Culture, Literary translation",
+            "Distribution - automatic support, MEDIA",
+            "Distribution - selective support, MEDIA",
+            "Distribution - support to sales agents",
+            "MEDIA, Support for Film Education",
+            "MEDIA, TV programming",
+            "Umbrella Stands, MEDIA"
+        ],
+        "Bio-based Industries": [
+            "Create and accelerate the market-uptake of bio-based products and applications",
+            "Develop innovative bio-based products for identified market applications",
+            "Foster supply of sustainable biomass feedstock to feed both existing and new value chains",
+            "Optimise efficient processing of integrated biorefineries through R&D&I"
+        ],
+        "Biotechnology": [
+            "Future and Emerging Technologies"
+        ],
+        "Culture": [
+            "Bridging culture and audiovisual content through digital, Cross-sectoral",
+            "Creative Industries",
+            "Culture, Literary translation",
+            "Distribution - selective support, MEDIA"
+        ],
+        "E-learning": [
+            "Developing relevant digital skills and competences for the digital transformation",
+            "Improving education systems through better data analysis and foresight",
+            "Making better use of digital technology for teaching and learning"
+        ],
+        "E-Education & Training": [
+            "Adult Education",
+            "Early Childhood education and care",
+            "Higher Education",
+            "Schools",
+            "Vocational Education and Training"
+        ],
+        "Employment & Social Inclusion": [
+            "A deeper and fairer Economic and Monetary Union",
+            "A Deeper and Fairer Internal Market with a Strengthened Industrial Base",
+            "A New Boost for Jobs, Growth and Investment"
+        ],
+        "Energy": [
+            "Building a low-carbon, climate resilient future: Secure, clean and efficient energy",
+            "Next Generation Batteries",
+            "Transforming the energy sector through digitisation"
+        ],
+        "Entrepreneurship": [
+            "Creation of an Environment where Entrepreneurs can Flourish and Grow",
+            "Entrepreneurial education and training to support growth and business creation",
+            "Role models and reaching out to specific groups",
+            "Small and medium-sized enterprises (SMEs)"
+        ]
+    },
+    "column2": {
+        "Environment & Climate Action": [
+            "Climate Action, Environment, Resource Efficiency and Raw Materials"
+        ],
+        "Food & Healthy Diet": [
+            "Blue Growth",
+            "Rural Renaissance",
+            "Sustainable Food Security"
+        ],
+        "Funding Researchers": [
+            "European Research Council",
+            "Marie Skłodowska-Curie actions"
+        ],
+        "Health": [
+            "Better Health and care, economic growth and sustainable health systems",
+            "Digital transformation in Health and Care",
+            "Trusted digital solutions and Cybersecurity in Health and Care"
+        ],
+        "ICT Research & Innovation": [
+            "Big Data",
+            "Cybersecurity",
+            "Digitising and transforming European industry and services: digital innovation hubs and platforms",
+            "Information and Communication Technologies",
+            "Internet of Things",
+            "Robotics"
+        ],
+        "Innovation": [
+            "AI / AR / VR",
+            "Future and Emerging Technologies",
+            "Startups - Fast Track to Innovation"
+        ],
+        "International Cooperation": [
+            "All"
+        ],
+        "Key Enabling Technologies": [
+            "Nanotechnologies, Advanced Materials, Biotechnology and Advanced Manufacturing and Processing"
+        ],
+        "Key Enabling Materials": [
+            "Circular Economy",
+            "Construction Materials",
+            "Plastics",
+            "Raw Materials"
+        ],
+        "Partnerships with Industry / Member Sattes": [
+            "Contractual public-private partnerships",
+            "Management Services",
+            "Partners with Industry",
+            "Public-public partnerships"
+        ],
+        "Regional Development": [
+            "Strengthen economic and social cohesion"
+        ]
+    },
+    "column3": {
+        "Research & Research Infrastructures": [
+            "European Data Infrastructure",
+            "Science Cloud",
+            "Support to policy and international cooperation"
+        ],
+        "Rural / Urban Development": [
+            "Greening the Rural Economy",
+            "Smart & Competitive Rural Areas",
+            "Sustainable Urban Development",
+            "Urban Innovative Actions"
+        ],
+        "Security": [
+            "Digital Security",
+            "Protecting the infrastructures of Europe and the people in the European smart cities",
+            "Security"
+        ],
+        "SMEs": [
+            "Access to Risk Finance",
+            "For a better innovation support of SMEs",
+            "SME Instrument"
+        ],
+        "Social Sciences & Humanities": [
+            "Citizenship",
+            "Gender Equality",
+            "Governance for the future",
+            "Migration",
+            "Other Actions",
+            "Socioeconomic and cultural transformations"
+        ],
+        "Society": [
+            "Science with and for Society"
+        ],
+        "Space": [
+            "EGNSS market uptake",
+            "Space"
+        ],
+        "Sports": [],
+        "Tourism": [
+            "Development of Innovative tourism services",
+            "Development of tourism-realted ICT products",
+            "Tourism relate research",
+            "Trainings / Promoting good practices and methodologies"
+        ],
+        "Trade & Commerce": [
+            "All"
+        ],
+        "Transport": [
+            "Aeronautics",
+            "Automotive Sector",
+            "Buiding a low-carbon, climate resilient future: Green Vehicles",
+            "Digitising and Transforming European Industry and Services: Automated Road Transport",
+            "Maritime Transport",
+            "Mobility for Growth",
+            "Railway Sector"
+        ],
+        "Youth": [
+            "Connecting EU with Youth",
+            "Equality of All Genders",
+            "Inclusive Societies",
+            "Information & Constructive Dialogue",
+            "Mental Health & Wellbeing",
+            "Moving Rural Youth Forward",
+            "Quality Employment for All",
+            "Quality Learning",
+            "Youth Organisations & European Programmes"
+        ],
+        "Other": [
+            "All"
+        ]
+    }
+}
