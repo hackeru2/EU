@@ -1,5 +1,5 @@
 <template>
-  <div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+  <div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;" >
     <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
       <div id="vueProfile" class="dashboard-content-inner" style="min-height: 833px;">
         <div class="dashboard-headline margin-bottom-30">

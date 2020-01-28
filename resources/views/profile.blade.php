@@ -17,11 +17,13 @@
     <link href="{{ asset('css/profile-blue.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('css/family.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/loading.scss') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/my-spinner.css')}}">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- import JavaScript -->
 
     <title>Document</title>
-
+ 
     <script src="{{ asset('js/app.js') }}" defer></script>
      
     
@@ -29,7 +31,7 @@
 <body>
     
     <div id="app">
-        <router-view></router-view>
+    
     </div>
   
 </body>

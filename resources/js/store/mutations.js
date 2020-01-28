@@ -11,8 +11,12 @@ export default {
     setMe(state, me) {
 
         state.me = me;
+        localStorage.setItem("authUser", JSON.stringify(me));
 
+    },
+    setGroupedKeyWords(state, groupedKeyWords) {
+
+        state.groupedKeyWords = groupedKeyWords;
 
     }
-
 }

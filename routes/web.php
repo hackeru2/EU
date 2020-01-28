@@ -66,8 +66,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/big-json', 'HomeController@getBigJson') ;
+ 
 Route::get('/get-topic-details/{identifier}', 'HomeController@getTopicDetails') ;
 Route::get('/me', 'AuthController@show') ;
+Route::resource('flag', 'FlagController');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::resource('profile', 'ProfileController');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');

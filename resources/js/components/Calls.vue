@@ -1,75 +1,77 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
-    <el-main>
-      <el-row :gutter="20">
-        <el-col
-          :span="8"
-          v-for="(o, index) in calls"
-          :key="index"
-          :id="o.identifier.toLowerCase()"
-          v-waypoint="{ active: false, callback: onWaypoint , options: {} }"
-        >
-          <!-- :offset="index > 0 ? 2 : 0" -->
-          <el-card :body-style="{ padding: '5px' }" :header="o.identifier.toLowerCase()">
-            <div slot="header" class="clearfix">
-              <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button>
-              <!-- <div style="width:80%;margin: 0 auto"> -->
-              <span>{{o.title}}</span>
-              <span style="color:orange">{{o.identifier.toLowerCase()}}</span>
+  <!-- <h2>Calls Page</h2> -->
 
-              <!-- </div> -->
-            </div>
-            <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image"
-            />
-            <div style="padding: 14px;">
-              <div>
-                budgetOverviewJSONItem :
-                <el-tag v-for="(tag,i_tag ) in o.tags" :key="i_tag">{{tag}}</el-tag>
-              </div>
-              <span>Yummy hamburger</span>
-              <div class="bottom clearfix">
-                <!-- <time class="time">{{ currentDate }}</time> -->
-                <span>
-                  <template>
-                    <Budget
-                      v-if="topicDetails"
-                      :budget="topicDetails"
-                      :id="o.identifier.toLowerCase()"
-                    />
-                  </template>
-                </span>
+  <el-main v-load="load">
+    <el-row :gutter="20">
+      <el-col
+        :span="8"
+        v-for="(o, index) in calls"
+        :key="index"
+        :id="o.identifier.toLowerCase()"
+        v-waypoint="{ active: false, callback: onWaypoint , options: {} }"
+      >
+        <!-- :offset="index > 0 ? 2 : 0" -->
 
-                <el-button type="outline" class="button" style="background-color: #d4dcff;">
-                  <router-link :to="`calls/${o.identifier.toLowerCase()}`">Show</router-link>
-                </el-button>
-              </div>
+        <el-card :body-style="{ padding: '5px' }" :header="o.identifier.toLowerCase()">
+          <div slot="header" class="clearfix">
+            <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button>
+            <!-- <div style="width:80%;margin: 0 auto"> -->
+            <span>{{o.title}}</span>
+            <span style="color:orange">{{o.identifier.toLowerCase()}}</span>
+
+            <!-- </div> -->
+          </div>
+          <img
+            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+            class="image"
+          />
+          <div style="padding: 14px;">
+            <div>
+              <!-- budgetOverviewJSONItem : -->
+              <el-tag v-for="(tag,i_tag ) in o.tags" :key="i_tag">{{tag}}</el-tag>
             </div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
+            <span>Yummy hamburger</span>
+            <div class="bottom clearfix">
+              <!-- <time class="time">{{ currentDate }}</time> -->
+              <span>
+                <template>
+                  <Budget
+                    v-if="topicDetails"
+                    :budget="topicDetails"
+                    :id="o.identifier.toLowerCase()"
+                  />
+                </template>
+              </span>
+
+              <el-button type="outline" class="button" style="background-color: #d4dcff;">
+                <router-link :to="`calls/${o.identifier.toLowerCase()}`">Show</router-link>
+              </el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+  </el-main>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import Budget from "./Budget";
 
 export default {
   components: { Budget },
   data() {
     return {
+      load: false,
+      callTitles: [],
       keywords: [],
       tags: [],
-      // flags: [],
       indetifiers: [],
       budgets: {},
 
       currentDate: new Date(),
-      calls: []
+      calls: [],
+      flags: []
     };
   },
   created() {
@@ -86,12 +88,37 @@ export default {
       });
     });
   },
-
+  updated() {
+    this.setGroupedKeyWords(this.kWordsGrouped);
+  },
   computed: {
+    callTitleUnique() {
+      return this.callTitles.filter(
+        (value, index, self) => self.indexOf(value) === index
+      );
+    },
+
     uniqueKeywords() {
       try {
         return [].concat
           .apply([], this.keywords)
+          .filter(a => a)
+          .map(a => a.split(","))
+          .flat()
+          .map(a => a.trim());
+      } catch ($e) {
+        throw $e;
+      }
+    },
+    uniqueflags2() {
+      return this.uniqueflags.filter(
+        (value, index, self) => self.indexOf(value) === index
+      );
+    },
+    uniqueflags() {
+      try {
+        return [].concat
+          .apply([], this.flags)
           .filter(a => a)
           .map(a => a.split(","))
           .flat()
@@ -129,6 +156,7 @@ export default {
     getTD(t_details) {
       console.log(t_details);
     },
+    ...mapMutations(["setGroupedKeyWords"]),
     ...mapActions(["getTopicDetails"]),
     async onWaypoint(e) {
       //console.log({ e });
@@ -143,11 +171,14 @@ export default {
       // )[0][0].budgetYearMap[2020];
     },
     async getBigJson() {
+      this.load = true;
       let { data: bigJson } = await axios.get("big-json");
+      this.load = false;
       //console.log(bigJson);
       bigJson = bigJson
         .filter(c => {
-          // this.flags.push(c.flags);
+          this.flags.push(c.flags);
+          // this.callTitles.push(c.callTitle);
           return (
             c.status.abbreviation != "Closed" &&
             c.status.description != "Closed"
@@ -159,8 +190,8 @@ export default {
           c.score = 0;
           this.keywords.push(c.keywords);
 
-          this.tags.push(c.tags);
-          if (c.tags) if (c.tags.includes("open innovation")) c.score += 5;
+          this.tags.push(c.tags); //
+          if (c.tags) if (c.tags.includes("integration")) c.score += 5;
 
           return c;
         });

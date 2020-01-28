@@ -14,6 +14,14 @@ export default {
         } catch (error) {
 
         }
+    },
+    authUser(state, getters) {
+
+        try {
+            return state.me ? state.me : JSON.parse(localStorage.getItem("authUser"))
+        } catch (error) {
+
+        }
     }
 
 

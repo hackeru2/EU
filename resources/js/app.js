@@ -8,12 +8,65 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale';
+import lang from 'element-ui/lib/locale/lang/en';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueRouter from 'vue-router';
 import VueWaypoint from 'vue-waypoint';
 import Vuex from "vuex";
-import routes from './routes';
+import routes from "./routes";
 import store from './store';
+
+
+// configure language
+locale.use(lang)
+
+
+Vue.config.productionTip = false
+let vMyDirective = {}
+vMyDirective.install = function install(_Vue) {
+    let _uid = 'vue-directive-loading' + Date.now().toString('16')
+    _Vue.directive('load', {
+        inserted: function (el, binding) {
+            console.log({ el, binding })
+            let spinner = document.createElement('div')
+            spinner.id = _uid
+            spinner.innerHTML = '<div class="my-spinner"></div>'
+            spinner.style.display = binding.value ? 'block' : 'none'
+            spinner.style['background-color'] = '#335c5e60';
+            // spinner.style.color = 'red'
+            // spinner.style.left = "49%";
+            spinner.style.zIndex = 149;
+            spinner.style['padding-top'] = "20%";
+            // spinner.style.top = 0
+            spinner.style.width = '100%'
+            spinner.style.height = '100%'
+            // spinner.style.left = 0
+            // spinner.style.right = 0
+            // spinner.style.bottom = 0
+            // spinner.top = 0
+            spinner.style.position = 'absolute'
+            // el.childNodes.forEach((item) => {
+            //     item.style.display = binding.value ? 'none' : ''
+            // })
+            el.appendChild(spinner)
+        },
+        update: function (el, binding, vnode) {
+            let spinner = document.getElementById(_uid)
+            spinner.style.display = binding.value ? 'block' : 'none'
+            // el.childNodes.forEach((item) => {
+            //     if (item.id === _uid) return
+            //     item.style.display = binding.value ? 'none' : ''
+            // })
+        }
+    })
+}
+
+Vue.use(vMyDirective)
+
+
+
+
 
 // Waypoint plugin
 Vue.use(VueWaypoint)
@@ -45,6 +98,7 @@ const app = new Vue({
     el: '#app',
 
     router: new VueRouter(routes),
-    store: new Vuex.Store(store)
+    store: new Vuex.Store(store),
     // template: '<ExampleComponent/>'
+    template: '<App />'
 });

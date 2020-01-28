@@ -11,17 +11,18 @@
           style="margin-top:5px"
         >
           <div slot="header" class="clearfix">
-            <h3>{{title}}</h3>
+            <h3>{{title}} {{typeof info}}</h3>
           </div>
           <div v-if="typeof info == 'object'">
-            <p v-for="(infoItem, info_i) in info" :key="info_i">
+            <div v-for="(infoItem, info_i) in info" :key="info_i">
               <b>{{info_i}}</b>
-              .{{infoItem}}
-            </p>
+              .
+              <div v-html="setHtml(infoItem)"></div>
+            </div>
           </div>
           <div
             v-else-if="
-          title !='supportInfo'  &&  title !='description' && title != 'conditions' "
+          title !='supportInfo' && title !='sepTemplate'  &&  title !='description' && title != 'conditions' "
           >{{ info}}</div>
           <div v-else>
             <span v-html="info"></span>
@@ -56,7 +57,19 @@ export default {
     console.log(this.topicDetails[this.$route.params.id]);
     console.log("mounted-end");
   },
-  methods: {},
+  methods: {
+    setHtml(datas) {
+      let htmlArr = "<div>";
+      if (typeof datas == "object") {
+        for (let data in datas) {
+          htmlArr = "<span style='color:blue'>" + data + " : </span>";
+          htmlArr += `${this.setHtml(datas[data])}</div>`;
+        }
+        htmlArr += `</div>`;
+        return htmlArr;
+      } else return datas;
+    }
+  },
   computed: {
     ...mapState(["topicDetails"])
   }
