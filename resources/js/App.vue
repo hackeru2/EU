@@ -59,9 +59,20 @@
 
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
+          <div class="demo-fit" style="float:left">
+            <div class="block" v-for="fit in fits" :key="fit">
+              <!-- <span class="title">{{ fit }}</span> -->
+              <el-avatar shape="square" :size="60" :fit="fit" :src="url"></el-avatar>
+            </div>
+          </div>
           <div style="float:left">
             <router-link to="/keywords">keywords</router-link>
+            <el-divider direction="vertical"></el-divider>
+
             <router-link to="/calls">Calls</router-link>
+            <el-divider direction="vertical"></el-divider>
+
+            <router-link to="/profile">Profile</router-link>
           </div>
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
@@ -95,7 +106,8 @@
 </style>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   data() {
     const item = {
@@ -104,11 +116,24 @@ export default {
       address: "No. 189, Grove St, Los Angeles"
     };
     return {
-      tableData: Array(20).fill(item)
+      tableData: Array(20).fill(item),
+      fits: ["fill"],
+      url:
+        "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
     };
   },
+  beforeCreate() {
+    this.$store.dispatch("meAct");
+  },
+  created() {},
   computed: {
     ...mapGetters(["authUser"])
-  }
+  },
+  methods: { ...mapActions(["meAct"]) }
 };
 </script>
+<style>
+.el-avatar {
+  width: 88px !important;
+}
+</style>

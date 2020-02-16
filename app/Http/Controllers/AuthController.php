@@ -46,7 +46,9 @@ class AuthController extends Controller
      */
     public function show() //User $user
     {
-        return auth()->user()->load('profile');
+
+        return  auth()->user()
+        ->where('id' , auth()->user()->id)->get()->last();
     }
 
     /**

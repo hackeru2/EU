@@ -6,18 +6,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
     <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/profile-cropper.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/profile-cropper.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap-grid.css') }}" rel="stylesheet">
     <link href="{{ asset('css/icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile-blue.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/family.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/loading.scss') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/profile.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/family.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/loading.scss') }}" rel="stylesheet">  
     <link rel="stylesheet" href="{{ asset('css/my-spinner.css')}}">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- import JavaScript -->

@@ -1,71 +1,77 @@
 <template>
-  <!-- <h2>Calls Page</h2> -->
+  <el-row :gutter="20" v-load="load">
+    <h2>Calls Page</h2>
+    {{meKW}}
+    <el-col :span="8" v-for="(o, index) in calls" :key="index" :id="o.identifier.toLowerCase()">
+      <!-- :offset="index > 0 ? 2 : 0" -->
 
-  <el-main v-load="load">
-    <el-row :gutter="20">
-      <el-col
-        :span="8"
-        v-for="(o, index) in calls"
-        :key="index"
-        :id="o.identifier.toLowerCase()"
-        v-waypoint="{ active: false, callback: onWaypoint , options: {} }"
-      >
-        <!-- :offset="index > 0 ? 2 : 0" -->
+      <el-card :body-style="{ padding: '5px' }" :header="o.identifier.toLowerCase()">
+        <div slot="header" class="clearfix">
+          <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button>
+          <!-- <div style="width:80%;margin: 0 auto"> -->
+          <span>{{o.title}}</span>
+          <span style="color:orange">{{o.identifier.toLowerCase()}}</span>
 
-        <el-card :body-style="{ padding: '5px' }" :header="o.identifier.toLowerCase()">
-          <div slot="header" class="clearfix">
-            <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button>
-            <!-- <div style="width:80%;margin: 0 auto"> -->
-            <span>{{o.title}}</span>
-            <span style="color:orange">{{o.identifier.toLowerCase()}}</span>
-
-            <!-- </div> -->
+          <!-- </div> -->
+        </div>
+        <img
+          src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+          class="image"
+        />
+        <div style="padding: 14px;">
+          <div>
+            <!-- budgetOverviewJSONItem : -->
+            <!-- <el-tag v-for="(tag,i_tag ) in o.tags" :key="i_tag">{{tag}}</el-tag> -->
+            <el-tag
+              v-for="(kw,i_kw ) in o.keywords"
+              :effect="meKW.includes(kw) ? 'dark' : 'light'"
+              :key="i_kw"
+            >{{kw}}</el-tag>
           </div>
-          <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-            class="image"
-          />
-          <div style="padding: 14px;">
-            <div>
-              <!-- budgetOverviewJSONItem : -->
-              <el-tag v-for="(tag,i_tag ) in o.tags" :key="i_tag">{{tag}}</el-tag>
-            </div>
-            <span>Yummy hamburger</span>
-            <div class="bottom clearfix">
-              <!-- <time class="time">{{ currentDate }}</time> -->
-              <span>
-                <template>
-                  <Budget
-                    v-if="topicDetails"
-                    :budget="topicDetails"
-                    :id="o.identifier.toLowerCase()"
-                  />
-                </template>
-              </span>
+          <span>Yummy hamburger</span>
+          <div class="bottom clearfix">
+            <!-- <time class="time">{{ currentDate }}</time> -->
+            <span>
+              <template>
+                <el-alert class="score-style" :title="`score : ${o.score}`" type="success"></el-alert>
+                <Budget
+                  v-if="topicDetails"
+                  :budget="topicDetails"
+                  :id="o.identifier.toLowerCase()"
+                />
+              </template>
+            </span>
 
-              <el-button type="outline" class="button" style="background-color: #d4dcff;">
-                <router-link :to="`calls/${o.identifier.toLowerCase()}`">Show</router-link>
-              </el-button>
-            </div>
+            <el-button type="outline" class="button" style="background-color: #d4dcff;">
+              <router-link :to="`calls/${o.identifier.toLowerCase()}`">Show</router-link>
+            </el-button>
           </div>
-        </el-card>
-      </el-col>
-    </el-row>
-  </el-main>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from "vuex";
+import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 import Budget from "./Budget";
 
 export default {
   components: { Budget },
   data() {
     return {
+      meKW: [],
+      intersectionOptions: {
+        root: null,
+        rootMargin: "0px 0px 0px 0px",
+        thresholds: [0]
+      },
       load: false,
       callTitles: [],
       keywords: [],
       tags: [],
+      flagsLength: [],
+      keywordsLength: [],
       indetifiers: [],
       budgets: {},
 
@@ -74,10 +80,16 @@ export default {
       flags: []
     };
   },
-  created() {
+  async created() {
     if (localStorage.calls && 1 == 2)
       return (this.calls = JSON.parse(localStorage.getItem("calls")));
-    else this.getBigJson();
+    else {
+      this.meKW = await JSON.parse(
+        localStorage.getItem("authUser")
+      ).keywords.map(a => a.description);
+
+      this.getBigJson(this.meKW);
+    }
   },
 
   mounted() {
@@ -92,24 +104,33 @@ export default {
     this.setGroupedKeyWords(this.kWordsGrouped);
   },
   computed: {
+    ...mapGetters(["authUser"]),
+    flagsLengthFilterd() {
+      return this.flagsLength.filter(fl => fl.flagsLength);
+    },
+    meFlags() {
+      try {
+        return this.me.flags.map(f => f.abbreviation);
+      } catch (e) {}
+    },
     callTitleUnique() {
       return this.callTitles.filter(
         (value, index, self) => self.indexOf(value) === index
       );
     },
 
-    uniqueKeywords() {
-      try {
-        return [].concat
-          .apply([], this.keywords)
-          .filter(a => a)
-          .map(a => a.split(","))
-          .flat()
-          .map(a => a.trim());
-      } catch ($e) {
-        throw $e;
-      }
-    },
+    // uniqueKeywords() {
+    //   try {
+    //     return [].concat
+    //       .apply([], this.keywords)
+    //       .filter(a => a)
+    //       .map(a => a.split(","))
+    //       .flat()
+    //       .map(a => a.trim());
+    //   } catch ($e) {
+    //     throw $e;
+    //   }
+    // },
     uniqueflags2() {
       return this.uniqueflags.filter(
         (value, index, self) => self.indexOf(value) === index
@@ -127,29 +148,29 @@ export default {
         throw $e;
       }
     },
-    kWordsGrouped() {
-      try {
-        return _.groupBy(
-          this.uniqueKeywords.map(keyWords => {
-            return { title: keyWords.split(" ")[0], keyWords };
-          }),
-          "title"
-        );
-      } catch ($e) {
-        throw $e;
-      }
-    },
-    KeywordsGroupedLength() {
-      try {
-        return Object.keys(this.kWordsGrouped).length;
-      } catch (error) {}
-    },
+    // kWordsGrouped() {
+    //   try {
+    //     return _.groupBy(
+    //       this.uniqueKeywords.map(keyWords => {
+    //         return { title: keyWords.split(" ")[0], keyWords };
+    //       }),
+    //       "title"
+    //     );
+    //   } catch ($e) {
+    //     throw $e;
+    //   }
+    // },
+    // KeywordsGroupedLength() {
+    //   try {
+    //     return Object.keys(this.kWordsGrouped).length;
+    //   } catch (error) {}
+    // },
     topicDetailsValues() {
       try {
         return this.topicDetails;
       } catch (error) {}
     },
-    ...mapState(["topicDetails"])
+    ...mapState(["topicDetails", "me", "meKeywords"])
   },
 
   methods: {
@@ -158,50 +179,61 @@ export default {
     },
     ...mapMutations(["setGroupedKeyWords"]),
     ...mapActions(["getTopicDetails"]),
-    async onWaypoint(e) {
-      //console.log({ e });
-      let t_details = await this.getTopicDetails(e.el.id);
 
-      // this.budgets[e.el.id] = Math.random(1000);
-      // console.log({ t_details });
-      // this.calls.find(a => a.identifier.toLowerCase() == e.el.id).t_details =
-      //   t_details[e.el.id];
-      // ).budget = Object.values(
-      //   this.topicDetails[e.el.id].budgetOverviewJSONItem.budgetTopicActionMap
-      // )[0][0].budgetYearMap[2020];
-    },
-    async getBigJson() {
+    async getBigJson(meKW) {
       this.load = true;
-      let { data: bigJson } = await axios.get("big-json");
-      this.load = false;
-      //console.log(bigJson);
-      bigJson = bigJson
-        .filter(c => {
-          this.flags.push(c.flags);
-          // this.callTitles.push(c.callTitle);
-          return (
-            c.status.abbreviation != "Closed" &&
-            c.status.description != "Closed"
-          );
-        })
-        .map(c => {
-          console.log({ c });
-          this.indetifiers.push(c.identifier.toLowerCase());
-          c.score = 0;
-          this.keywords.push(c.keywords);
+      try {
+        let { data: bigJson } = await axios.get("big-json");
 
-          this.tags.push(c.tags); //
-          if (c.tags) if (c.tags.includes("integration")) c.score += 5;
+        this.load = false;
+        //console.log(bigJson);
+        bigJson = bigJson
+          .filter(c => {
+            this.flags.push(c.flags);
+            // this.callTitles.push(c.callTitle);
+            return (
+              c.status.abbreviation != "Closed" &&
+              c.status.description != "Closed"
+            );
+          })
+          .map(c => {
+            console.log({ c });
+            this.indetifiers.push(c.identifier.toLowerCase());
+            c.score = 0;
+            this.keywords.push(c.keywords);
 
-          return c;
-        });
-      bigJson = bigJson.filter(function(a) {
-        return a.score;
-      });
-      console.log({ indetifiers: this.indetifiers });
+            this.tags.push(c.tags); //
+            //if (c.tags) if (c.tags.includes("integration")) c.score += 5;
+            //let intersection = _.intersection(c.flags, this.meFlags);
+            let intersection = _.intersection(c.keywords, meKW);
+            console.log({ c_keywords: c.keywords, meKW });
+            // if (intersection)
+            //   this.flagsLength.push({
+            //     flags: c.flags,
+            //     flagsLength: intersection.length
+            //   });
+            if (intersection)
+              this.keywords.push({
+                keywords: c.flags,
+                keywordsLength: intersection.length
+              });
+            try {
+              c.score = intersection.length * 5;
+            } catch (error) {
+              c.score = 0;
+            }
+            return c;
+          });
+        // bigJson = bigJson.filter(function(a) {
+        //   return a.score;
+        // });
+        console.log({ indetifiers: this.indetifiers });
 
-      localStorage.setItem("calls", JSON.stringify(bigJson));
-      this.calls = bigJson;
+        localStorage.setItem("calls", JSON.stringify(bigJson));
+        this.calls = _.orderBy(bigJson, "score", "desc");
+      } catch (error) {
+        window.location.reload();
+      }
     }
   }
 };
@@ -272,5 +304,9 @@ body > .el-container {
 
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
+}
+.score-style {
+  width: 120px;
+  float: left;
 }
 </style>

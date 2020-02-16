@@ -42,7 +42,18 @@ export default {
         let { data: me
         } = await axios.get(`me`);
         commit('setMe', me);
-    }
 
+        commit('setMeTopics', me.profile.topics);
+
+
+    },
+    async keywordsAct({ state, getters, commit, dispatch }, text) {
+
+        let { data: keywords
+        } = await axios.get(`keywords`);
+        await commit('setKeywords', keywords);
+        await commit('setMeKeywords', getters.authUser.profile.keywords_ccm2_Ids);
+
+    }
 
 }

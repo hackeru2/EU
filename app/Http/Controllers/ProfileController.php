@@ -70,6 +70,7 @@ class ProfileController extends Controller
     public function update(Request $request  ) //Profile $profile
     {
         //
+        return $request->all();
         $profile  = auth()->user()->profile()->first();
         $experties =  collect($request->experties)->filter();
         $profile->experties = $experties;

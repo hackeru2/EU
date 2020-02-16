@@ -69,6 +69,19 @@ class UserController extends Controller
      */
     public function update(Request $request  ) //User $user
     {
+
+            $user =  auth()->user();
+        
+        
+            $user->flags()->sync($request->flags);
+            $user->profile->keywords_ccm2_Ids =  $request->keywords;
+            $user->profile->topics =  $request->topics;
+            $user->profile->save();
+        return auth()->user()->with('flags','profile')
+        ->where('id' , auth()->user()->id)
+        ->get()->last();
+        
+        return $request->all();
         //
         // $profile  = auth()->user()->profile()->first();
         // $experties =  collect($request->experties)->filter();

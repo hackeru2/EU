@@ -1,7 +1,7 @@
 <template>
   <el-card>
     <el-row>
-      <el-checkbox-group v-model="checkboxGroup1">
+      <el-checkbox-group v-model="cityData" @change="$emit('cities',cityData)">
         <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
       </el-checkbox-group>
     </el-row>
@@ -19,28 +19,27 @@ const cityOptions = [
   "Consumers",
   "Culture and media",
   "Customs",
-  "iety",
-  "e euro",
+  "Digital economy and society",
+  "Economy, finance and the euro",
   "Education and training",
-  "ffairs",
+  "Employment and social affairs",
   "Energy",
   "Environment",
-  "EU enlargement",
-  "policy",
   "Food safety",
-  "urity policy",
+  "Foreign affairs and security policy",
   "Fraud prevention",
   "Home affairs",
-  "vil protection",
+  "Humanitarian aid and civil protection",
   "Institutional affairs",
-  "on and development",
-  "rights",
-  "sheries",
+  "International cooperation and development",
+  "Justice and fundamental rights",
+  "Maritime affairs and fisheries",
   "Migration and asylum",
   "Public health",
   "Regional policy",
   "Research and innovation",
   "Single market",
+  "Society",
   "Sport",
   "Statistics",
   "Taxation",
@@ -52,10 +51,10 @@ const cityOptions = [
 export default {
   data() {
     return {
-      checkboxGroup1: ["Shanghai"],
-      checkboxGroup2: ["Shanghai"],
-      checkboxGroup3: ["Shanghai"],
-      checkboxGroup4: ["Shanghai"],
+      cityData: [""],
+      // checkboxGroup2: ["Shanghai"],
+      // checkboxGroup3: ["Shanghai"],
+      // checkboxGroup4: ["Shanghai"],
       cities: cityOptions
     };
   }

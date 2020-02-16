@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      <router-link to="calls">Calls</router-link>
-    </div>
     <h1>Keywords</h1>
     <el-card v-for="(item,title ,index) in groupedKeyWords" :key="index">
       <h3>{{index}}.{{ title}}</h3>

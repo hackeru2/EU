@@ -61,6 +61,7 @@ Route::get('json' ,function ( )
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/try', 'AuthController@show') ;
 
  
 
@@ -70,8 +71,10 @@ Route::get('/big-json', 'HomeController@getBigJson') ;
 Route::get('/get-topic-details/{identifier}', 'HomeController@getTopicDetails') ;
 Route::get('/me', 'AuthController@show') ;
 Route::resource('flag', 'FlagController');
+Route::resource('keywords', 'KeywordController');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::resource('profile', 'ProfileController');
+Route::resource('user', 'UserController');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::get('calls/{any?}', 'HomeController@profile')->name('profile');
 //Route::get('/profile', 'HomeController@profile')->name('profile');

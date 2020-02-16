@@ -10,12 +10,12 @@ export default {
   data() {
     return { budg: "" };
   },
-  async created() {
-    console.log("created");
-    let myID = await this.getTopicDetails(this.id);
-    console.log(myID);
-    this.budg = myID.ccm2Id;
-  },
+  // async created() {
+  //   console.log("created");
+  //   let myID = await this.getTopicDetails(this.id);
+  //   console.log(myID);
+  //   this.budg = myID.ccm2Id;
+  // },
   //   updated: function() {
   //     this.$nextTick(function() {
   //       console.log("123");

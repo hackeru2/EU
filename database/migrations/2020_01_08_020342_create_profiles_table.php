@@ -22,7 +22,8 @@ class CreateProfilesTable extends Migration
             $table->timestamps();
             // $table->string('name');
             $table->text('experties');
-            $table->string('keywords');
+            //$table->string('keywords');
+            $table->string('description');
             $table->bigInteger('user_id')->unsigned();
             // $table->string('email')->unique();
             $table->foreign('user_id')
