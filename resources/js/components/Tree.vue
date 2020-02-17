@@ -38,7 +38,8 @@ export default {
 
       this.$emit("isTopicActive", "");
       setTimeout(() => {
-        this.setCheckedNodes();
+        //this.setCheckedNodes();
+        this.sck();
       }, 500);
     },
     filterText(val) {
@@ -48,8 +49,8 @@ export default {
 
   methods: {
     sck() {
-      console.log("31049876");
-      this.$refs.tree.setCheckedKeys(["31049876"]);
+      console.log(this.meKeywords.map(a => a.ccm2_Id));
+      this.$refs.tree.setCheckedKeys(this.meKeywords.map(a => a.ccm2_Id));
     },
     setCheckedNodes() {
       console.log("after 500");

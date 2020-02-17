@@ -165,20 +165,20 @@ export default {
     //     return Object.keys(this.kWordsGrouped).length;
     //   } catch (error) {}
     // },
-    topicDetailsValues() {
-      try {
-        return this.topicDetails;
-      } catch (error) {}
-    },
+    // topicDetailsValues() {
+    //   try {
+    //     return this.topicDetails;
+    //   } catch (error) {}
+    // },
     ...mapState(["topicDetails", "me", "meKeywords"])
   },
 
   methods: {
-    getTD(t_details) {
-      console.log(t_details);
-    },
+    // getTD(t_details) {
+    //   console.log(t_details);
+    // },
     ...mapMutations(["setGroupedKeyWords"]),
-    ...mapActions(["getTopicDetails"]),
+    //...mapActions(["getTopicDetails"]),
 
     async getBigJson(meKW) {
       this.load = true;

@@ -12,12 +12,14 @@ import locale from 'element-ui/lib/locale';
 import lang from 'element-ui/lib/locale/lang/en';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueDragResize from 'vue-drag-resize';
+import VueObserveVisibility from 'vue-observe-visibility';
 import VueRouter from 'vue-router';
 import VueWaypoint from 'vue-waypoint';
 import Vuex from "vuex";
 import routes from "./routes";
 import store from './store';
 
+Vue.use(VueObserveVisibility)
 
 // configure language
 locale.use(lang)

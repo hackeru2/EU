@@ -1,5 +1,8 @@
 <template>
-  <el-button>BUDGET COMP - {{budg}}</el-button>
+  <el-button
+    :icon="!budg ? 'el-icon-loading' : ''"
+    v-observe-visibility="visibilityChanged"
+  >BUDGET COMP - {{budg}}</el-button>
 </template>
 
 <script>
@@ -31,6 +34,13 @@ export default {
     }
   },
   methods: {
+    async visibilityChanged(e) {
+      if (!e) return console.log(e);
+      let myID = await this.getTopicDetails(this.id);
+      this.budg = myID.ccm2Id;
+      //this.budg = this.topicDetails[this.id].ccm2Id;
+      //console.log(this.topicDetails[this.id].ccm2Id);
+    },
     ...mapActions(["getTopicDetails"])
   }
   //   mounted() {

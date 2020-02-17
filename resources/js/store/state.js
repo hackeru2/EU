@@ -24,6 +24,7 @@ export default {
         { name: "Education and training", active: false },
         { name: "Employment and social affairs", active: false },
         { name: "Energy", active: false },
+        { name: "Engineering", active: false }, //NEW!!
         { name: "Environment", active: false },
         { name: "Food safety", active: false },
         { name: "Foreign affairs and security policy", active: false },

@@ -23,7 +23,7 @@
 
 <script>
 //import { mapMutations } from "vuex";
-import kpt from "../../json/portal_keyword_tree.json";
+//import kpt from "../../json/portal_keyword_tree.json";
 import { mapActions, mapState, mapMutations, mapGetters } from "vuex";
 export default {
   name: "Topics",
@@ -94,18 +94,18 @@ export default {
     ...mapState(["keywords", "treeName", "topics"])
   },
   async created() {
-    console.log({ kpt });
+    //console.log({ kpt });
     this.loading = true;
     await this.keywordsAct();
     this.loading = false;
   },
-  async mounted() {
-    await this.bigArrayFlat(kpt);
-    // console.log(kpt);
-    setTimeout(() => {
-      //  this.authUserTopics();
-    }, 500);
-  },
+  //async mounted() {
+  //await this.bigArrayFlat(kpt);
+  // console.log(kpt);
+  //  setTimeout(() => {
+  //  this.authUserTopics();
+  // }, 500);
+  //},
   methods: {
     authUserTopics() {
       console.log(
@@ -150,7 +150,7 @@ export default {
               let name = kw.name;
               return {
                 ccm2_Id,
-                id: ccm2_Id,
+                id: Number(ccm2_Id),
                 name,
                 description: kw.description,
                 label: name,
