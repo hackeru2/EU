@@ -2,6 +2,9 @@
   <el-card>
     <div v-if="treeName" slot="header" class="clearfix" style="text-align:left">
       <span>{{treeName}}</span>
+      <transition name="el-fade-in-linear">
+        <i v-if="loading" class="el-icon-loading"></i>
+      </transition>
       <el-button
         style="text-align:eft;float: right; padding: 3px 0"
         type="text"
@@ -35,11 +38,12 @@ export default {
   watch: {
     treeNameCmp(nv) {
       //console.log(nv);
-
+      this.loading = true;
       this.$emit("isTopicActive", "");
       setTimeout(() => {
         //this.setCheckedNodes();
         this.sck();
+        this.loading = false;
       }, 500);
     },
     filterText(val) {
@@ -49,8 +53,10 @@ export default {
 
   methods: {
     sck() {
-      console.log(this.meKeywords.map(a => a.ccm2_Id));
-      this.$refs.tree.setCheckedKeys(this.meKeywords.map(a => a.ccm2_Id));
+      let ccm2_Ids = this.meKeywords.map(a => a.ccm2_Id);
+      this.$refs.tree.setCheckedKeys(ccm2_Ids);
+      let GCN = this.$refs.tree.getCheckedNodes();
+      if (GCN.length) this.$emit("isTopicActive", true);
     },
     setCheckedNodes() {
       console.log("after 500");
@@ -66,9 +72,23 @@ export default {
     ]),
     handleCheckChange(data, checked, indeterminate) {
       console.log(data, checked, indeterminate);
+
       let nodes = this.$refs.tree.getCheckedNodes();
-      if (!checked) this.deleteFromMeKyWords(data);
-      else this.pushMeKyWords(data);
+
+      if (!checked && !indeterminate) {
+        console.log(data.name);
+        if (data.children && data.children.length)
+          data.children.forEach(dataChildren => {
+            this.deleteFromMeKyWords(dataChildren);
+          });
+        this.deleteFromMeKyWords(data);
+      } else if (checked) {
+        if (data.children && data.children.length)
+          data.children.forEach(dataChildren => {
+            this.pushMeKyWords(dataChildren);
+          });
+        this.pushMeKyWords(data);
+      }
       this.$emit("isTopicActive", Boolean(nodes.length));
       this.setTopicKeywords(nodes);
     },
@@ -84,6 +104,7 @@ export default {
 
   data() {
     return {
+      loading: false,
       filterText: "",
       data: [
         {

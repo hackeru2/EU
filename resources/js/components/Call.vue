@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Banner />
+    <Banner :title="infos.title" />
     <el-container>
       <el-main>
         <CallTable />

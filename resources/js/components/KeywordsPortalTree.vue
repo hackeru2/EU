@@ -2,7 +2,7 @@
   <div>
     KPT
     <div>
-      <!-- <el-button @click="insertAll">INSERT ALL</el-button> -->
+      <el-button @click="insertAll">INSERT ALL</el-button>
       <div class="h-container">
         <a class="h-btn h-btn-1" @click="findKeywords">Development</a>
         <a class="h-btn h-btn-2">Hover me</a>
@@ -16,7 +16,8 @@
 
 <script>
 //import { mapMutations } from "vuex";
-import kpt from "../../json/portal_keyword_tree.json";
+import oldkpt from "../../json/portal_keyword_tree.json";
+import kpt from "../../json/new_portal_keyword_tree.json";
 import { mapActions, mapState, mapMutations, mapGetters } from "vuex";
 export default {
   name: "KeywordsPortalTree",
@@ -53,7 +54,7 @@ export default {
       console.log(e);
     },
     insertAll() {
-      //axios.post("keywords", this.bigArray);
+      axios.post("keywords", this.bigArray);
     },
     bigArrayFlat(arr) {
       arr.forEach(item => {

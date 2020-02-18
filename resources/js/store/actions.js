@@ -43,7 +43,7 @@ export default {
         } = await axios.get(`me`);
         commit('setMe', me);
 
-        commit('setMeTopics', me.profile.topics);
+        if (me.profile.topics) commit('setMeTopics', me.profile.topics);
 
 
     },
@@ -52,7 +52,9 @@ export default {
         let { data: keywords
         } = await axios.get(`keywords`);
         await commit('setKeywords', keywords);
-        await commit('setMeKeywords', getters.authUser.profile.keywords_ccm2_Ids);
+        if (getters.authUser.profile)
+            if (getters.authUser.profile.keywords_ccm2_Ids)
+                await commit('setMeKeywords', getters.authUser.profile.keywords_ccm2_Ids);
 
     }
 

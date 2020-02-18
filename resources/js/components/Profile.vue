@@ -90,7 +90,6 @@
           ></el-autocomplete>
         </el-form-item>
         <el-form-item>
-          {{meKeywords.map(a=>a.description)}}
           <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
           <el-button @click="resetForm('ruleForm')">Reset</el-button>
         </el-form-item>
@@ -229,6 +228,11 @@ export default {
         description: this.ruleForm.desc
       });
       console.log({ userPofile });
+      this.$message({
+        type: "success",
+        dangerouslyUseHTMLString: true,
+        message: "<strong>Your profile has been <i>HTML</i> updated!</strong>"
+      });
       this.setMe(userPofile);
       this.$refs[formName].validate(valid => {
         if (valid) {

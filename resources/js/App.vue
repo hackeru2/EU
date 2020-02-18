@@ -8,13 +8,22 @@
               <i class="el-icon-message"></i>Navigator One
             </template>
             <el-menu-item-group>
-              <template slot="title">Group 1</template>
-              <el-menu-item index="1-1">Option 1</el-menu-item>
-              <el-menu-item index="1-2">Option 2</el-menu-item>
+              <template slot="title">All keywords</template>
+
+              <transition
+                name="el-zoom-in-top"
+                v-for="(item, index) in meKeywords"
+                :key="index"
+                :index="`1-${index}`"
+              >
+                <el-menu-item style="font-size:1.4vh">{{item.name}}</el-menu-item>
+              </transition>
+
+              <!-- <el-menu-item index="1-2">Option 2</el-menu-item> -->
             </el-menu-item-group>
-            <el-menu-item-group title="Group 2">
+            <!-- <el-menu-item-group title="Group 2">
               <el-menu-item index="1-3">Option 3</el-menu-item>
-            </el-menu-item-group>
+            </el-menu-item-group>-->
             <el-submenu index="1-4">
               <template slot="title">Option4</template>
               <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
@@ -106,7 +115,7 @@
 </style>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -127,6 +136,7 @@ export default {
   },
   created() {},
   computed: {
+    ...mapState(["meKeywords"]),
     ...mapGetters(["authUser"])
   },
   methods: { ...mapActions(["meAct"]) }
@@ -135,5 +145,8 @@ export default {
 <style>
 .el-avatar {
   width: 88px !important;
+}
+.el-menu-item-group__title {
+  padding: 0 !important;
 }
 </style>
