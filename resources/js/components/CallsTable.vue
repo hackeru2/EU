@@ -1,47 +1,62 @@
 <template>
   <el-row :gutter="20" v-load="load">
-    <el-table :data="mCalls" style="width: 100%" border>
-      <el-table-column prop="identifier" label="header" width="90" style="font-size:6px">
-        <template slot-scope="header">asdas</template>
-      </el-table-column>
-      <el-table-column prop="identifier" label="Identifier" width="90" style="font-size:6px"></el-table-column>
-      <el-table-column prop="tags" label="tags">
-        <template slot-scope="scope" v-if="scope.row.tags">
-          <el-badge
-            style="white-space:normal !important;height:inherit;margin:10px"
-            v-for="(item, i ) in scope.row.tags"
-            :key="i"
-            :type="typeTags[(i  % 5)]"
-            :value="i "
-          >
-            <el-button style="font-size:10px" size="mini">{{item}}</el-button>
-          </el-badge>
-        </template>
-      </el-table-column>
-      <el-table-column prop="keywords" label="Keywords">
+    <el-table :data="mCalls.length ? mCalls : calls" style="width: 100%" border>
+      <el-table-column prop="title" label="CALL TABLE">
         <template slot-scope="scope">
-          <el-tag
-            v-for="(item , tag_i) in scope.row.keywords"
-            :key="tag_i"
-            :type="typeTags[(tag_i % 5)  ]"
-            style="white-space:normal !important;height:inherit"
-            effect="light"
-          >{{ item }}</el-tag>
+          <div
+            style="color:white;padding:5px;white-space:normal;text-align:center;backgroundColor:#9a9ae9"
+          >{{scope.row.title}}</div>
+
+          <div style="align-text:center">
+            <el-table :data="[scope.row]" style="width: 100%" border>
+              <el-table-column prop="identifier" label="Identifier" width="90"></el-table-column>
+              <el-table-column prop="tags" label="tags">
+                <template slot-scope="scope" v-if="scope.row.tags">
+                  <el-badge
+                    style="white-space:normal !important;height:inherit;margin:10px"
+                    v-for="(item, i ) in scope.row.tags"
+                    :key="i"
+                    :type="typeTags[(i  % 5)]"
+                    :value="i "
+                  >
+                    <el-button style="font-size:10px" size="mini">{{item}}</el-button>
+                  </el-badge>
+                </template>
+              </el-table-column>
+              <el-table-column prop="keywords" label="Keywords">
+                <template slot-scope="scope">
+                  <el-tag
+                    v-for="(item , tag_i) in scope.row.keywords"
+                    :key="tag_i"
+                    :type="typeTags[(tag_i % 5)  ]"
+                    style="white-space:normal !important;height:inherit"
+                    effect="light"
+                  >{{ item }}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="programmeDivision" label="programmeDivision">
+                <template slot-scope="scope">
+                  <el-tag
+                    v-for="(item , tag_i) in mapPD(scope.row.programmeDivision)"
+                    :key="tag_i"
+                    :type="typeTags[(tag_i % 5)  ]"
+                    style="white-space:normal !important;height:inherit"
+                    effect="light"
+                  >{{ item }}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="url" label="Links">
+                <template slot-scope="scope">
+                  {{callLinksWP(scope.row.workProgrammepart)}}
+                  <br />
+                  <a
+                    :href="callLinksPDF(scope.row.workProgrammepart)"
+                  >{{callLinksPDF(scope.row.workProgrammepart)}}</a>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
         </template>
-      </el-table-column>
-      <el-table-column prop="programmeDivision" label="programmeDivision">
-        <template slot-scope="scope">
-          <el-tag
-            v-for="(item , tag_i) in mapPD(scope.row.programmeDivision)"
-            :key="tag_i"
-            :type="typeTags[(tag_i % 5)  ]"
-            style="white-space:normal !important;height:inherit"
-            effect="light"
-          >{{ item }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="url" label="Links">
-        <template slot-scope="scope">{{callLinksWP(scope.row.workProgrammepart)}}</template>
       </el-table-column>
     </el-table>
   </el-row>
@@ -77,7 +92,8 @@ export default {
     };
   },
   async created() {
-    if (localStorage.calls)
+    this.load = true;
+    if (localStorage.calls && 1 == 2)
       this.setMCalls(JSON.parse(localStorage.getItem("calls")));
     //return (this.calls = JSON.parse(localStorage.getItem("calls")));
     else {
@@ -89,14 +105,14 @@ export default {
     }
   },
 
-  mounted() {
-    this.$nextTick(() => {
-      this.calls = Object.values(this.calls).map(c => {
-        let i = c.identifier.toLowerCase();
-        return c;
-      });
-    });
-  },
+  //   mounted() {
+  //     this.$nextTick(() => {
+  //       this.calls = Object.values(this.calls).map(c => {
+  //         let i = c.identifier.toLowerCase();
+  //         return c;
+  //       });
+  //     });
+  //   },
   updated() {
     this.setGroupedKeyWords(this.kWordsGrouped);
   },
@@ -171,6 +187,9 @@ export default {
   },
 
   methods: {
+    visibilityChanged(E) {
+      console.log(E);
+    },
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
       if (rowIndex % 2 === 0) {
         if (columnIndex === 0) {
@@ -185,6 +204,11 @@ export default {
         return call.wp_website;
       } catch (error) {}
     },
+    callLinksPDF(call) {
+      try {
+        return call.wp_document;
+      } catch (error) {}
+    },
     mapPD(pd) {
       if (!pd) return [];
       return pd.map(pd => pd.description);
@@ -196,7 +220,7 @@ export default {
     //...mapActions(["getTopicDetails"]),
 
     async getBigJson(meKW) {
-      this.load = true;
+      //   this.load = true;
       try {
         let { data: bigJson } = await axios.get("big-json");
 
@@ -246,6 +270,7 @@ export default {
 
         localStorage.setItem("calls", JSON.stringify(bigJson));
         this.calls = _.orderBy(bigJson, "score", "desc");
+        this.setMCalls(this.calls);
       } catch (error) {
         //window.location.reload();
       }
