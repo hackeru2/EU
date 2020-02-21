@@ -1,6 +1,9 @@
 <template>
   <el-row :gutter="20" v-load="load">
-    <el-table :data="calls" style="width: 100%" border>
+    <el-table :data="mCalls" style="width: 100%" border>
+      <el-table-column prop="identifier" label="header" width="90" style="font-size:6px">
+        <template slot-scope="header">asdas</template>
+      </el-table-column>
       <el-table-column prop="identifier" label="Identifier" width="90" style="font-size:6px"></el-table-column>
       <el-table-column prop="tags" label="tags">
         <template slot-scope="scope" v-if="scope.row.tags">
@@ -74,8 +77,9 @@ export default {
     };
   },
   async created() {
-    if (localStorage.calls && 1 == 2)
-      return (this.calls = JSON.parse(localStorage.getItem("calls")));
+    if (localStorage.calls)
+      this.setMCalls(JSON.parse(localStorage.getItem("calls")));
+    //return (this.calls = JSON.parse(localStorage.getItem("calls")));
     else {
       this.meKW = await JSON.parse(
         localStorage.getItem("authUser")
@@ -163,10 +167,19 @@ export default {
     //     return this.topicDetails;
     //   } catch (error) {}
     // },
-    ...mapState(["topicDetails", "me", "meKeywords"])
+    ...mapState(["topicDetails", "me", "meKeywords", "mCalls"])
   },
 
   methods: {
+    arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (rowIndex % 2 === 0) {
+        if (columnIndex === 0) {
+          return [1, 6];
+        } else if (columnIndex === 1) {
+          return [0, 0];
+        }
+      }
+    },
     callLinksWP(call) {
       try {
         return call.wp_website;
@@ -179,7 +192,7 @@ export default {
     // getTD(t_details) {
     //   console.log(t_details);
     // },
-    ...mapMutations(["setGroupedKeyWords"]),
+    ...mapMutations(["setGroupedKeyWords", "setMCalls"]),
     //...mapActions(["getTopicDetails"]),
 
     async getBigJson(meKW) {

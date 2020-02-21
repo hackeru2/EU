@@ -25,6 +25,11 @@ export default {
         state.tree = tree;
 
     },
+    setMCalls(state, mCalls) {
+        state.mCalls = mCalls;
+        console.log({ CALLMUTATIONS: state.mCalls })
+
+    },
     setTreeName(state, treeName) {
         state.treeName = treeName;
 

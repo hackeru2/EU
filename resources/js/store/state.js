@@ -1,6 +1,7 @@
 export default {
 
     updateFlags: [],
+    mCalls: [],
     firstState: "firstState"
     , topicDetails: {},
     me: {},
