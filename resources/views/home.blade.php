@@ -15,7 +15,13 @@
                     @endif
 
                     You are logged in!
+                    <div>
+                        <a href="/profiles">Profile</a> |
+                        <a href="/calls">Calls</a> |
+                        <a href="/calls-table">Table</a>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>

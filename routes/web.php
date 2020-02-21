@@ -72,6 +72,7 @@ Route::get('/get-topic-details/{identifier}', 'HomeController@getTopicDetails') 
 Route::get('/me', 'AuthController@show') ;
 Route::resource('flag', 'FlagController');
 Route::resource('keywords', 'KeywordController');
+Route::resource('programmes', 'ProgrammeController');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::resource('profile', 'ProfileController');
 Route::resource('user', 'UserController');

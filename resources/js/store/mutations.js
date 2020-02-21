@@ -53,8 +53,8 @@ export default {
         state.topics.find(a => a.name == state.treeName).active = isTopicActive;
     },
     setMeTopics(state, meTopics) {
-        if (meTopics)
-            if (!meTopics.includes(",")) return state.topics.find(t => t.name == meTopics).active = true;
+
+        if (!meTopics.includes(",")) return state.topics.find(t => t.name == meTopics).active = true;
         meTopics.split(',').forEach(topic => {
 
             state.topics.find(t => t.name == topic).active = true;

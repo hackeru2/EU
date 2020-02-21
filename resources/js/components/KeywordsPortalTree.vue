@@ -2,7 +2,7 @@
   <div>
     KPT
     <div>
-      <el-button @click="insertAll">INSERT ALL</el-button>
+      <!-- <el-button @click="insertAll">INSERT ALL</el-button> -->
       <div class="h-container">
         <a class="h-btn h-btn-1" @click="findKeywords">Development</a>
         <a class="h-btn h-btn-2">Hover me</a>

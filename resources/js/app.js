@@ -10,8 +10,8 @@ window.Vue = require('vue');
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale';
 import lang from 'element-ui/lib/locale/lang/en';
-import 'element-ui/lib/theme-chalk/index.css';
-import VueDragResize from 'vue-drag-resize';
+import "element-ui/lib/theme-chalk/display.css";
+// import 'element-ui/lib/theme-chalk/index.css';
 import VueObserveVisibility from 'vue-observe-visibility';
 import VueRouter from 'vue-router';
 import VueWaypoint from 'vue-waypoint';
@@ -68,9 +68,9 @@ vMyDirective.install = function install(_Vue) {
 Vue.use(vMyDirective)
 
 
-Vue.component('vue-drag-resize', VueDragResize)
+// Vue.component('vue-drag-resize', VueDragResize)
 
-console.log({ VueDragResize })
+// console.log({ VueDragResize })
 
 
 // Waypoint plugin

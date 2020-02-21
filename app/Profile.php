@@ -15,6 +15,6 @@ class Profile extends Model
 
     public function setKeywords_ccm2_IdsAttribue(){
 
-        return 12312312;
+         
     }
 }

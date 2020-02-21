@@ -1,0 +1,2299 @@
+{
+    "fpDivisions": [
+        {
+            "id": 318,
+            "ccm2Level": 2,
+            "code": "Euratom",
+            "description": "Euratom Research and Training Programme",
+            "children": [
+                {
+                    "id": 228,
+                    "ccm2Level": 3,
+                    "code": "Euratom-1.",
+                    "description": "Indirect actions",
+                    "parent": 318,
+                    "children": [
+                        {
+                            "id": 229,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.1.",
+                            "description": "Support safe operation of nuclear systems",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 230,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.2.",
+                            "description": "Contribute to the development of solutions for the management of ultimate nuclear waste",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 231,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.3.",
+                            "description": "Support the development and sustainability of nuclear competences at Union level",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 232,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.4.",
+                            "description": "Foster radiation protection",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 233,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.5.",
+                            "description": "Move toward demonstration of feasibility of fusion as a power source by exploiting existing and future fusion facilities",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 234,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.6.",
+                            "description": "Lay the foundations for future fusion power plants by developing materials, technologies and conceptual design",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 235,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.7.",
+                            "description": "Promote innovation and industry competitiveness",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 236,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.8.",
+                            "description": "Ensure availability and use of research infrastructures of pan_european relevance",
+                            "parent": 228,
+                            "children": []
+                        },
+                        {
+                            "id": 237,
+                            "ccm2Level": 4,
+                            "code": "Euratom-1.9.",
+                            "description": "European Fusion Programme",
+                            "parent": 228,
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": 238,
+                    "ccm2Level": 3,
+                    "code": "Euratom-2.",
+                    "description": "JRC direct actions",
+                    "parent": 318,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": 369300,
+            "ccm2Level": 2,
+            "code": "euratom",
+            "description": "Euratom Research and Training Programme 2019-2020",
+            "children": []
+        },
+        {
+            "id": 50,
+            "ccm2Level": 2,
+            "code": "EC",
+            "description": "EC Treaty",
+            "children": [
+                {
+                    "id": 312,
+                    "ccm2Level": 3,
+                    "code": "EU.6.",
+                    "description": "Non-nuclear direct actions of the Joint Research Centre (JRC)",
+                    "parent": 50,
+                    "children": []
+                },
+                {
+                    "id": 313,
+                    "ccm2Level": 3,
+                    "code": "EU.7.",
+                    "description": "The European Institute of Innovation and Technology (EIT)",
+                    "parent": 50,
+                    "children": []
+                },
+                {
+                    "id": 314,
+                    "ccm2Level": 3,
+                    "code": "EU.5.",
+                    "description": "Science with and for Society",
+                    "parent": 50,
+                    "children": [
+                        {
+                            "id": 301,
+                            "ccm2Level": 4,
+                            "code": "EU.5.a.",
+                            "description": "Make scientific and technological careers attractive to young students, and forster sustainable interaction between schools, research institutions, industry and civil society organisations",
+                            "parent": 314,
+                            "children": []
+                        },
+                        {
+                            "id": 302,
+                            "ccm2Level": 4,
+                            "code": "EU.5.b.",
+                            "description": "Promote gender equality in particular by supporting structural change in the organisation of research institutions and in the content and design of research activities",
+                            "parent": 314,
+                            "children": []
+                        },
+                        {
+                            "id": 303,
+                            "ccm2Level": 4,
+                            "code": "EU.5.c.",
+                            "description": "Integrate society in science and innovation issues, policies and activities in order to integrate citizens\u0027 interests and values and to increase the quality, relevance, social acceptability and sustainability of research and innovation outcomes in various fields of activity from social innovation to areas such as biotechnology and nanotechnology",
+                            "parent": 314,
+                            "children": []
+                        },
+                        {
+                            "id": 304,
+                            "ccm2Level": 4,
+                            "code": "EU.5.d.",
+                            "description": "Encourage citizens to engage in science through formal and informal science education, and promote the diffusion of science-based activities, namely in science centres and through other appropriate channels",
+                            "parent": 314,
+                            "children": []
+                        },
+                        {
+                            "id": 305,
+                            "ccm2Level": 4,
+                            "code": "EU.5.e.",
+                            "description": "Develop the accessibility and the use of the results of publicly-funded research",
+                            "parent": 314,
+                            "children": []
+                        },
+                        {
+                            "id": 306,
+                            "ccm2Level": 4,
+                            "code": "EU.5.f.",
+                            "description": "Develop the governance for the advancement of responsible research and innovation by all stakeholders, which is sensitive to society needs and demands and promote an ethics framework for research and innovation",
+                            "parent": 314,
+                            "children": []
+                        },
+                        {
+                            "id": 307,
+                            "ccm2Level": 4,
+                            "code": "EU.5.g.",
+                            "description": "Take due and proportional precautions in research and innovation activities by anticipating and assessing potential environmental, health and safety impacts",
+                            "parent": 314,
+                            "children": []
+                        },
+                        {
+                            "id": 308,
+                            "ccm2Level": 4,
+                            "code": "EU.5.h.",
+                            "description": "Improving knowledge on science communication in order to improve the quality and effectiveness of interactions between scientists, general media and the public",
+                            "parent": 314,
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": 315,
+                    "ccm2Level": 3,
+                    "code": "EU.4.",
+                    "description": "Spreading excellence and widening participation",
+                    "parent": 50,
+                    "children": [
+                        {
+                            "id": 295,
+                            "ccm2Level": 4,
+                            "code": "EU.4.a.",
+                            "description": "Teaming of excellent research institutions and low performing RDI regions",
+                            "parent": 315,
+                            "children": []
+                        },
+                        {
+                            "id": 296,
+                            "ccm2Level": 4,
+                            "code": "EU.4.b.",
+                            "description": "Twinning of research institutions",
+                            "parent": 315,
+                            "children": []
+                        },
+                        {
+                            "id": 297,
+                            "ccm2Level": 4,
+                            "code": "EU.4.c.",
+                            "description": "ERA chairs",
+                            "parent": 315,
+                            "children": []
+                        },
+                        {
+                            "id": 298,
+                            "ccm2Level": 4,
+                            "code": "EU.4.d.",
+                            "description": "Policy Support Facility (PSF)",
+                            "parent": 315,
+                            "children": []
+                        },
+                        {
+                            "id": 299,
+                            "ccm2Level": 4,
+                            "code": "EU.4.e.",
+                            "description": "Supporting access to international networks for excellent researchers and innovators who lack sufficient involvement in European and international networks",
+                            "parent": 315,
+                            "children": []
+                        },
+                        {
+                            "id": 300,
+                            "ccm2Level": 4,
+                            "code": "EU.4.f.",
+                            "description": "Strengthening the administrative and operational capacity of transnational networks of National Contact Points",
+                            "parent": 315,
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": 52,
+                    "ccm2Level": 3,
+                    "code": "EU.1.",
+                    "description": "Excellent Science",
+                    "parent": 50,
+                    "children": [
+                        {
+                            "id": 283,
+                            "ccm2Level": 4,
+                            "code": "EU.1.3.",
+                            "description": "Marie-Sklodowska-Curie Actions",
+                            "parent": 52,
+                            "children": [
+                                {
+                                    "id": 56,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.3.1.",
+                                    "description": "Fostering new skills by means of excellent initial training of researchers",
+                                    "parent": 283,
+                                    "children": []
+                                },
+                                {
+                                    "id": 57,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.3.2.",
+                                    "description": "Nurturing excellence by means of cross-border and cross-sector mobility",
+                                    "parent": 283,
+                                    "children": []
+                                },
+                                {
+                                    "id": 58,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.3.3.",
+                                    "description": "Stimulating innovation by means of cross-fertilisation of knowledge",
+                                    "parent": 283,
+                                    "children": []
+                                },
+                                {
+                                    "id": 59,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.3.4.",
+                                    "description": "Increasing structural impact by co-funding activities",
+                                    "parent": 283,
+                                    "children": []
+                                },
+                                {
+                                    "id": 60,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.3.5.",
+                                    "description": "Specific support and policy actions",
+                                    "parent": 283,
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": 284,
+                            "ccm2Level": 4,
+                            "code": "EU.1.4.",
+                            "description": "Research Infrastructures",
+                            "parent": 52,
+                            "children": [
+                                {
+                                    "id": 61,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.4.1.",
+                                    "description": "Developing the European research infrastructures for 2020 and beyond",
+                                    "parent": 284,
+                                    "children": [
+                                        {
+                                            "id": 62,
+                                            "ccm2Level": 6,
+                                            "code": "EU.1.4.1.1.",
+                                            "description": "Developing new world-class research infrastructures",
+                                            "parent": 61,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 63,
+                                            "ccm2Level": 6,
+                                            "code": "EU.1.4.1.2.",
+                                            "description": "Integrating and opening existing national and regional  research infrastructures of European interest",
+                                            "parent": 61,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 64,
+                                            "ccm2Level": 6,
+                                            "code": "EU.1.4.1.3.",
+                                            "description": "Development, deployment and operation of ICT-based e-infrastructures",
+                                            "parent": 61,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 65,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.4.2.",
+                                    "description": "Fostering the innovation potential of research infrastructures and their human resources",
+                                    "parent": 284,
+                                    "children": [
+                                        {
+                                            "id": 66,
+                                            "ccm2Level": 6,
+                                            "code": "EU.1.4.2.1.",
+                                            "description": "Exploiting the innovation potential of research infrastructures",
+                                            "parent": 65,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 67,
+                                            "ccm2Level": 6,
+                                            "code": "EU.1.4.2.2.",
+                                            "description": "Strengthening the human capital of research infrastructures",
+                                            "parent": 65,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 68,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.4.3.",
+                                    "description": "Reinforcing European research infrastructure policy and international cooperation",
+                                    "parent": 284,
+                                    "children": [
+                                        {
+                                            "id": 69,
+                                            "ccm2Level": 6,
+                                            "code": "EU.1.4.3.1.",
+                                            "description": "Reinforcing European policy for research infrastructures",
+                                            "parent": 68,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 70,
+                                            "ccm2Level": 6,
+                                            "code": "EU.1.4.3.2.",
+                                            "description": "Facilitate strategic international cooperation",
+                                            "parent": 68,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 316,
+                            "ccm2Level": 4,
+                            "code": "EU.1.2.",
+                            "description": "Future and Emerging Technologies (FET)",
+                            "parent": 52,
+                            "children": [
+                                {
+                                    "id": 53,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.2.1.",
+                                    "description": "FET Open ",
+                                    "parent": 316,
+                                    "children": []
+                                },
+                                {
+                                    "id": 54,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.2.2.",
+                                    "description": "FET Proactive",
+                                    "parent": 316,
+                                    "children": []
+                                },
+                                {
+                                    "id": 55,
+                                    "ccm2Level": 5,
+                                    "code": "EU.1.2.3.",
+                                    "description": "FET Flagships",
+                                    "parent": 316,
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": 317,
+                            "ccm2Level": 4,
+                            "code": "EU.1.1.",
+                            "description": "European Research Council (ERC)",
+                            "parent": 52,
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": 71,
+                    "ccm2Level": 3,
+                    "code": "EU.2.",
+                    "description": "Industrial Leadership",
+                    "parent": 50,
+                    "children": [
+                        {
+                            "id": 285,
+                            "ccm2Level": 4,
+                            "code": "EU.2.1.",
+                            "description": "Leadership in enabling and industrial technologies (LEIT)",
+                            "parent": 71,
+                            "children": [
+                                {
+                                    "id": 72,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.1.1.",
+                                    "description": "Information and Communication Technologies",
+                                    "parent": 285,
+                                    "children": [
+                                        {
+                                            "id": 245,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.1.7.",
+                                            "description": "ECSEL",
+                                            "parent": 72,
+                                            "children": [
+                                                {
+                                                    "id": 246,
+                                                    "ccm2Level": 7,
+                                                    "code": "EU.2.1.1.7.1.",
+                                                    "description": "Design technologies, process and integration, equipment, materials and manufacturing for micro- and nanoelectronics while targeting miniaturisation, diversification and differentiation, heterogeneous integration",
+                                                    "parent": 245,
+                                                    "children": []
+                                                },
+                                                {
+                                                    "id": 247,
+                                                    "ccm2Level": 7,
+                                                    "code": "EU.2.1.1.7.2.",
+                                                    "description": "Processes, methods, tools and platforms, reference designs and architectures, for software and/or control-intensive embedded/cyber-physical systems, addressing seamless connectivity and interoperability, functional safety, high availability, and security for professional and consumer type applications, and connected services",
+                                                    "parent": 245,
+                                                    "children": []
+                                                },
+                                                {
+                                                    "id": 248,
+                                                    "ccm2Level": 7,
+                                                    "code": "EU.2.1.1.7.3.",
+                                                    "description": "Multi-disciplinary approaches for smart systems, supported by developments in holistic design and advanced manufacturing to realise self-reliant and adaptable smart systems having sophisticated interfaces and offering complex functionalities based on, for example, the seamless integration of sensing, actuating, processing, energy provision and networking",
+                                                    "parent": 245,
+                                                    "children": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 73,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.1.1.",
+                                            "description": "A new generation of components and systems: Engineering of advanced embedded and energy and resource efficient components and systems",
+                                            "parent": 72,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 74,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.1.2.",
+                                            "description": "Next generation computing: Advanced and secure computing systems and technologies, including cloud computing",
+                                            "parent": 72,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 75,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.1.3.",
+                                            "description": "Future Internet: Software, hardware, Infrastructures, technologies and services",
+                                            "parent": 72,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 76,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.1.4.",
+                                            "description": "Content technologies and information management: ICT for digital content, cultural and creative industries",
+                                            "parent": 72,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 77,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.1.5.",
+                                            "description": "Advanced interfaces and robots: Robotics and smart spaces",
+                                            "parent": 72,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 78,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.1.6.",
+                                            "description": "Micro- and nanoelectronics and photonics: Key enabling technologies related to micro- and nanoelectronics and to photonics, covering also quantum technologies",
+                                            "parent": 72,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 79,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.1.2.",
+                                    "description": "Nanotechnologies",
+                                    "parent": 285,
+                                    "children": [
+                                        {
+                                            "id": 80,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.2.1.",
+                                            "description": "Developing next generation nanomaterials, nanodevices and nanosystems ",
+                                            "parent": 79,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 81,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.2.2.",
+                                            "description": "Ensuring the safe and sustainable development and application of nanotechnologies",
+                                            "parent": 79,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 82,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.2.3.",
+                                            "description": "Developing the societal dimension of nanotechnology",
+                                            "parent": 79,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 83,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.2.4.",
+                                            "description": "Efficient and sustainable synthesis and manufacturing of nanomaterials, components and systems",
+                                            "parent": 79,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 84,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.2.5.",
+                                            "description": "Developing and standardisation of capacity-enhancing techniques, measuring methods and equipment",
+                                            "parent": 79,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 85,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.1.3.",
+                                    "description": "Advanced materials",
+                                    "parent": 285,
+                                    "children": [
+                                        {
+                                            "id": 86,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.3.1.",
+                                            "description": "Cross-cutting and enabling materials technologies",
+                                            "parent": 85,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 87,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.3.2.",
+                                            "description": "Materials development and transformation",
+                                            "parent": 85,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 88,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.3.3.",
+                                            "description": "Management of materials components",
+                                            "parent": 85,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 89,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.3.4.",
+                                            "description": "Materials for a sustainable, resource-efficient and low-emission industry",
+                                            "parent": 85,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 90,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.3.5.",
+                                            "description": "Materials for creative industries, including heritage",
+                                            "parent": 85,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 91,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.3.6.",
+                                            "description": "Metrology, characterisation, standardisation and quality control",
+                                            "parent": 85,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 92,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.3.7.",
+                                            "description": "Optimisation of the use of materials",
+                                            "parent": 85,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 93,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.1.4.",
+                                    "description": "Biotechnology",
+                                    "parent": 285,
+                                    "children": [
+                                        {
+                                            "id": 94,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.4.1.",
+                                            "description": "Boosting cutting-edge biotechnologies as a future innovation driver",
+                                            "parent": 93,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 95,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.4.2.",
+                                            "description": "Bio-technology based industrial products and processes",
+                                            "parent": 93,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 96,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.4.3.",
+                                            "description": "Innovative and competitive platform technologies",
+                                            "parent": 93,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 97,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.1.5.",
+                                    "description": "Advanced manufacturing and processing",
+                                    "parent": 285,
+                                    "children": [
+                                        {
+                                            "id": 239,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.5.2.",
+                                            "description": "Technologies enabling energy-efficient systems and energy-efficient buildings with a low environmental impact",
+                                            "parent": 97,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 98,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.5.1.",
+                                            "description": "Technologies for Factories of the Future",
+                                            "parent": 97,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 99,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.5.3.",
+                                            "description": "Sustainable, resource-efficient and low-carbon technologies in energy-intensive process industries",
+                                            "parent": 97,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 100,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.5.4.",
+                                            "description": "New sustainable business models",
+                                            "parent": 97,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 101,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.1.6.",
+                                    "description": "Space",
+                                    "parent": 285,
+                                    "children": [
+                                        {
+                                            "id": 102,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.6.1.",
+                                            "description": "Enabling European competitiveness, non-dependence and innovation of the European space sector",
+                                            "parent": 101,
+                                            "children": [
+                                                {
+                                                    "id": 240,
+                                                    "ccm2Level": 7,
+                                                    "code": "EU.2.1.6.1.1.",
+                                                    "description": "Safeguard and further develop a competitive, sustainable and entrepreneurial space industry and research community and strengthen European non-dependence in space systems",
+                                                    "parent": 102,
+                                                    "children": []
+                                                },
+                                                {
+                                                    "id": 241,
+                                                    "ccm2Level": 7,
+                                                    "code": "EU.2.1.6.1.2.",
+                                                    "description": "Boost innovation between space and non-space sectors",
+                                                    "parent": 102,
+                                                    "children": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 103,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.6.2.",
+                                            "description": "Enabling advances in space technology",
+                                            "parent": 101,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 104,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.6.3.",
+                                            "description": "Enabling exploitation of space data",
+                                            "parent": 101,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 105,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.1.6.4.",
+                                            "description": "Enabling European research in support of international space partnerships",
+                                            "parent": 101,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 286,
+                            "ccm2Level": 4,
+                            "code": "EU.2.2.",
+                            "description": "Access to risk finance",
+                            "parent": 71,
+                            "children": [
+                                {
+                                    "id": 106,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.2.1.",
+                                    "description": "Debt facility",
+                                    "parent": 286,
+                                    "children": []
+                                },
+                                {
+                                    "id": 107,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.2.2.",
+                                    "description": "Equity facility",
+                                    "parent": 286,
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": 287,
+                            "ccm2Level": 4,
+                            "code": "EU.2.3.",
+                            "description": "Innovation in SMEs",
+                            "parent": 71,
+                            "children": [
+                                {
+                                    "id": 108,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.3.1.",
+                                    "description": " Mainstreaming SME support, especially through a dedicated instrument",
+                                    "parent": 287,
+                                    "children": []
+                                },
+                                {
+                                    "id": 109,
+                                    "ccm2Level": 5,
+                                    "code": "EU.2.3.2.",
+                                    "description": "Specific support",
+                                    "parent": 287,
+                                    "children": [
+                                        {
+                                            "id": 110,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.3.2.1.",
+                                            "description": "Support for research intensive SMEs",
+                                            "parent": 109,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 111,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.3.2.2.",
+                                            "description": "Enhancing the innovation capacity of SMEs",
+                                            "parent": 109,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 112,
+                                            "ccm2Level": 6,
+                                            "code": "EU.2.3.2.3.",
+                                            "description": "Supporting market-driven innovation",
+                                            "parent": 109,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 113,
+                    "ccm2Level": 3,
+                    "code": "EU.3.",
+                    "description": "Societal Challenges",
+                    "parent": 50,
+                    "children": [
+                        {
+                            "id": 288,
+                            "ccm2Level": 4,
+                            "code": "EU.3.1.",
+                            "description": "Health, demographic change and wellbeing",
+                            "parent": 113,
+                            "children": [
+                                {
+                                    "id": 131,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.1.6.",
+                                    "description": "Health care provision and integrated care",
+                                    "parent": 288,
+                                    "children": [
+                                        {
+                                            "id": 132,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.6.1.",
+                                            "description": "Promoting integrated care",
+                                            "parent": 131,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 133,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.6.2.",
+                                            "description": "Optimising the efficiency and effectiveness of healthcare provision and reducing inequalities by evidence based decision making and dissemination of best practice, and innovative technologies and approaches",
+                                            "parent": 131,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 258,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.1.7.",
+                                    "description": "Innovative Medicines Initiative 2 (IMI2)",
+                                    "parent": 288,
+                                    "children": [
+                                        {
+                                            "id": 257,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.4.",
+                                            "description": "Diabetes",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 259,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.1.",
+                                            "description": "Antimicrobial resistance",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 260,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.2.",
+                                            "description": "Osteoarthritis",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 261,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.3.",
+                                            "description": "Cardiovascular diseases",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 262,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.5.",
+                                            "description": "Neurodegenerative diseases",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 263,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.6.",
+                                            "description": "Psychiatric diseases",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 264,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.7.",
+                                            "description": "Respiratory diseases",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 265,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.8.",
+                                            "description": "Immune-mediated diseases",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 266,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.9.",
+                                            "description": "Ageing-associated diseases",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 267,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.10.",
+                                            "description": "Cancer",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 268,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.11.",
+                                            "description": "Rare/Orphan Diseases",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 269,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.12.",
+                                            "description": "Vaccine",
+                                            "parent": 258,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 270,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.7.13.",
+                                            "description": "Other",
+                                            "parent": 258,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 114,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.1.1.",
+                                    "description": "Understanding health, wellbeing and disease",
+                                    "parent": 288,
+                                    "children": [
+                                        {
+                                            "id": 115,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.1.1.",
+                                            "description": "Understanding the determinants of health, improving health promotion and disease prevention",
+                                            "parent": 114,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 116,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.1.2.",
+                                            "description": "Understanding disease",
+                                            "parent": 114,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 117,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.1.3.",
+                                            "description": "Improving surveillance and preparedness",
+                                            "parent": 114,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 118,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.1.2.",
+                                    "description": "Preventing disease",
+                                    "parent": 288,
+                                    "children": [
+                                        {
+                                            "id": 119,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.2.1.",
+                                            "description": "Developing effective prevention and screening programmes and improving the assessment of disease susceptibility",
+                                            "parent": 118,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 120,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.2.2.",
+                                            "description": "Improving diagnosis and prognosis",
+                                            "parent": 118,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 121,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.2.3.",
+                                            "description": "Developing better preventive and therapeutic vaccines",
+                                            "parent": 118,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 122,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.1.3.",
+                                    "description": "Treating and managing disease",
+                                    "parent": 288,
+                                    "children": [
+                                        {
+                                            "id": 123,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.3.1.",
+                                            "description": "Treating disease, including developing regenerative medicine",
+                                            "parent": 122,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 124,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.3.2.",
+                                            "description": "Transferring knowledge to clinical practice and scalable innovation actions",
+                                            "parent": 122,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 125,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.1.4.",
+                                    "description": "Active ageing and self-management of health",
+                                    "parent": 288,
+                                    "children": [
+                                        {
+                                            "id": 242,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.4.1.",
+                                            "description": "Active ageing, independent and assisted living",
+                                            "parent": 125,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 126,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.4.2.",
+                                            "description": "Individual awareness and empowerment for self-management of health",
+                                            "parent": 125,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 127,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.1.5.",
+                                    "description": "Methods and data",
+                                    "parent": 288,
+                                    "children": [
+                                        {
+                                            "id": 129,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.5.2.",
+                                            "description": "Improving scientific tools and methods to support policy making and regulatory needs",
+                                            "parent": 127,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 130,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.5.3.",
+                                            "description": "Using in-silico medicine for improving disease management and prediction",
+                                            "parent": 127,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 128,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.1.5.1.",
+                                            "description": "Improving halth information and better use of health data",
+                                            "parent": 127,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 289,
+                            "ccm2Level": 4,
+                            "code": "EU.3.2.",
+                            "description": "Food security, sustainable agriculture and forestry, marine and maritime and inland water research and the bioeconomy",
+                            "parent": 113,
+                            "children": [
+                                {
+                                    "id": 134,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.2.1.",
+                                    "description": "Sustainable agriculture and forestry",
+                                    "parent": 289,
+                                    "children": [
+                                        {
+                                            "id": 135,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.1.1.",
+                                            "description": "Increasing production efficiency and coping with climate change, while ensuring sustainability and resilience",
+                                            "parent": 134,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 136,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.1.2.",
+                                            "description": "Providing ecosystems services and public goods",
+                                            "parent": 134,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 137,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.1.3.",
+                                            "description": "Empowerment of rural areas, support to policies and rural innovation",
+                                            "parent": 134,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 138,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.1.4.",
+                                            "description": "Sustainable forestry",
+                                            "parent": 134,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 139,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.2.2.",
+                                    "description": " Sustainable and competitive agri-food sector for a safe and healthy diet",
+                                    "parent": 289,
+                                    "children": [
+                                        {
+                                            "id": 140,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.2.1.",
+                                            "description": "Informed consumer choices",
+                                            "parent": 139,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 141,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.2.2.",
+                                            "description": "Healthy and safe foods and diets for all",
+                                            "parent": 139,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 142,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.2.3.",
+                                            "description": "A sustainable and competitive agri-food industry",
+                                            "parent": 139,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 143,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.2.3.",
+                                    "description": "Unlocking the potential of aquatic living resources",
+                                    "parent": 289,
+                                    "children": [
+                                        {
+                                            "id": 144,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.3.1.",
+                                            "description": "Developing sustainable and environmentally-friendly fisheries",
+                                            "parent": 143,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 145,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.3.2.",
+                                            "description": "Developing competitive and environmentally-friendly European aquaculture",
+                                            "parent": 143,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 146,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.3.3.",
+                                            "description": "Boosting marine and maritime innovation through biotechnology",
+                                            "parent": 143,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 147,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.2.4.",
+                                    "description": "Sustainable and competitive bio-based industries and supporting the development of a European bio-economy",
+                                    "parent": 289,
+                                    "children": [
+                                        {
+                                            "id": 148,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.4.1.",
+                                            "description": "Fostering the bio-economy for bio-based industries",
+                                            "parent": 147,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 149,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.4.2.",
+                                            "description": "Developing integrated biorefineries",
+                                            "parent": 147,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 150,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.4.3.",
+                                            "description": "Supporting market development for bio-based products and processes",
+                                            "parent": 147,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 151,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.2.5.",
+                                    "description": "Cross-cutting marine and maritime research",
+                                    "parent": 289,
+                                    "children": [
+                                        {
+                                            "id": 152,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.5.1.",
+                                            "description": "Climate change impact on marine ecosystems and maritime economy",
+                                            "parent": 151,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 153,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.5.2.",
+                                            "description": "Develop the potential of marine resources through an integrated approach",
+                                            "parent": 151,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 154,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.5.3.",
+                                            "description": "Cross-cutting concepts and technologies enabling maritime growth",
+                                            "parent": 151,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 279,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.2.6.",
+                                    "description": "Bio-based Industries Joint Technology Initiative (BBI-JTI)",
+                                    "parent": 289,
+                                    "children": [
+                                        {
+                                            "id": 280,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.6.1.",
+                                            "description": "Sustainable and competitive bio-based industries and supporting the development of a European bio-economy",
+                                            "parent": 279,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 281,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.6.2.",
+                                            "description": "Fostering the bio-economy for bio-based industrie",
+                                            "parent": 279,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 282,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.2.6.3.",
+                                            "description": "Sustainable biorefineries",
+                                            "parent": 279,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 290,
+                            "ccm2Level": 4,
+                            "code": "EU.3.3.",
+                            "description": "Secure, clean and efficient energy",
+                            "parent": 113,
+                            "children": [
+                                {
+                                    "id": 155,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.1.",
+                                    "description": "Reducing energy consumption and carbon foorpint by smart and sustainable use",
+                                    "parent": 290,
+                                    "children": [
+                                        {
+                                            "id": 156,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.1.1.",
+                                            "description": "Bring to mass market technologies and services for a smart and efficient energy use",
+                                            "parent": 155,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 157,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.1.2.",
+                                            "description": "Unlock the potential of efficient and renewable heating-cooling systems",
+                                            "parent": 155,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 158,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.1.3.",
+                                            "description": "Foster European Smart cities and Communities",
+                                            "parent": 155,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 159,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.2.",
+                                    "description": "Low-cost, low-carbon energy supply",
+                                    "parent": 290,
+                                    "children": [
+                                        {
+                                            "id": 160,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.2.1.",
+                                            "description": "Develop the full potential of wind energy",
+                                            "parent": 159,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 161,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.2.2.",
+                                            "description": "Develop efficient, reliable and cost-competitive solar energy systems",
+                                            "parent": 159,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 162,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.2.3.",
+                                            "description": "Develop competitive and environmentally safe technologies for CO2 capture, transport, storage and re-use",
+                                            "parent": 159,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 163,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.2.4.",
+                                            "description": "Develop geothermal, hydro, marine and other renewable energy options",
+                                            "parent": 159,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 164,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.3.",
+                                    "description": "Alternative fuels and mobile energy sources",
+                                    "parent": 290,
+                                    "children": [
+                                        {
+                                            "id": 165,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.3.1.",
+                                            "description": "Make bio-energy more competitive and sustainable",
+                                            "parent": 164,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 166,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.3.2.",
+                                            "description": "Reducing time to market for hydrogen and fuel cells technologies",
+                                            "parent": 164,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 167,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.3.3.",
+                                            "description": "New alternative fuels",
+                                            "parent": 164,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 168,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.4.",
+                                    "description": "A single, smart European electricity grid",
+                                    "parent": 290,
+                                    "children": []
+                                },
+                                {
+                                    "id": 169,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.5.",
+                                    "description": "New knowledge and technologies",
+                                    "parent": 290,
+                                    "children": []
+                                },
+                                {
+                                    "id": 170,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.6.",
+                                    "description": "Robust decision making and public engagement",
+                                    "parent": 290,
+                                    "children": []
+                                },
+                                {
+                                    "id": 171,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.7.",
+                                    "description": "Market uptake of energy innovation",
+                                    "parent": 290,
+                                    "children": []
+                                },
+                                {
+                                    "id": 249,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.3.8.",
+                                    "description": "FCH2 (energy objectives)",
+                                    "parent": 290,
+                                    "children": [
+                                        {
+                                            "id": 250,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.8.1.",
+                                            "description": "Increase the electrical efficiency and the durability of the different fuel cells used for power production to levels which can compete with conventional technologies, while reducing costs",
+                                            "parent": 249,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 251,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.8.2.",
+                                            "description": "Increase the energy efficiency of production of hydrogen mainly from water electrolysis and renewable sources while reducing operating and capital costs, so that the combined system of the hydrogen production and the conversion using the fuel cell system can compete with the alternatives for electricity production available on the market",
+                                            "parent": 249,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 252,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.3.8.3.",
+                                            "description": "Demonstrate on a large scale the feasibility of using hydrogen to support integration of renewable energy sources into the energy systems, including through its use as a competitive energy storage medium for electricity produced from renewable energy sources",
+                                            "parent": 249,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 291,
+                            "ccm2Level": 4,
+                            "code": "EU.3.4.",
+                            "description": "Smart, green and integrated transport",
+                            "parent": 113,
+                            "children": [
+                                {
+                                    "id": 172,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.1.",
+                                    "description": "Resource efficient transport that respects the environment",
+                                    "parent": 291,
+                                    "children": [
+                                        {
+                                            "id": 173,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.1.1.",
+                                            "description": "Making aircraft, vehicles and vessels cleaner and quieter will improve environmental performance and reduce perceived noise and vibration",
+                                            "parent": 172,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 174,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.1.2.",
+                                            "description": "Developing smart equipment, infrastructures and services",
+                                            "parent": 172,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 175,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.1.3.",
+                                            "description": "Improving transport and mobility in urban areas",
+                                            "parent": 172,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 176,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.2.",
+                                    "description": "Better mobility, less congestion, more safety and security",
+                                    "parent": 291,
+                                    "children": [
+                                        {
+                                            "id": 177,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.2.1.",
+                                            "description": "A substantial reduction of traffic congestion",
+                                            "parent": 176,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 178,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.2.2.",
+                                            "description": "Substantial improvements in the mobility of people and freight",
+                                            "parent": 176,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 179,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.2.3.",
+                                            "description": "Developing new concepts of freight transport and logistics",
+                                            "parent": 176,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 180,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.2.4.",
+                                            "description": "Reducing accident rates, fatalities and casualties and improving security",
+                                            "parent": 176,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 181,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.3.",
+                                    "description": "Global leadership for the European transport industry",
+                                    "parent": 291,
+                                    "children": [
+                                        {
+                                            "id": 182,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.3.1.",
+                                            "description": "Developing the next generation of transport means as the way to secure market share in the future",
+                                            "parent": 181,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 183,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.3.2.",
+                                            "description": "On board, smart control systems",
+                                            "parent": 181,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 184,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.3.3.",
+                                            "description": "Advanced production processes",
+                                            "parent": 181,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 185,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.3.4.",
+                                            "description": "Exploring entirely new transport concepts",
+                                            "parent": 181,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 186,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.4.",
+                                    "description": "Socio-economic and behavioural research and forward looking activities for policy making",
+                                    "parent": 291,
+                                    "children": []
+                                },
+                                {
+                                    "id": 253,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.6.",
+                                    "description": "FCH2 (transport objectives)",
+                                    "parent": 291,
+                                    "children": [
+                                        {
+                                            "id": 254,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.6.1.",
+                                            "description": "Reduce the production cost of fuel cell systems to be used in transport applications, while increasing their lifetime to levels which can compete with conventional technologies",
+                                            "parent": 253,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 271,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.5",
+                                    "description": "CLEANSKY2",
+                                    "parent": 291,
+                                    "children": [
+                                        {
+                                            "id": 272,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.1.",
+                                            "description": "IADP Large Passenger Aircraft",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 273,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.2.",
+                                            "description": "IADP Regional Aircraft",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 274,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.3.",
+                                            "description": "IADP Fast Rotorcraft",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 275,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.4.",
+                                            "description": "ITD Airframe",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 276,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.5.",
+                                            "description": "ITD Engines",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 277,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.6.",
+                                            "description": "ITD Systems",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 278,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.9.",
+                                            "description": "Technology Evaluator",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 309,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.7.",
+                                            "description": "Small Air Transport (SAT) Transverse Area",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 310,
+                                            "ccm2Level": 8,
+                                            "code": "EU.3.4.5.8.",
+                                            "description": "ECO Transverse  Area",
+                                            "parent": 271,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 367300,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.5.10.",
+                                            "description": "Thematic Topics",
+                                            "parent": 271,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 1050,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.7.",
+                                    "description": "SESAR JU",
+                                    "parent": 291,
+                                    "children": [
+                                        {
+                                            "id": 1051,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.7.1",
+                                            "description": "Exploratory Research",
+                                            "parent": 1050,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 3055,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.4.8.",
+                                    "description": "Shift2Rail JU",
+                                    "parent": 291,
+                                    "children": [
+                                        {
+                                            "id": 3050,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.8.1.",
+                                            "description": "Innovation Programme 1 (IP1): Cost-efficient and reliable trains",
+                                            "parent": 3055,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 3051,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.8.5.",
+                                            "description": "Innovation Programme 5: Technologies for sustainable and attractive European rail freight",
+                                            "parent": 3055,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 3052,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.8.2.",
+                                            "description": "Innovation Programme 2: Advanced traffic management and control systems",
+                                            "parent": 3055,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 3053,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.8.6.",
+                                            "description": "Cross-cutting themes and activities (CCA)",
+                                            "parent": 3055,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 3054,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.8.4.",
+                                            "description": "Innovation Programme 4: IT Solutions for attractive railway services",
+                                            "parent": 3055,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 3056,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.4.8.3.",
+                                            "description": "Innovation Programme 3: Cost Efficient and Reliable High Capacity Infrastructure",
+                                            "parent": 3055,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 292,
+                            "ccm2Level": 4,
+                            "code": "EU.3.5.",
+                            "description": "Climate action, environment,  resource efficiency and raw materials",
+                            "parent": 113,
+                            "children": [
+                                {
+                                    "id": 187,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.5.1.",
+                                    "description": "Fighting and adapting to climate change",
+                                    "parent": 292,
+                                    "children": [
+                                        {
+                                            "id": 188,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.1.1.",
+                                            "description": "Improve the understanding of climate change and the provision of reliable climate projections",
+                                            "parent": 187,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 189,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.1.2.",
+                                            "description": "Assess impacts, vulnerabilities and develop innovative cost-effective adaptation and risk prevention and management measures",
+                                            "parent": 187,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 190,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.1.3.",
+                                            "description": "Support mitigation policies, including studies that focus on impact from other sectoral policies",
+                                            "parent": 187,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 191,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.5.2.",
+                                    "description": "Protection of the environment, sustainable management of natural resources, water , biodiversity and ecosystems",
+                                    "parent": 292,
+                                    "children": [
+                                        {
+                                            "id": 192,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.2.1.",
+                                            "description": "Further our understanding of biodiversity and the functioning of ecosystems, their interactions with social systems and their role in sustaining the economy and human well-being",
+                                            "parent": 191,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 193,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.2.2.",
+                                            "description": "Developing integrated approaches to address water-related challenges and the transition to sustainable management and use of water resources and services",
+                                            "parent": 191,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 194,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.2.3.",
+                                            "description": "Provide knowledge and tools for effective decision making and public engagement",
+                                            "parent": 191,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 195,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.5.3.",
+                                    "description": " Ensuring the sustainable supply of non-energy and non-agricultural raw materials",
+                                    "parent": 292,
+                                    "children": [
+                                        {
+                                            "id": 196,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.3.1.",
+                                            "description": "Improve the knowledge base on the availability of raw materials",
+                                            "parent": 195,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 197,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.3.2.",
+                                            "description": "Promote the sustainable supply and use of raw materials, including mineral resources, from land and sea, covering exploration, extraction, processing, re-use, recycling and recovery",
+                                            "parent": 195,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 198,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.3.3.",
+                                            "description": "Find alternatives for critical raw materials",
+                                            "parent": 195,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 199,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.3.4.",
+                                            "description": "Improve societal awareness and skills on raw materials",
+                                            "parent": 195,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 200,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.5.4.",
+                                    "description": "Enabling the transition towards a green economy and society through eco-innovation",
+                                    "parent": 292,
+                                    "children": [
+                                        {
+                                            "id": 201,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.4.1.",
+                                            "description": "Strengthen  eco-innovative technologies, processes, services and products including exploring ways to reduce the quantities of raw materials in production and consumption, and overcoming barriers in this context and boost their market uptake",
+                                            "parent": 200,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 202,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.4.2.",
+                                            "description": "Support innovative policies and societal changes",
+                                            "parent": 200,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 203,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.4.3.",
+                                            "description": "Measure and assess progress towards a green economy",
+                                            "parent": 200,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 204,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.4.4.",
+                                            "description": "Foster resource efficiency through digital systems",
+                                            "parent": 200,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 205,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.5.5.",
+                                    "description": "Developing comprehensive and sustained global environmental observation and information systems",
+                                    "parent": 292,
+                                    "children": []
+                                },
+                                {
+                                    "id": 206,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.5.6.",
+                                    "description": "Cultural heritage",
+                                    "parent": 292,
+                                    "children": [
+                                        {
+                                            "id": 207,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.6.1.",
+                                            "description": "Identifying resilience levels via observations, monitoring and modelling",
+                                            "parent": 206,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 208,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.6.2.",
+                                            "description": "Providing for a better understanding on how communities perceive and respond to climate change and seismic and volcanic hazards",
+                                            "parent": 206,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 255,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.5.7.",
+                                    "description": "FCH2 (raw materials objective)",
+                                    "parent": 292,
+                                    "children": [
+                                        {
+                                            "id": 256,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.5.7.1.",
+                                            "description": "Reduce the use of the EU defined \"Critical raw materials\", for instance through low platinum or platinum free resources and through recycling or reducing or avoiding the use of rare earth elements",
+                                            "parent": 255,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 293,
+                            "ccm2Level": 4,
+                            "code": "EU.3.6.",
+                            "description": "Europe in a changing world - inclusive, innovative and reflective societies",
+                            "parent": 113,
+                            "children": [
+                                {
+                                    "id": 209,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.6.1.",
+                                    "description": "Inclusive societies",
+                                    "parent": 293,
+                                    "children": [
+                                        {
+                                            "id": 210,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.1.1.",
+                                            "description": "The mechanisms to promote smart, sustainable and inclusive growth",
+                                            "parent": 209,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 211,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.1.2.",
+                                            "description": "Trusted organisations, practices, services and policies that are necessary to build resilient, inclusive, participatory, open and creative societies in Europe, in particular taking into account migration, integration and demographic change",
+                                            "parent": 209,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 212,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.1.3.",
+                                            "description": "Europe\u0027s role as a global actor, notably regarding human rights and global justice",
+                                            "parent": 209,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 213,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.1.4.",
+                                            "description": "The promotion of sustainable and inclusive environments through innovative spatial and urban planning and design",
+                                            "parent": 209,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 214,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.6.2.",
+                                    "description": "Innovative societies",
+                                    "parent": 293,
+                                    "children": [
+                                        {
+                                            "id": 215,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.2.2.",
+                                            "description": "Explore new forms of innovation, with special emphasis on social innovation and creativity and understanding how all forms of innovation are developed, succeed or fail",
+                                            "parent": 214,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 216,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.2.3.",
+                                            "description": "Make use of the innovative, creative and productive potential of all generations",
+                                            "parent": 214,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 217,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.2.4.",
+                                            "description": "Promote coherent and effective cooperation with third countries",
+                                            "parent": 214,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 243,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.2.1.",
+                                            "description": "Strengthen the evidence base and support for the Innovation Union and ERA",
+                                            "parent": 214,
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": 218,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.6.3.",
+                                    "description": "Reflective societies - cultural heritage and European identity",
+                                    "parent": 293,
+                                    "children": [
+                                        {
+                                            "id": 219,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.3.1.",
+                                            "description": "Study European heritage, memory, identity, integration and cultural interaction and translation, including its representations in cultural and scientific collections, archives and museums, to better inform and understand the present by richer interpretations of the past",
+                                            "parent": 218,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 220,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.3.3.",
+                                            "description": "Research on Europe\u0027s role in the world, on the mutual influence and ties between the world regions, and a view from outside on European cultures",
+                                            "parent": 218,
+                                            "children": []
+                                        },
+                                        {
+                                            "id": 244,
+                                            "ccm2Level": 6,
+                                            "code": "EU.3.6.3.2.",
+                                            "description": "Research into European countries\u0027 and regions\u0027 history, literature, art, philosophy and religions and how these have informed contemporary European diversity",
+                                            "parent": 218,
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 294,
+                            "ccm2Level": 4,
+                            "code": "EU.3.7.",
+                            "description": "Secure societies - protecting freedom and security of Europe and its citizens",
+                            "parent": 113,
+                            "children": [
+                                {
+                                    "id": 221,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.1.",
+                                    "description": "Fight crime, illegal trafficking and terrorism, including understanding and tackling terrorist ideas and beliefs",
+                                    "parent": 294,
+                                    "children": []
+                                },
+                                {
+                                    "id": 222,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.2.",
+                                    "description": "Protect and improve the resilience of critical infrastructures, supply chains and tranport modes",
+                                    "parent": 294,
+                                    "children": []
+                                },
+                                {
+                                    "id": 223,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.3.",
+                                    "description": "Strengthen security through border management",
+                                    "parent": 294,
+                                    "children": []
+                                },
+                                {
+                                    "id": 224,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.4.",
+                                    "description": "Improve cyber security",
+                                    "parent": 294,
+                                    "children": []
+                                },
+                                {
+                                    "id": 225,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.5.",
+                                    "description": "Increase Europe\u0027s resilience to crises and disasters",
+                                    "parent": 294,
+                                    "children": []
+                                },
+                                {
+                                    "id": 226,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.6.",
+                                    "description": "Ensure privacy and freedom, including in the Internet and enhance the societal, legal and ethical understanding of all areas of security, risk and management",
+                                    "parent": 294,
+                                    "children": []
+                                },
+                                {
+                                    "id": 227,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.7.",
+                                    "description": "Enhance stadardisation and interoperability of systems, including for emergency purposes",
+                                    "parent": 294,
+                                    "children": []
+                                },
+                                {
+                                    "id": 311,
+                                    "ccm2Level": 5,
+                                    "code": "EU.3.7.8.",
+                                    "description": "Support the Union\u0027s external security policies including through conflict prevention and peace-building",
+                                    "parent": 294,
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,10 +1,12 @@
 import Call from '../components/Call';
 import Calls from '../components/Calls';
+import CallsTable from '../components/CallsTable';
 import Carousel from '../components/Carousel';
 import Expretize from '../components/Expretize';
 import Keywords from '../components/Keywords';
 import KeywordsPortalTree from '../components/KeywordsPortalTree';
 import Profile from '../components/Profile';
+import Programme from '../components/Programme';
 
 
 export default {
@@ -34,6 +36,16 @@ export default {
             path: '/calls',
             name: 'Calls',
             component: Calls
+        },
+        {
+            path: '/calls-table',
+            name: 'CallsTable',
+            component: CallsTable
+        },
+        {
+            path: '/programme',
+            name: 'Programme',
+            component: Programme
         },
         {
             path: '/Keywords',
