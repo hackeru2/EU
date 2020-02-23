@@ -1,6 +1,18 @@
 <template>
   <el-row :gutter="20" v-load="load">
-    <el-table :data="mCalls.length ? mCalls : calls" style="width: 100%" border>
+    <div class="block">
+      <span class="demonstration">All combined</span>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-sizes="[25, 50 ,100, 200, 300, 400]"
+        :page-size="25"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="calls.length"
+      ></el-pagination>
+    </div>
+    <el-table :data="callsChunck[currentPage]" style="width: 100%" border>
       <el-table-column prop="title" label="CALL TABLE">
         <template slot-scope="scope">
           <div
@@ -47,6 +59,15 @@
               </el-table-column>
               <el-table-column prop="url" label="Links">
                 <template slot-scope="scope">
+                  <el-button
+                    type="primary"
+                    plain
+                    style="width:100%"
+                    @click="goto('../calls/'+scope.row.identifier.toLowerCase())"
+                  >
+                    SHOW
+                    <!-- <router-link :to="`calls/${scope.row.identifier.toLowerCase()}`">Show</router-link> -->
+                  </el-button>
                   {{callLinksWP(scope.row.workProgrammepart)}}
                   <br />
                   <a
@@ -70,6 +91,12 @@ export default {
   components: { Budget },
   data() {
     return {
+      callsChunck: [],
+      currentPage: 1,
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4,
       typeTags: ["primary", "success", "info", "warning", "danger"],
       meKW: [],
       intersectionOptions: {
@@ -93,16 +120,16 @@ export default {
   },
   async created() {
     this.load = true;
-    if (localStorage.calls && 1 == 2)
-      this.setMCalls(JSON.parse(localStorage.getItem("calls")));
+    //if (localStorage.calls && 1 == 2)
+    //this.setMCalls(JSON.parse(localStorage.getItem("calls")));
     //return (this.calls = JSON.parse(localStorage.getItem("calls")));
-    else {
-      this.meKW = await JSON.parse(
-        localStorage.getItem("authUser")
-      ).keywords.map(a => a.description);
+    //else {
+    this.meKW = await JSON.parse(localStorage.getItem("authUser")).keywords.map(
+      a => a.description
+    );
 
-      this.getBigJson(this.meKW);
-    }
+    this.getBigJson(this.meKW);
+    //}
   },
 
   //   mounted() {
@@ -187,9 +214,29 @@ export default {
   },
 
   methods: {
+    async visibilityChanged(e) {
+      //if (!e) return console.log(e);
+      console.log("in visibility change");
+      let myID = await this.getTopicDetails(this.id);
+      //this.budg = myID.ccm2Id;
+      //this.budg = this.topicDetails[this.id].ccm2Id;
+      //console.log(this.topicDetails[this.id].ccm2Id);
+    },
+    goto(url) {
+      //alert(url);
+      return this.$router.push({ path: url, query: { plan: "private" } });
+    },
+    handleSizeChange(val) {
+      console.log(`${val} items per page`);
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      console.log(`current page: ${val}`);
+    },
     visibilityChanged(E) {
       console.log(E);
     },
+
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
       if (rowIndex % 2 === 0) {
         if (columnIndex === 0) {
@@ -217,7 +264,7 @@ export default {
     //   console.log(t_details);
     // },
     ...mapMutations(["setGroupedKeyWords", "setMCalls"]),
-    //...mapActions(["getTopicDetails"]),
+    ...mapActions(["getTopicDetails"]),
 
     async getBigJson(meKW) {
       //   this.load = true;
@@ -270,7 +317,8 @@ export default {
 
         localStorage.setItem("calls", JSON.stringify(bigJson));
         this.calls = _.orderBy(bigJson, "score", "desc");
-        this.setMCalls(this.calls);
+        this.callsChunck = _.chunk(this.calls, 20);
+        //  this.setMCalls(this.calls);
       } catch (error) {
         //window.location.reload();
       }

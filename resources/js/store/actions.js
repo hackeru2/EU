@@ -42,7 +42,7 @@ export default {
         let { data: me
         } = await axios.get(`me`);
         commit('setMe', me);
-
+        console.log(axios.defaults.baseURL)
         if (me.profile.topics) commit('setMeTopics', me.profile.topics);
 
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Banner :title="infos.title" />
-    <el-container>
+    <el-container v-loading="loading">
       <el-main>
         <CallTable />
         <el-card
@@ -41,15 +41,20 @@ export default {
   components: { CallTable, Banner },
   data() {
     return {
+      loading: false,
       infos: []
     };
   },
-  created() {
+  async created() {
     let id = this.$route;
-    console.log({ id });
-    if (!this.topicDetails[this.$route.params.id])
-      this.$router.replace("/calls");
-    else this.infos = this.topicDetails[this.$route.params.id];
+
+    if (!this.topicDetails[this.$route.params.id]) {
+      this.loading = true;
+      await this.getTopicDetails(this.$route.params.id);
+      this.infos = this.topicDetails[this.$route.params.id];
+      console.log(this.infos);
+      this.loading = false;
+    } else this.infos = this.topicDetails[this.$route.params.id];
     //console.log(this.topicDetails);
   },
   mounted() {
@@ -58,6 +63,7 @@ export default {
     console.log("mounted-end");
   },
   methods: {
+    ...mapActions(["getTopicDetails"]),
     setHtml(datas) {
       let htmlArr = "<div>";
       if (typeof datas == "object") {
