@@ -1,5 +1,6 @@
 export default {
-
+    allProgrammes: [],
+    mainProgrammes: [],
     updateFlags: [],
     mCalls: [],
     firstState: "firstState"

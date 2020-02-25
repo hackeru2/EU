@@ -1,22 +1,55 @@
 <template>
-  <el-container style="min-height: 100vw">
-    <Slide class="hidden-md-and-up">
-      <router-link to="/keywords">keywords</router-link>
-      <router-link to="/calls">Calls</router-link>
-      <router-link to="/calls-table">Table</router-link>
-      <router-link to="/profile">Profile</router-link>
-    </Slide>
-
+  <el-container>
+    <el-aside width="200px" class="hidden-md-and-down" style="background-color: rgb(238, 241, 246)">
+      <el-menu
+        default-active="2"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        :collapse="true"
+      >
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title">Navigator One</span>
+          </template>
+          <el-menu-item-group>
+            <span slot="title">Group One</span>
+            <el-menu-item index="1-1">item one</el-menu-item>
+            <el-menu-item index="1-2">item two</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="Group Two">
+            <el-menu-item index="1-3">item three</el-menu-item>
+          </el-menu-item-group>
+          <el-submenu index="1-4">
+            <span slot="title">item four</span>
+            <el-menu-item index="1-4-1">item one</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-menu-item index="2">
+          <i class="el-icon-menu"></i>
+          <span slot="title">Navigator Two</span>
+        </el-menu-item>
+        <el-menu-item index="3" disabled>
+          <i class="el-icon-document"></i>
+          <span slot="title">Navigator Three</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-setting"></i>
+          <span slot="title">Navigator Four</span>
+        </el-menu-item>
+      </el-menu>
+    </el-aside>
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
         <!-- <span class="title">{{ fit }}</span> -->
 
         <img
-          style="background-color:gray;height:60px;padding:2px;margin-right:20px;margin-left:40px;float:left"
+          style="background-color:gray;height:60px;padding:2px;margin-right:20px;float:left"
           :src="url"
         />
 
-        <div style="float:left" class="hidden-sm-and-down">
+        <div style="float:left">
           <router-link to="/keywords">keywords</router-link>
           <el-divider direction="vertical"></el-divider>
 
@@ -26,32 +59,20 @@
           <el-divider direction="vertical"></el-divider>
           <router-link to="/profile">Profile</router-link>
         </div>
-        <el-dropdown style="cursor:pointer">
+        <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>
-              <el-tooltip
-                :content="'Show calls with obsolete programms: ' + programmToggle"
-                placement="top"
-              >
-                <el-switch
-                  v-model="programmToggle"
-                  active-color="#13ce66"
-                  inactive-color="#ff4949"
-                  :active-value="true"
-                  :inactive-value="false"
-                ></el-switch>
-              </el-tooltip>
-            </el-dropdown-item>
+            <el-dropdown-item>View</el-dropdown-item>
             <el-dropdown-item>Add</el-dropdown-item>
             <el-dropdown-item>Delete</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>{{authUser.name}}</span>
-        <!-- {{isCollapse}} -->
+        <span>{{authUser.name}} {{isCollapse}}</span>
       </el-header>
+
+      <el-button style="left:38px;position:absolute" @click="isCollapse = !isCollapse">C</el-button>
       <el-main>
-        <router-view :programmToggle="programmToggle"></router-view>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -71,7 +92,6 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-import { Slide } from "vue-burger-menu"; // import the CSS transitions you wish to use, in this case we are using `Slide`
 
 export default {
   data() {
@@ -81,7 +101,6 @@ export default {
       address: "No. 189, Grove St, Los Angeles"
     };
     return {
-      programmToggle: false,
       isCollapse: false,
       tableData: Array(20).fill(item),
       fits: ["fill"],
@@ -92,7 +111,6 @@ export default {
   beforeCreate() {
     this.$store.dispatch("meAct");
   },
-  components: { Slide },
   created() {},
   computed: {
     ...mapState(["meKeywords"]),
@@ -124,15 +142,7 @@ export default {
   height: 50px;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
+  width: 300px;
   min-height: 400px;
-}
-.bm-burger-button {
-  position: absolute;
-  width: 36px;
-  height: 30px;
-  left: 12px;
-  top: 16px;
-  cursor: pointer;
 }
 </style>

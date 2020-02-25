@@ -1,5 +1,13 @@
 <template>
   <el-row :gutter="20" v-load="load">
+    <el-checkbox-group v-model="checkboxGroup1">
+      <el-checkbox-button
+        v-for="(item, index) in mainProgrammes"
+        :label="item.description"
+        :key="index"
+        :checked="true"
+      ></el-checkbox-button>
+    </el-checkbox-group>
     <div class="block">
       <span class="demonstration">All combined</span>
       <el-pagination
@@ -88,9 +96,11 @@ import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 import Budget from "./Budget";
 
 export default {
+  props: ["programmToggle"],
   components: { Budget },
   data() {
     return {
+      checkboxGroup1: [],
       callsChunck: [],
       currentPage: 1,
       currentPage1: 5,
@@ -118,7 +128,13 @@ export default {
       flags: []
     };
   },
+  watch: {
+    programmToggle(o, n) {
+      this.getBigJson(this.meKW);
+    }
+  },
   async created() {
+    await this.callProgram();
     this.load = true;
     //if (localStorage.calls && 1 == 2)
     //this.setMCalls(JSON.parse(localStorage.getItem("calls")));
@@ -132,14 +148,14 @@ export default {
     //}
   },
 
-  //   mounted() {
-  //     this.$nextTick(() => {
-  //       this.calls = Object.values(this.calls).map(c => {
-  //         let i = c.identifier.toLowerCase();
-  //         return c;
-  //       });
-  //     });
-  //   },
+  mounted() {
+    // this.$nextTick(() => {
+    //   this.calls = Object.values(this.calls).map(c => {
+    //     let i = c.identifier.toLowerCase();
+    //     return c;
+    //   });
+    // });
+  },
   updated() {
     this.setGroupedKeyWords(this.kWordsGrouped);
   },
@@ -210,7 +226,13 @@ export default {
     //     return this.topicDetails;
     //   } catch (error) {}
     // },
-    ...mapState(["topicDetails", "me", "meKeywords", "mCalls"])
+    ...mapState([
+      "topicDetails",
+      "me",
+      "meKeywords",
+      "mCalls",
+      "mainProgrammes"
+    ])
   },
 
   methods: {
@@ -264,7 +286,7 @@ export default {
     //   console.log(t_details);
     // },
     ...mapMutations(["setGroupedKeyWords", "setMCalls"]),
-    ...mapActions(["getTopicDetails"]),
+    ...mapActions(["getTopicDetails", "callProgram"]),
 
     async getBigJson(meKW) {
       //   this.load = true;
@@ -277,9 +299,15 @@ export default {
           .filter(c => {
             this.flags.push(c.flags);
             // this.callTitles.push(c.callTitle);
+            let pda = c.programmeDivision.map(pd => pd.description); //programmDivisionArray
+            let mpd = this.mainProgrammes.map(mp => mp.description); // mainProgrammesDescription
+            let intersection = this.programmToggle
+              ? ["hasIntersection"]
+              : _.intersection(pda, mpd);
             return (
               c.status.abbreviation != "Closed" &&
-              c.status.description != "Closed"
+              c.status.description != "Closed" &&
+              intersection.length
             );
           })
           .map(c => {

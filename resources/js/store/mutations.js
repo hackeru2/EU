@@ -103,4 +103,13 @@ export default {
     // }
     //     state.topics.find(t => t.name == topic).active = true;
     // });
+    ,
+    setAllProgrammes(state, programmes) {
+        state.allProgrammes = programmes
+    }
+    ,
+    setMainProgrammes(state, programmes) {
+        state.mainProgrammes = programmes
+    }
+
 }

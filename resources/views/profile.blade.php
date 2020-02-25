@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('css/my-spinner.css')}}">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/display.css">
+    <link href="{{ asset('css/index.scss') }}" rel="stylesheet">  
+    {{-- <link href="{{ asset('css/variables.scss') }}" rel="stylesheet">   --}}
     <!-- import JavaScript -->
 
     <title>Document</title>

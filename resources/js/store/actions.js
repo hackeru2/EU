@@ -47,6 +47,17 @@ export default {
 
 
     },
+    async callProgram({ state, getters, commit, dispatch }) {
+        let { data: callProgram
+        } = await axios.get(`programmes`);
+        commit('setAllProgrammes', callProgram.all);
+        commit('setMainProgrammes', callProgram.level2);
+        // console.log(axios.defaults.baseURL)
+        // if (me.profile.topics) commit('setMeTopics', me.profile.topics);
+
+
+    },
+
     async keywordsAct({ state, getters, commit, dispatch }, text) {
 
         let { data: keywords
