@@ -15,7 +15,7 @@ class ProgrammeController extends Controller
     public function index()
     {
         $programme = Programme::all();
-        $level2 = Programme::where('ccm2Level', '<' , 4)->get();    
+        $level2 = Programme::where('ccm2Level', '<' , 5)->where('ccm2Level', '>' , 2) ->get();    
         return response (['all' => $programme , 'level2' => $level2]);
     }
 

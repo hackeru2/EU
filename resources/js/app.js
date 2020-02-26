@@ -26,6 +26,8 @@ locale.use(lang)
 
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
+Vue.config.debug = true
 let vMyDirective = {}
 vMyDirective.install = function install(_Vue) {
     let _uid = 'vue-directive-loading' + Date.now().toString('16')

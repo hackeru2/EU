@@ -1,13 +1,27 @@
 <template>
   <el-row :gutter="20" v-load="load">
-    <el-checkbox-group v-model="checkboxGroup1">
-      <el-checkbox-button
-        v-for="(item, index) in mainProgrammes"
-        :label="item.description"
-        :key="index"
-        :checked="true"
-      ></el-checkbox-button>
-    </el-checkbox-group>
+    <el-collapse v-model="activeNames" @change="handleChangeCollapse">
+      <el-collapse-item title="Programmes" name="1">
+        <el-card>
+          <el-checkbox-group v-model="checkboxGroup1" @change="getBigJson(meKW)">
+            <!-- @change="log" -->
+            <el-checkbox-button
+              class="white-space-n"
+              v-for="(item, index) in mainProgrammes"
+              :label="item.description"
+              :key="index"
+            ></el-checkbox-button>
+            <!-- :checked="true" -->
+          </el-checkbox-group>
+        </el-card>
+      </el-collapse-item>
+      <el-collapse-item title="Tags" name="2">
+        <el-checkbox-group v-model="tagList">
+          <el-checkbox :checked="true" v-for="(item, index) in tagsFlat" :key="index" :label="item"></el-checkbox>
+        </el-checkbox-group>
+      </el-collapse-item>
+    </el-collapse>
+
     <div class="block">
       <span class="demonstration">All combined</span>
       <el-pagination
@@ -21,7 +35,7 @@
       ></el-pagination>
     </div>
     <el-table :data="callsChunck[currentPage]" style="width: 100%" border>
-      <el-table-column prop="title" label="CALL TABLE">
+      <el-table-column prop="title" label="CALL TABLE" style="width: 100%">
         <template slot-scope="scope">
           <div
             style="color:white;padding:5px;white-space:normal;text-align:center;backgroundColor:#9a9ae9"
@@ -38,6 +52,7 @@
                     :key="i"
                     :type="typeTags[(i  % 5)]"
                     :value="i "
+                    @click.native="toggleTag"
                   >
                     <el-button style="font-size:10px" size="mini">{{item}}</el-button>
                   </el-badge>
@@ -100,7 +115,14 @@ export default {
   components: { Budget },
   data() {
     return {
-      checkboxGroup1: [],
+      activeNames: ["1"],
+      tagList: [],
+      excluded: {},
+      checkboxGroup1: [
+        "JRC direct actions",
+        "Excellent Science",
+        "Science with and for Society"
+      ],
       callsChunck: [],
       currentPage: 1,
       currentPage1: 5,
@@ -160,6 +182,9 @@ export default {
     this.setGroupedKeyWords(this.kWordsGrouped);
   },
   computed: {
+    tagsFlat() {
+      return Object.keys(_.invert({ ...this.tags.flat() }));
+    },
     ...mapGetters(["authUser"]),
     flagsLengthFilterd() {
       return this.flagsLength.filter(fl => fl.flagsLength);
@@ -236,6 +261,22 @@ export default {
   },
 
   methods: {
+    toggleTag(tag) {
+      tag = tag.target.textContent;
+      if (this.tagList.includes(tag))
+        this.tagList = this.tagList.filter(t => t != tag);
+      else this.tagList.push(tag);
+      return this.getBigJson(this.meKW);
+    },
+    handleChangeCollapse(val) {
+      console.log(val);
+    },
+    log(isCheck, event) {
+      this.excluded[event.target.value] = {
+        active: isCheck ? true : false,
+        name: event.target.value
+      };
+    },
     async visibilityChanged(e) {
       //if (!e) return console.log(e);
       console.log("in visibility change");
@@ -299,19 +340,36 @@ export default {
           .filter(c => {
             this.flags.push(c.flags);
             // this.callTitles.push(c.callTitle);
+
+            //***************Toggle Button***********//
+
             let pda = c.programmeDivision.map(pd => pd.description); //programmDivisionArray
             let mpd = this.mainProgrammes.map(mp => mp.description); // mainProgrammesDescription
-            let intersection = this.programmToggle
+            let iUSP = _.intersection(pda, this.checkboxGroup1); //intersection-user-selected-programme
+            //console.log({ checkboxGroup1 });
+            let intersectionToggle = this.programmToggle
               ? ["hasIntersection"]
               : _.intersection(pda, mpd);
+
+            //END***************Toggle Button***********//
+
+            //***************Tags Intersection***********//
+            let intersectionTag = _.intersection(c.tags, this.tagList);
+            if (!this.tagList.length)
+              intersectionTag = ["Perform only if not empty"];
+
+            //END***************Tags Intersection***********//
+            console.log({ intersectionTag });
             return (
               c.status.abbreviation != "Closed" &&
               c.status.description != "Closed" &&
-              intersection.length
+              intersectionToggle.length &&
+              iUSP.length &&
+              intersectionTag.length
             );
           })
           .map(c => {
-            console.log({ c });
+            //console.log({ c });
             this.indetifiers.push(c.identifier.toLowerCase());
             c.score = 0;
             this.keywords.push(c.keywords);
@@ -424,5 +482,14 @@ body > .el-container {
 .score-style {
   width: 120px;
   float: left;
+}
+.white-space-n > span {
+  white-space: normal !important;
+  max-width: 500px;
+  line-height: 20px;
+  min-height: 100px;
+}
+.el-collapse-item__content {
+  background-color: #b3b3b32a;
 }
 </style>
