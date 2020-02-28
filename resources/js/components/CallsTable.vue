@@ -1,5 +1,6 @@
 <template>
   <el-row :gutter="20" v-load="load">
+    <!-- {{callsFilterSearch}} -->
     <el-collapse v-model="activeNames" @change="handleChangeCollapse">
       <el-collapse-item title="Programmes" name="1">
         <el-card>
@@ -7,11 +8,12 @@
             <!-- @change="log" -->
             <el-checkbox-button
               class="white-space-n"
+              :checked="true"
               v-for="(item, index) in mainProgrammes"
               :label="item.description"
               :key="index"
             ></el-checkbox-button>
-            <!-- :checked="true" -->
+            <!--  -->
           </el-checkbox-group>
         </el-card>
       </el-collapse-item>
@@ -31,11 +33,16 @@
         :page-sizes="[25, 50 ,100, 200, 300, 400]"
         :page-size="25"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="calls.length"
+        :total="total"
       ></el-pagination>
     </div>
-    <el-table :data="callsChunck[currentPage]" style="width: 100%" border>
+
+    <el-table :data="callsFilterSearchChunck[currentPage-1]" style="width: 100%" border>
       <el-table-column prop="title" label="CALL TABLE" style="width: 100%">
+        <template slot="header" slot-scope="scope">
+          <el-input v-model="search" size="mini" placeholder="Type to search" />
+        </template>
+
         <template slot-scope="scope">
           <div
             style="color:white;padding:5px;white-space:normal;text-align:center;backgroundColor:#9a9ae9"
@@ -115,16 +122,17 @@ export default {
   components: { Budget },
   data() {
     return {
+      search: "",
       activeNames: ["1"],
       tagList: [],
       excluded: {},
       checkboxGroup1: [
-        "JRC direct actions",
-        "Excellent Science",
-        "Science with and for Society"
+        // "JRC direct actions",
+        // "Excellent Science",
+        // "Science with and for Society"
       ],
       callsChunck: [],
-      currentPage: 1,
+      currentPage: 0,
       currentPage1: 5,
       currentPage2: 5,
       currentPage3: 5,
@@ -146,8 +154,8 @@ export default {
       budgets: {},
 
       currentDate: new Date(),
-      calls: [],
-      flags: []
+      calls: []
+      //flags: []
     };
   },
   watch: {
@@ -182,6 +190,35 @@ export default {
     this.setGroupedKeyWords(this.kWordsGrouped);
   },
   computed: {
+    total() {
+      return _.flatten(this.callsFilterSearch).length;
+    },
+    callsFilterSearchChunck() {
+      try {
+        return _.chunk(this.callsFilterSearch, 20);
+      } catch (e) {
+        return e;
+      }
+    },
+    callsFilterSearch() {
+      if (!this.calls || !this.calls.length) return [];
+      let calls = this.calls.filter(a => {
+        let pd = a.programmeDivision
+          .map(a => {
+            //console.log(a.description);
+            return a.description;
+          })
+          .toString()
+          .toLowerCase();
+        return pd.includes(this.search.toLowerCase());
+      });
+      return calls;
+      //calls = calls.filter(a =>
+      // a.toLowerCase().includes(this.search.toLowerCase())
+      //);
+      //return _.chunk(calls, 20);
+    },
+
     tagsFlat() {
       return Object.keys(_.invert({ ...this.tags.flat() }));
     },
@@ -338,7 +375,7 @@ export default {
         //console.log(bigJson);
         bigJson = bigJson
           .filter(c => {
-            this.flags.push(c.flags);
+            //this.flags.push(c.flags);
             // this.callTitles.push(c.callTitle);
 
             //***************Toggle Button***********//
@@ -359,7 +396,7 @@ export default {
               intersectionTag = ["Perform only if not empty"];
 
             //END***************Tags Intersection***********//
-            console.log({ intersectionTag });
+            // console.log({ intersectionTag });
             return (
               c.status.abbreviation != "Closed" &&
               c.status.description != "Closed" &&
@@ -370,6 +407,7 @@ export default {
           })
           .map(c => {
             //console.log({ c });
+
             this.indetifiers.push(c.identifier.toLowerCase());
             c.score = 0;
             this.keywords.push(c.keywords);
@@ -402,8 +440,9 @@ export default {
         //console.log({ indetifiers: this.indetifiers });
 
         localStorage.setItem("calls", JSON.stringify(bigJson));
+        // this.calls = bigJson;
         this.calls = _.orderBy(bigJson, "score", "desc");
-        this.callsChunck = _.chunk(this.calls, 20);
+        // this.callsChunck = _.chunk(this.calls, 20);
         //  this.setMCalls(this.calls);
       } catch (error) {
         //window.location.reload();
