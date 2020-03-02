@@ -67,6 +67,33 @@ export default {
             if (getters.authUser.profile.keywords_ccm2_Ids)
                 await commit('setMeKeywords', getters.authUser.profile.keywords_ccm2_Ids);
 
+    },
+    async getBigJsonAct() {
+        let { data: bigJson } = await axios.get("big-json");
+
+        return bigJson;
+    },
+    async getTags({ dispatch }) {
+        return await dispatch('getBigJsonAct').then(r =>
+            r.filter(r => r.status.abbreviation != "Closed" && r.status.description != "Closed")
+                .map(a => a.tags).filter(a => a).flat())
+
+
+    },
+
+    async tagsUnique({ dispatch }) {
+        let gtu = await dispatch('getTags').then(r => { return [...new Set([...r])]; })
+        return gtu.map((a, i) => { return { name: a, id: i, checked: false } });
+    },
+    async insertTags(context, data) {
+        let { data: tags } = await axios.post("tags", data);
+        console.log({ tags })
+    },
+    async  Tags() {
+        let { data: tags } = await axios.get("tags");
+        // console.log({ tags })
+        return tags;
     }
+
 
 }

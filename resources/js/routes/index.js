@@ -7,6 +7,7 @@ import Keywords from '../components/Keywords';
 import KeywordsPortalTree from '../components/KeywordsPortalTree';
 import Profile from '../components/Profile';
 import Programme from '../components/Programme';
+import ProgrammeTags from '../components/ProgrammeTags';
 
 
 export default {
@@ -56,7 +57,12 @@ export default {
             path: '/portal',
             name: 'KeywordsPortalTree',
             component: KeywordsPortalTree
-        }
+        },
+        {
+            path: '/programme-tags',
+            name: 'ProgrammeTags',
+            component: ProgrammeTags
+        },
         // {
         //     // will match everything
         //     name: 'Call',

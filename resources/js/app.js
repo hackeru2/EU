@@ -11,6 +11,7 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale';
 import lang from 'element-ui/lib/locale/lang/en';
 import "element-ui/lib/theme-chalk/display.css";
+import VueDraggable from 'vue-draggable';
 // import 'element-ui/lib/theme-chalk/index.css';
 import VueObserveVisibility from 'vue-observe-visibility';
 import VueRouter from 'vue-router';
@@ -19,7 +20,9 @@ import Vuex from "vuex";
 import routes from "./routes";
 import store from './store';
 
+
 Vue.use(VueObserveVisibility)
+Vue.use(VueDraggable);
 
 // configure language
 locale.use(lang)
@@ -95,12 +98,17 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 Vue.use(ElementUI);
 Vue.use(VueRouter);
 Vue.use(Vuex);
+
+Vue.filter('capitalize', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+})
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 const app = new Vue({
     el: '#app',
 
@@ -108,4 +116,5 @@ const app = new Vue({
     store: new Vuex.Store(store),
     // template: '<ExampleComponent/>'
     template: '<App />'
+
 });
