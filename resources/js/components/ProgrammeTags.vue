@@ -2,7 +2,7 @@
   <div class="row">
     <!-- {{groupedTags}} -->
     <el-container style=" border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+      <el-aside width="300px" style="background-color: rgb(238, 241, 246); max-height:700px">
         <h3>{{ listMainName | capitalize}}</h3>
         <div class="list-group-item item">
           <el-input
