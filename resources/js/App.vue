@@ -1,5 +1,5 @@
 <template>
-  <el-container style="min-height: 100vw">
+  <el-container :style="elContainerStyle">
     <Slide class="hidden-md-and-up">
       <router-link to="/keywords">keywords</router-link>
       <router-link to="/calls">Calls</router-link>
@@ -95,6 +95,13 @@ export default {
   components: { Slide },
   created() {},
   computed: {
+    elContainerStyle() {
+      if (this.$route.name == "ProgrammeTags") {
+        return "overflow-y:hidden";
+      } else {
+        return "height:90vh";
+      }
+    },
     ...mapState(["meKeywords"]),
     ...mapGetters(["authUser"])
   },
@@ -110,6 +117,10 @@ export default {
 };
 </script>
 <style>
+.el-main {
+  margin: 0;
+  padding: 0 0 0 20px;
+}
 .el-avatar {
   width: 88px !important;
 }

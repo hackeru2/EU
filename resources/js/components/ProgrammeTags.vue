@@ -2,8 +2,10 @@
   <div class="row">
     <!-- {{groupedTags}} -->
     <el-container style=" border: 1px solid #eee">
-      <el-aside width="300px" style="background-color: rgb(238, 241, 246); max-height:700px">
-        <h3>{{ listMainName | capitalize}}</h3>
+      <el-aside width="300px" style="background-color: rgb(238, 241, 246); max-height:800px">
+        <el-card class="gradinent-list">
+          <h3>{{ listMainName | capitalize}}</h3>
+        </el-card>
         <div class="list-group-item item">
           <el-input
             v-model="searchMain"
@@ -13,11 +15,21 @@
             prefix-icon="el-icon-search"
           />
         </div>
-        <draggable :list="listMainValues" class="list-group" draggable=".item" group="a">
+        <draggable
+          :list="listMainValues"
+          class="list-group"
+          draggable=".item"
+          group="a"
+          :move="onMove"
+          @end="end"
+        >
+          <!-- @start="onStart"
+          @choose="choose"-->
           <div
+            v-show="element.name.includes(searchMain)"
             class="list-group-item item w3-theme-dark"
-            :class="` w3-theme-${(15 + main_i) % 15 }`"
-            v-for="(element , main_i) in listMainValuesFilter"
+            :class="`w3-theme-${(15 + main_i) % 15 }`"
+            v-for="(element , main_i) in listMainValues"
             :key="element.id"
           >
             {{ element.name }}
@@ -36,7 +48,7 @@
         </draggable>
       </el-aside>
 
-      <el-container>
+      <el-container style=" max-height:800px">
         <el-main>
           <!-- renameTag {{renameTag}} |||| groupedTags ---- {{groupedTags}} -->
           <button class="btn btn-secondary float-left mb-2" @click="addNewHeader">+ Add</button>
@@ -56,6 +68,7 @@
 
               <template slot-scope="scope" v-if="scope.row.show">
                 <draggable
+                  :options="{animation:500}"
                   id="first"
                   data-source="juju"
                   :list="scope.row.values"
@@ -221,9 +234,9 @@ export default {
         ? "Choose new name for selected tags"
         : "";
     },
-    listMainValues() {
-      return this.lists.find(l => l.name == "listMain").values; //,
-    },
+    // listMainValues() {
+    //   return this.lists.find(l => l.name == "listMain").values; //,
+    // },
 
     //  e => e.name
     //);
@@ -249,6 +262,9 @@ export default {
           values: entry[1]
         };
       });
+      this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
+      console.log(this.listMainValues);
+
       return console.log("this.lists");
     }
     console.log("start");
@@ -264,6 +280,10 @@ export default {
   },
   data() {
     return {
+      listMainValues: [],
+      futureIndex: "",
+      movingIndex: "",
+      listDragg: "",
       savePosition: { style: "" },
       groupedTags: { listName: "", values: [] },
       renameTag: "",
@@ -286,7 +306,47 @@ export default {
       ]
     };
   },
+  // mounted() {
+  //   this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
+  // },
   methods: {
+    onMove(e) {
+      console.log(e.draggedContext);
+    },
+    onStart(CustomEvent) {
+      console.log("onStart", CustomEvent.item.textContent);
+    },
+    choose(CustomEvent) {
+      console.log("choose", CustomEvent.item.textContent);
+    },
+    end(CustomEvent) {
+      console.log("end", CustomEvent.item.textContent, CustomEvent);
+    },
+    unchoose(CustomEvent) {
+      console.log("unchoose", CustomEvent.item.textContent);
+    },
+    handleDragEnd() {
+      this.$message("dragEnd");
+      console.log(this.listDragg);
+      let list = this.lists.find(l => l.name == this.listDragg).values;
+
+      this.futureItem = list[this.futureIndex];
+      this.movingItem = list[this.movingIndex];
+      const _items = Object.assign([], list);
+      _items[this.futureIndex] = this.movingItem;
+      _items[this.movingIndex] = this.futureItem;
+      console.log({ _items });
+      list = _items;
+    },
+    handleMove(e) {
+      console.log(e.draggedContext);
+      this.listDragg = e.draggedContext.element.header;
+      const { index, futureIndex } = e.draggedContext;
+      // console.log({ index, futureIndex });
+      this.movingIndex = index;
+      this.futureIndex = futureIndex;
+      return false; // disable sort
+    },
     addNewHeader() {
       this.form.title = "Add new header";
       this.dialogFormVisible = true;
@@ -548,5 +608,17 @@ export default {
 }
 .w3-hover-border-theme:hover {
   border-color: #bc70a4 !important;
+}
+.gradinent-list {
+  position: sticky;
+  top: 0;
+  z-index: 123;
+  background: rgb(204, 0, 31);
+  background: linear-gradient(
+    90deg,
+    rgba(204, 0, 31, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(26, 35, 126, 1) 100%
+  );
 }
 </style>
