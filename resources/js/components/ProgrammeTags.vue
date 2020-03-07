@@ -250,8 +250,8 @@ export default {
     let allTags = "";
     let DBTAGS = await this.Tags();
     console.log({ DBTAGS });
+
     if (DBTAGS.length) {
-      //&& 1 == 2
       this.allTags = DBTAGS;
 
       this.lists = Object.values(DBTAGS);
@@ -272,7 +272,8 @@ export default {
     console.log(allTags);
     this.allTags = allTags;
     this.lists.find(l => l.name == "listMain").values = allTags;
-
+    this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
+    console.log(this.lists);
     console.log("end");
   },
   components: {
