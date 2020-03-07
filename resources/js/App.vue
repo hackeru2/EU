@@ -119,7 +119,7 @@ export default {
 <style>
 .el-main {
   margin: 0;
-  padding: 0 0 0 20px;
+  padding: 0 10px 0 10px;
 }
 .el-avatar {
   width: 88px !important;

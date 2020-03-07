@@ -10,7 +10,7 @@ window.Vue = require('vue');
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale';
 import lang from 'element-ui/lib/locale/lang/en';
-import "element-ui/lib/theme-chalk/display.css";
+//import "element-ui/lib/theme-chalk/display.css";
 import VueDraggable from 'vue-draggable';
 // import 'element-ui/lib/theme-chalk/index.css';
 import VueObserveVisibility from 'vue-observe-visibility';

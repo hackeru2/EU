@@ -1,20 +1,24 @@
 <template>
-  <div class="row">
+  <el-row>
     <!-- {{groupedTags}} -->
-    <el-container style=" border: 1px solid #eee">
-      <el-aside width="300px" style="background-color: rgb(238, 241, 246); max-height:800px">
+    <el-col :span="4" :sm="6" :xs="6">
+      <el-aside
+        width="100%"
+        class="my-aside"
+        style="background-color: rgb(238, 241, 246); max-height:800px"
+      >
         <el-card class="gradinent-list">
           <h3>{{ listMainName | capitalize}}</h3>
+          <div>
+            <el-input
+              v-model="searchMain"
+              size="mini"
+              style="width100%"
+              placeholder="Search list"
+              prefix-icon="el-icon-search"
+            />
+          </div>
         </el-card>
-        <div class="list-group-item item">
-          <el-input
-            v-model="searchMain"
-            size="mini"
-            style="width:150px"
-            placeholder="Type to search"
-            prefix-icon="el-icon-search"
-          />
-        </div>
         <draggable
           :list="listMainValues"
           class="list-group"
@@ -31,10 +35,7 @@
             :class="`w3-theme-${(15 + main_i) % 15 }`"
             v-for="(element , main_i) in listMainValues"
             :key="element.id"
-          >
-            {{ element.name }}
-            <div></div>
-          </div>
+          >{{ element.name }}</div>
 
           <div
             slot="footer"
@@ -47,16 +48,38 @@
           </div>
         </draggable>
       </el-aside>
-
-      <el-container style=" max-height:800px">
+    </el-col>
+    <el-col :span="20" :sm="18" :xs="18">
+      <el-container style=" max-height:800px;padding-right:10px">
         <el-main>
           <!-- renameTag {{renameTag}} |||| groupedTags ---- {{groupedTags}} -->
           <button class="btn btn-secondary float-left mb-2" @click="addNewHeader">+ Add</button>
           <el-table @row-click="onRowClick" highlight-current-row :data="mainListFilter">
             <!--@click.native="changeData"  -->
             <!-- <el-table-column prop="date" label="Date" width="140"></el-table-column> -->
-            <el-table-column prop="name" label="Name" width="120" align="center"></el-table-column>
-            <el-table-column prop="values" label="Values" align="center">
+            <el-table-column prop="name" label="Name" width="120" align="center">
+              <template slot-scope="scope">
+                <div class="sm-and-up">{{scope.row.name}}</div>
+                <div class="hidden-sm-and-up">
+                  <el-button
+                    size="mini"
+                    @click="handleEdit(scope.row.name ,scope.$index )"
+                  >Rename {{scope.row.name}}</el-button>
+                  <el-button
+                    size="mini"
+                    :type="scope.row.show ? 'primary' : 'danger'"
+                    style="margin:10px"
+                    @click="scope.row.show = !scope.row.show"
+                  >{{scope.row.show ? 'Hide' : 'Show' }}</el-button>
+                  <el-button
+                    :disabled="groupedTags.values.length <2 || groupedTags.listName!=scope.row.name"
+                    size="mini"
+                    @click="handleUnify"
+                  >Unify {{groupedTags.length}}</el-button>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column class-name="values-col" prop="values" label="Values" align="center">
               <template slot-scope="scope">
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
                 <el-button
@@ -119,84 +142,86 @@
                 </draggable>
               </template>
             </el-table-column>
-            <el-table-column label="Actions" width="220" align="center">
+            <el-table-column label="Actions" class-name="hidden-xs-only" align="center">
               <template slot="header">
                 <!-- <el-button size="mini" @click="handleEdit( )">Edit</el-button> -->
 
                 <el-input
                   v-model="search"
                   size="mini"
-                  style="width:200px;float:right"
+                  class="search-values"
                   placeholder="Type to search"
                   prefix-icon="el-icon-search"
                 />
               </template>
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  @click="handleEdit(scope.row.name ,scope.$index )"
-                >Rename {{scope.row.name}}</el-button>
-                <el-button
-                  size="mini"
-                  :type="scope.row.show ? 'primary' : 'danger'"
-                  style="margin:10px"
-                  @click="scope.row.show = !scope.row.show"
-                >{{scope.row.show ? 'Hide' : 'Show' }}</el-button>
-                <el-button
-                  :disabled="groupedTags.values.length <2 || groupedTags.listName!=scope.row.name"
-                  size="mini"
-                  @click="handleUnify"
-                >Unify {{groupedTags.length}}</el-button>
+                <div class="hidden-xs-only">
+                  <el-button
+                    size="mini"
+                    @click="handleEdit(scope.row.name ,scope.$index )"
+                  >Rename {{scope.row.name}}</el-button>
+                  <el-button
+                    size="mini"
+                    :type="scope.row.show ? 'primary' : 'danger'"
+                    style="margin:10px"
+                    @click="scope.row.show = !scope.row.show"
+                  >{{scope.row.show ? 'Hide' : 'Show' }}</el-button>
+                  <el-button
+                    :disabled="groupedTags.values.length <2 || groupedTags.listName!=scope.row.name"
+                    size="mini"
+                    @click="handleUnify"
+                  >Unify {{groupedTags.length}}</el-button>
+                </div>
               </template>
             </el-table-column>
           </el-table>
         </el-main>
       </el-container>
-    </el-container>
 
-    <el-dialog :title="form.title" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item v-if="placeHolder" label="Tags" label-width="200">
-          <el-badge
-            v-for="(item, gtvi) in groupedTags.values"
-            :key="gtvi"
-            is-dot
-            class="item"
-            style="margin-right:5px"
-          >
-            <el-button class="share-button" plain icon="el-icon-share" type="primary">{{item}}</el-button>
-          </el-badge>
-        </el-form-item>
-        <el-form-item label label-width="0">
-          <el-input v-model="form.name" :placeholder="placeHolder" autocomplete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="onConfirmDialog">Confirm</el-button>
-      </span>
-    </el-dialog>
-    <el-card
-      style="z-index:100;position:fixed;bottom:10px;right:10px;padding:0"
-      :style="savePosition.style"
-    >
-      <div>
-        <i
-          style="cursor:pointer"
-          class="el-icon-caret-top"
-          @click="savePosition.style = 'bottom:620px;right:10px'"
-        ></i>
-      </div>
-      <el-button @click="onSave">SAVE</el-button>
-      <div>
-        <i
-          style="cursor:pointer"
-          class="el-icon-caret-bottom"
-          @click="savePosition.style = 'bottom:10px;right:10px'"
-        ></i>
-      </div>
-    </el-card>
-  </div>
+      <el-dialog :title="form.title" :visible.sync="dialogFormVisible">
+        <el-form :model="form">
+          <el-form-item v-if="placeHolder" label="Tags" label-width="200">
+            <el-badge
+              v-for="(item, gtvi) in groupedTags.values"
+              :key="gtvi"
+              is-dot
+              class="item"
+              style="margin-right:5px"
+            >
+              <el-button class="share-button" plain icon="el-icon-share" type="primary">{{item}}</el-button>
+            </el-badge>
+          </el-form-item>
+          <el-form-item label label-width="0">
+            <el-input v-model="form.name" :placeholder="placeHolder" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="onConfirmDialog">Confirm</el-button>
+        </span>
+      </el-dialog>
+      <el-card
+        style="z-index:100;position:fixed;bottom:10px;right:10px;padding:0;background-color:#ffffff6e"
+        :style="savePosition.style"
+      >
+        <div>
+          <i
+            style="cursor:pointer"
+            class="el-icon-caret-top"
+            @click="savePosition.style = 'bottom:420px;right:10px'"
+          ></i>
+        </div>
+        <el-button @click="onSave">SAVE</el-button>
+        <div>
+          <i
+            style="cursor:pointer"
+            class="el-icon-caret-bottom"
+            @click="savePosition.style = 'bottom:10px;right:10px'"
+          ></i>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -498,6 +523,7 @@ export default {
 };
 </script>
 <style scoped>
+@import url(../../css/screen.css);
 .el-aside {
   background-color: #d3dce6;
   color: #333;

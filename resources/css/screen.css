@@ -1,0 +1,96 @@
+.search-values {
+    width:200px;float:right
+}
+@media only screen and (max-width: 767px) {
+    .my-aside {  }
+    .search-values {
+        display: none ;
+    }
+    .hidden-xs-only {
+        display:none!important
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .my-aside {  }
+    .hidden-sm-and-up {
+        display:none!important
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width:991px) {
+    
+    .my-aside {  }
+    .hidden-sm-only {
+        display:none!important
+    }
+    .actions-col {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .my-aside {  }
+    .hidden-sm-and-down {
+        display:none!important
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .my-aside {  }
+    .hidden-md-and-up {
+        display:none!important
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width:1199px) {
+    .my-aside {   }
+    .hidden-md-only {
+        display:none!important
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .cell { width: 160px;}
+    table.el-table__body {
+        width: 100%;
+        overflow-x: auto;
+
+    }
+    div.list-group-item.item  {font-size:1.2vh;}
+    .my-aside {
+         /* border  : 4px solid orange; */
+        font-size:1.2vh;}
+      
+    .hidden-md-and-down {
+        display:none!important
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .my-aside {  }
+    .hidden-lg-and-up {
+        display:none!important
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width:1919px) {
+    .my-aside {  }
+    .hidden-lg-only {
+        display:none!important
+    }
+}
+
+@media only screen and (max-width: 1919px) {
+    
+    .hidden-lg-and-down {
+        display:none!important
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    
+    .hidden-xl-only {
+        display:none!important
+    }
+}
