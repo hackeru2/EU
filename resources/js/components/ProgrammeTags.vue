@@ -13,7 +13,7 @@
             <el-input
               v-model="searchMain"
               size="mini"
-              style="width100%"
+              style="width : 100%"
               placeholder="Search list"
               prefix-icon="el-icon-search"
             />
@@ -30,7 +30,7 @@
           <!-- @start="onStart"
           @choose="choose"-->
           <div
-            v-show="element.name.includes(searchMain)"
+            v-show="elIncludesSearchMain(element.name)"
             class="list-group-item item w3-theme-dark"
             :class="`w3-theme-${(15 + main_i) % 15 }`"
             v-for="(element , main_i) in listMainValues"
@@ -50,7 +50,7 @@
       </el-aside>
     </el-col>
     <el-col :span="20" :sm="18" :xs="18">
-      <el-container style=" max-height:800px;padding-right:10px">
+      <el-container style=" max-height:800px">
         <el-main>
           <!-- renameTag {{renameTag}} |||| groupedTags ---- {{groupedTags}} -->
           <button class="btn btn-secondary float-left mb-2" @click="addNewHeader">+ Add</button>
@@ -336,6 +336,14 @@ export default {
   //   this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
   // },
   methods: {
+    log() {
+      console.log(this.searchMain);
+    },
+    elIncludesSearchMain(name) {
+      if (!this.searchMain) return true;
+
+      return name.toLowerCase().includes(this.searchMain.toLowerCase());
+    },
     onMove(e) {
       console.log(e.draggedContext);
     },
