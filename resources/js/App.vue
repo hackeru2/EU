@@ -25,6 +25,8 @@
           <router-link to="/calls-table">Table</router-link>
           <el-divider direction="vertical"></el-divider>
           <router-link to="/profile">Profile</router-link>
+          <el-divider direction="vertical"></el-divider>
+          <router-link to="/programme-tags">Programme tags</router-link>
         </div>
         <el-dropdown style="cursor:pointer">
           <i class="el-icon-setting" style="margin-right: 15px"></i>

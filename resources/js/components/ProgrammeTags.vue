@@ -57,7 +57,7 @@
           <button class="btn btn-secondary float-left m-2" @click="open">Reset all</button>
 
           <div>{{groupedTags}}</div>
-          <el-table @row-click="onRowClick" highlight-current-row :data="mainListFilter">
+          <el-table @cell-mouse-enter="onRowClick" highlight-current-row :data="mainListFilter">
             <!--@click.native="changeData"  -->
             <!-- <el-table-column prop="date" label="Date" width="140"></el-table-column> -->
             <el-table-column prop="name" label="Name" width="120" align="center">
@@ -341,6 +341,7 @@ export default {
       renameTag: "",
       allTags: [],
       form: {
+        old_name: "",
         name: "",
         title: "Rename header"
       },
@@ -551,7 +552,9 @@ export default {
         });
       }
       if (this.form.title == "Rename header")
-        this.lists[this.form.index].name = this.form.name;
+        this.lists.find(
+          n => n.name == this.form.old_name
+        ).name = this.form.name;
       else if (this.form.title == "Rename Tag name") {
         let value = this.lists[this.form.listsIndex].values[this.form.tagIndex];
         if (!value.origin_name) value.origin_name = value.name;
@@ -614,6 +617,7 @@ export default {
     },
     handleEdit(name, index) {
       this.form.name = name;
+      this.form.old_name = name;
       this.form.title = "Rename header";
       this.form.index = index;
       this.dialogFormVisible = true;

@@ -18,7 +18,8 @@
                     <div>
                         <a href="/profiles">Profile</a> |
                         <a href="/calls">Calls</a> |
-                        <a href="/calls-table">Table</a>
+                        <a href="/calls-table">Table</a>|
+                        <a href="/programme-tags">Programme tags</a>
                     </div>
                 </div>
                 
