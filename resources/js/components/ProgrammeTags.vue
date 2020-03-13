@@ -54,6 +54,7 @@
         <el-main>
           <!-- renameTag {{renameTag}} |||| groupedTags ---- {{groupedTags}} -->
           <button class="btn btn-secondary float-left mb-2" @click="addNewHeader">+ Add</button>
+          <div>{{groupedTags}}</div>
           <el-table @row-click="onRowClick" highlight-current-row :data="mainListFilter">
             <!--@click.native="changeData"  -->
             <!-- <el-table-column prop="date" label="Date" width="140"></el-table-column> -->
@@ -116,14 +117,24 @@
                     ></el-checkbox>
                     {{ element.name }}
                     <div style="right: 0px;top:5px;position:absolute;">
-                      <transition name="el-fade-in-linear">
+                      <transition-group name="el-fade-in-linear">
                         <button
                           v-if="renameTag==element.name"
-                          class="btn btn-secondary"
+                          :key="1"
+                          class="btn btn-secondary mr-2"
                           style="width:5vw;font-size:10px;padding: 0 0 3px 3px"
                           @click="onRenameTag(scope.$index , e_i)"
                         >Rename</button>
-                      </transition>
+                        <button
+                          :key="2"
+                          v-if="renameTag==element.name && element.origin_name"
+                          class="btn btn-secondary"
+                          style="width:5vw;font-size:10px;padding: 0 0 3px 3px"
+                          @click="onExtractTag(scope.$index , e_i)"
+                        >EXTRACT</button>
+                      </transition-group>
+                      <br />
+
                       <!-- @click="add(scope.row)" -->
                     </div>
                   </div>
@@ -182,7 +193,7 @@
         <el-form :model="form">
           <el-form-item v-if="placeHolder" label="Tags" label-width="200">
             <el-badge
-              v-for="(item, gtvi) in groupedTags.values"
+              v-for="(item, gtvi) in dialogBoxes"
               :key="gtvi"
               is-dot
               class="item"
@@ -191,13 +202,17 @@
               <el-button class="share-button" plain icon="el-icon-share" type="primary">{{item}}</el-button>
             </el-badge>
           </el-form-item>
-          <el-form-item label label-width="0">
+
+          <el-form-item label label-width="0" v-if="placeHolder!='extract'">
             <el-input v-model="form.name" :placeholder="placeHolder" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="onConfirmDialog">Confirm</el-button>
+          <el-button
+            type="primary"
+            @click="onConfirmDialog"
+          >{{placeHolder == 'extract' ? "Extract": 'Confirm'}}</el-button>
         </span>
       </el-dialog>
       <el-card
@@ -234,6 +249,13 @@ export default {
   display: "Two list header slot",
   order: 14,
   computed: {
+    dialogBoxes() {
+      if (this.form.title == "Extract Tag origin names")
+        return this.lists
+          .find(l => l.name == this.groupedTags.listName)
+          .values.map(v => v.origin_name);
+      return this.groupedTags.values;
+    },
     listMainValuesFilter() {
       return this.listMainValues.filter(
         data =>
@@ -255,9 +277,18 @@ export default {
       }
     },
     placeHolder() {
-      return this.form.title == "Handle Unify"
-        ? "Choose new name for selected tags"
-        : "";
+      switch (true) {
+        case this.form.title == "Handle Unify":
+          return "Choose new name for selected tags";
+          break;
+        case this.form.title == "Extract Tag origin names":
+          return "extract";
+        default:
+          return "";
+      }
+      // return this.form.title == "Handle Unify"
+      //   ? "Choose new name for selected tags"
+      //   : "";
     },
     // listMainValues() {
     //   return this.lists.find(l => l.name == "listMain").values; //,
@@ -342,7 +373,10 @@ export default {
     elIncludesSearchMain(name) {
       if (!this.searchMain) return true;
 
-      return name.toLowerCase().includes(this.searchMain.toLowerCase());
+      return name
+        .trim()
+        .toLowerCase()
+        .includes(this.searchMain.trim().toLowerCase());
     },
     onMove(e) {
       console.log(e.draggedContext);
@@ -416,7 +450,19 @@ export default {
       return _.uniqBy(newArr, e => e.name);
     },
     onRowClick(payload) {
-      if (!this.groupedTags.listName) this.groupedTags.listName = payload.name;
+      if (
+        this.groupedTags.listName &&
+        this.groupedTags.listName != payload.name
+      ) {
+        this.lists
+          .find(l => l.name == this.groupedTags.listName)
+          .values.map(e => {
+            e.checked = false;
+            return e;
+          });
+        this.groupedTags.values = [];
+      }
+      this.groupedTags.listName = payload.name;
     },
     handleUnify() {
       this.form.title = "Handle Unify";
@@ -440,6 +486,25 @@ export default {
     },
     onConfirmDialog() {
       this.dialogFormVisible = false;
+      if (this.form.title == "Extract Tag origin names") {
+        alert(
+          this.lists
+            .find(l => l.name == this.groupedTags.listName)
+            .values.map(v => v.origin_name)
+            .join(",")
+        );
+        this.lists.find(
+          l => l.name == this.groupedTags.listName
+        ).values = this.lists
+          .find(l => l.name == this.groupedTags.listName)
+          .values.map(t => {
+            t.name = t.origin_name;
+
+            //alert(t.origin.name);
+            t.origin_name = "";
+            return t;
+          });
+      }
       if (this.form.title == "Add new header") {
         return this.lists.push({
           name: this.form.name,
@@ -477,9 +542,24 @@ export default {
       }
     },
     onMouseoverTag(a) {
+      console.log({ a });
       //return console.log(a);
       this.renameTag = a.name;
       //return console.log(this.lists[a]);
+    },
+    onExtractTag(listsIndex, tagIndex) {
+      //this.renameTag = this.lists[a].values[b].name;
+      console.log(this.renameTag);
+      this.form.listsIndex = listsIndex;
+      this.form.tagIndex = tagIndex;
+      console.log({ form: this.form });
+      this.form.name = this.renameTag;
+      this.dialogFormVisible = true;
+      // setTimeout(() => {
+      //   this.renameTag = "";
+      // }, 1000);
+
+      this.form.title = "Extract Tag origin names";
     },
     onRenameTag(listsIndex, tagIndex) {
       //this.renameTag = this.lists[a].values[b].name;
