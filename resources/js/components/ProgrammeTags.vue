@@ -53,7 +53,9 @@
       <el-container style=" max-height:800px">
         <el-main>
           <!-- renameTag {{renameTag}} |||| groupedTags ---- {{groupedTags}} -->
-          <button class="btn btn-secondary float-left mb-2" @click="addNewHeader">+ Add</button>
+          <button class="btn btn-secondary float-left m-2" @click="addNewHeader">+ Add</button>
+          <button class="btn btn-secondary float-left m-2" @click="open">Reset all</button>
+
           <div>{{groupedTags}}</div>
           <el-table @row-click="onRowClick" highlight-current-row :data="mainListFilter">
             <!--@click.native="changeData"  -->
@@ -323,14 +325,7 @@ export default {
 
       return console.log("this.lists");
     }
-    console.log("start");
-    allTags = await this.tagsUnique();
-    console.log(allTags);
-    this.allTags = allTags;
-    this.lists.find(l => l.name == "listMain").values = allTags;
-    this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
-    console.log(this.lists);
-    console.log("end");
+    this.ResetAll();
   },
   components: {
     draggable
@@ -367,6 +362,49 @@ export default {
   //   this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
   // },
   methods: {
+    open() {
+      this.$confirm(
+        "This will permanently Reset  the lists. Continue?",
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning"
+        }
+      )
+        .then(() => {
+          this.resetAll();
+          this.$message({
+            type: "success",
+            message: "Delete completed"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "Delete canceled"
+          });
+        });
+    },
+    async resetAll() {
+      this.lists = [
+        { name: "list1", values: [], show: true },
+        { name: "list2", values: [], show: true },
+        {
+          name: "listMain",
+          values: []
+        }
+      ];
+      let allTags = "";
+      console.log("start");
+      allTags = await this.tagsUnique();
+      console.log(allTags);
+      this.allTags = allTags;
+      this.lists.find(l => l.name == "listMain").values = allTags;
+      this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
+      console.log(this.lists);
+      console.log("end");
+    },
     log() {
       console.log(this.searchMain);
     },
