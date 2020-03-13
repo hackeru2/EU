@@ -192,7 +192,7 @@
       </el-container>
 
       <el-dialog :title="form.title" :visible.sync="dialogFormVisible">
-        <el-form :model="form">
+        <el-form :model="form" @submit.prevent>
           <el-form-item v-if="placeHolder" label="Tags" label-width="200">
             <el-badge
               v-for="(item, gtvi) in dialogBoxes"
