@@ -205,7 +205,7 @@
                       @click="handleUnify"
                     >Unify {{groupedTags.length}}</el-button>
 
-                    <transition name="el-zoom-in-top">
+                    <!-- <transition name="el-zoom-in-top">
                       <el-select
                         @destroyPopper="onDestroyPopper"
                         size="mini"
@@ -229,7 +229,7 @@
                         size="mini"
                         @click="moveTags"
                       >Move tag/s</el-button>
-                    </transition>
+                    </transition>-->
                   </el-button-group>
                 </div>
               </template>
