@@ -95,9 +95,10 @@
               </template>
 
               <template slot-scope="scope" v-if="scope.row.show">
+                <!-- disabled : findListNTag -->
                 <draggable
                   @remove="onRemove"
-                  :options="{animation:500 ,disabled : findListNTag}"
+                  :options="{animation:500 ,}"
                   id="first"
                   :data-source="scope.row.name"
                   :list="scope.row.values"
