@@ -57,7 +57,12 @@
           <button class="btn btn-secondary float-left m-2" @click="open">Reset all</button>
 
           <!-- <div style="color:blue">{{findListNTag}}</div> -->
-          <div style="color:red">grouped tags : {{groupedTags}} | {{groupedTagsListName}}</div>
+          <div style="color:red">
+            grouped tags : {{groupedTags}} | {{groupedTagsListName}}
+            <span
+              style="color:green"
+            >{{tagChildren}}</span>
+          </div>
 
           <el-table @cell-mouse-enter="onRowClick" highlight-current-row :data="mainListFilter">
             <!--@click.native="changeData"  -->
@@ -81,6 +86,7 @@
                     size="mini"
                     @click="handleUnify"
                   >Unify {{groupedTags.length}}</el-button>
+                  <el-button v-for="(item, index) in tagChildren" :key="index">{{item}}</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -98,8 +104,9 @@
                 <!-- disabled : findListNTag -->
                 <draggable
                   @remove="onRemove"
-                  :options="{animation:500 ,}"
+                  :options="{animation:500 ,disabled : isDisabled}"
                   id="first"
+                  :move="onMove"
                   :data-source="scope.row.name"
                   :list="scope.row.values"
                   class="list-group"
@@ -175,6 +182,14 @@
               <template slot-scope="scope">
                 <div class="hidden-xs-only">
                   <el-button-group>
+                    <template v-if="groupedTagsListName == scope.row.name">
+                      <el-button
+                        size="mini"
+                        type="success"
+                        v-for="(item, index) in tagChildren"
+                        :key="index"
+                      >{{item}}</el-button>
+                    </template>
                     <el-button
                       size="mini"
                       @click="handleEdit(scope.row.name ,scope.$index )"
@@ -189,6 +204,7 @@
                       size="mini"
                       @click="handleUnify"
                     >Unify {{groupedTags.length}}</el-button>
+
                     <transition name="el-zoom-in-top">
                       <el-select
                         @destroyPopper="onDestroyPopper"
@@ -316,6 +332,13 @@ export default {
         //console.log(e);
       }
     },
+    tagChildren() {
+      try {
+        return this.findList(this.groupedTags.listName)
+          .values.filter(v => v.name == this.renameTag && v.origin_name != null)
+          .map(v => v.origin_name);
+      } catch (e) {}
+    },
     dialogBoxes() {
       if (
         this.form.title == "Extract Tag origin names" &&
@@ -422,6 +445,7 @@ export default {
   },
   data() {
     return {
+      isDisabled: false,
       selectModel: "",
       listMainValues: [],
       futureIndex: "",
@@ -474,10 +498,10 @@ export default {
     showMoveTagsButton(name) {
       return this.showSelect(name) && this.selectModel;
     },
-    isDisabled(e) {
-      console.log({ e });
-      return true;
-    },
+    // isDisa bled(e) {
+    //   console.log({ e });
+    //   return true;
+    // },
     onRemove() {},
     // onRemove(e) {
     //   console.log({ e });
@@ -564,6 +588,8 @@ export default {
         .includes(this.searchMain.trim().toLowerCase());
     },
     onMove(e) {
+      // if (e.draggedContext.element.origin_name);
+      // this.isDisabled = true;
       console.log(e.draggedContext);
     },
     onStart(CustomEvent) {
