@@ -56,7 +56,9 @@
           <button class="btn btn-secondary float-left m-2" @click="addNewHeader">+ Add</button>
           <button class="btn btn-secondary float-left m-2" @click="open">Reset all</button>
 
-          <div>{{groupedTags}}</div>
+          <!-- <div style="color:blue">{{findListNTag}}</div> -->
+          <div style="color:red">grouped tags : {{groupedTags}} | {{groupedTagsListName}}</div>
+
           <el-table @cell-mouse-enter="onRowClick" highlight-current-row :data="mainListFilter">
             <!--@click.native="changeData"  -->
             <!-- <el-table-column prop="date" label="Date" width="140"></el-table-column> -->
@@ -94,9 +96,10 @@
 
               <template slot-scope="scope" v-if="scope.row.show">
                 <draggable
-                  :options="{animation:500}"
+                  @remove="onRemove"
+                  :options="{animation:500 ,disabled : findListNTag}"
                   id="first"
-                  data-source="juju"
+                  :data-source="scope.row.name"
                   :list="scope.row.values"
                   class="list-group"
                   draggable=".item"
@@ -105,6 +108,7 @@
                   <div
                     @mouseleave="renameTag=''"
                     @mouseover="onMouseoverTag(element) "
+                    :id="element.name"
                     class="list-group-item item"
                     style="margin:4px;border:1px solid aqua"
                     v-for="(element , e_i) in uniqBy(scope.row.values)"
@@ -169,21 +173,47 @@
               </template>
               <template slot-scope="scope">
                 <div class="hidden-xs-only">
-                  <el-button
-                    size="mini"
-                    @click="handleEdit(scope.row.name ,scope.$index )"
-                  >Rename {{scope.row.name}}</el-button>
-                  <el-button
-                    size="mini"
-                    :type="scope.row.show ? 'primary' : 'danger'"
-                    style="margin:10px"
-                    @click="scope.row.show = !scope.row.show"
-                  >{{scope.row.show ? 'Hide' : 'Show' }}</el-button>
-                  <el-button
-                    :disabled="groupedTags.values.length <2 || groupedTags.listName!=scope.row.name"
-                    size="mini"
-                    @click="handleUnify"
-                  >Unify {{groupedTags.length}}</el-button>
+                  <el-button-group>
+                    <el-button
+                      size="mini"
+                      @click="handleEdit(scope.row.name ,scope.$index )"
+                    >Rename {{scope.row.name}}</el-button>
+                    <el-button
+                      size="mini"
+                      :type="scope.row.show ? 'primary' : 'danger'"
+                      @click="scope.row.show = !scope.row.show"
+                    >{{scope.row.show ? 'Hide' : 'Show' }}</el-button>
+                    <el-button
+                      :disabled="groupedTags.values.length <2 || groupedTags.listName!=scope.row.name"
+                      size="mini"
+                      @click="handleUnify"
+                    >Unify {{groupedTags.length}}</el-button>
+                    <transition name="el-zoom-in-top">
+                      <el-select
+                        @destroyPopper="onDestroyPopper"
+                        size="mini"
+                        v-if="showSelect(scope.row.name)"
+                        v-model="selectModel"
+                        placeholder="Select"
+                        id="input__inner"
+                      >
+                        <el-option
+                          :disabled="item.name == groupedTagsListName || item.name == 'listMain'"
+                          v-for="(item , i) in options"
+                          :key="i"
+                          :label="item.name"
+                          :value="item.name"
+                        ></el-option>
+                      </el-select>
+                    </transition>
+                    <transition name="el-zoom-in-top">
+                      <el-button
+                        v-if="showMoveTagsButton(scope.row.name)"
+                        size="mini"
+                        @click="moveTags"
+                      >Move tag/s</el-button>
+                    </transition>
+                  </el-button-group>
                 </div>
               </template>
             </el-table-column>
@@ -192,7 +222,13 @@
       </el-container>
 
       <el-dialog :title="form.title" :visible.sync="dialogFormVisible">
-        <el-form :model="form" @submit.prevent>
+        <el-form :model="form" @submit.native.prevent>
+          <el-form-item label label-width="0" v-if="placeHolder=='extract'">
+            <h3>EXTRACT {{form.name}}</h3>
+          </el-form-item>
+          <el-form-item label label-width="0" v-if="placeHolder=='move tags'">
+            <h3>Move tags to {{selectModel}} list.</h3>
+          </el-form-item>
           <el-form-item v-if="placeHolder" label="Tags" label-width="200">
             <el-badge
               v-for="(item, gtvi) in dialogBoxes"
@@ -205,7 +241,11 @@
             </el-badge>
           </el-form-item>
 
-          <el-form-item label label-width="0" v-if="placeHolder!='extract'">
+          <el-form-item
+            label
+            label-width="0"
+            v-if="placeHolder!='extract' && placeHolder!='move tags' "
+          >
             <el-input v-model="form.name" :placeholder="placeHolder" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
@@ -251,12 +291,39 @@ export default {
   display: "Two list header slot",
   order: 14,
   computed: {
+    options() {
+      try {
+        return this.lists.map(a => {
+          {
+            let name = a.name;
+            let value = a.name;
+            return {
+              name,
+              value
+            };
+          }
+        });
+      } catch (e) {}
+    },
+    findListNTag() {
+      try {
+        if (this.findList(this.groupedTags.listName).values.length)
+          return this.findList(this.groupedTags.listName).values.find(
+            v => v.name == this.renameTag
+          ).origin_name;
+      } catch (e) {
+        //console.log(e);
+      }
+    },
     dialogBoxes() {
-      if (this.form.title == "Extract Tag origin names")
-        return this.lists
-          .find(l => l.name == this.groupedTags.listName)
-          .values.map(v => v.origin_name);
-      return this.groupedTags.values;
+      if (
+        this.form.title == "Extract Tag origin names" &&
+        this.dialogFormVisible
+      )
+        return this.findList(this.groupedTags.listName)
+          .values.filter(v => v.name == this.form.name)
+          .map(v => v.origin_name);
+      else return this.groupedTags.values;
     },
     listMainValuesFilter() {
       return this.listMainValues.filter(
@@ -280,6 +347,10 @@ export default {
     },
     placeHolder() {
       switch (true) {
+        case this.form.title ==
+          "this action will move the following tags. approve?":
+          return "move tags";
+          break;
         case this.form.title == "Handle Unify":
           return "Choose new name for selected tags";
           break;
@@ -302,6 +373,24 @@ export default {
       try {
         return this.lists.find(l => l.name == "listMain").name;
       } catch (e) {}
+    },
+    groupedTagsListName() {
+      try {
+        return this.groupedTags.listName;
+      } catch (e) {}
+    }
+  },
+  watch: {
+    groupedTagsListName(nv, ov) {
+      if (ov && this.lists) {
+        let vals = this.findList(ov).values;
+        if (vals && vals.length)
+          vals = vals.map(v => {
+            v.checked = false;
+            return v;
+          });
+      }
+      return (this.groupedTags.values = []);
     }
   },
   async created() {
@@ -332,6 +421,7 @@ export default {
   },
   data() {
     return {
+      selectModel: "",
       listMainValues: [],
       futureIndex: "",
       movingIndex: "",
@@ -360,9 +450,64 @@ export default {
     };
   },
   // mounted() {
-  //   this.listMainValues = this.lists.find(l => l.name == "listMain").values; //,
+  //   let gebi = document.getElementById("input__inner");
+  //   console.log(gebi);
+  //   console.log(($("#input__inner")[0].style.height = "38px"));
   // },
   methods: {
+    onDestroyPopper() {
+      alert("345");
+      this.selectModel = "";
+    },
+    moveTags() {
+      this.dialogFormVisible = true;
+      this.form.title = "this action will move the following tags. approve?";
+    },
+    showSelect(name) {
+      try {
+        return (
+          name == this.groupedTags.listName && this.groupedTags.values.length
+        );
+      } catch (e) {}
+    },
+    showMoveTagsButton(name) {
+      return this.showSelect(name) && this.selectModel;
+    },
+    isDisabled(e) {
+      console.log({ e });
+      return true;
+    },
+    onRemove() {},
+    // onRemove(e) {
+    //   console.log({ e });
+    //   console.log({ from: e.srcElement.dataset.source });
+    //   let toName = e.to.dataset.source;
+    //   let toList = this.findList(e.to.dataset.source);
+    //   console.log({ toName, toList });
+    //   console.log({ e1: e.target.children[0].id });
+    //   let transferedEl = this.findList(e.to.dataset.source).values.find(
+    //     v => v.name == e.target.children[0].id
+    //   );
+    //   console.log({
+    //     transferedEl
+    //   });
+
+    //   let fromList = this.findList(e.srcElement.dataset.source);
+    //   let fromListDraggedValues = fromList.values.filter(
+    //     v => v.name == e.target.children[0].id
+    //   );
+    //   console.log({ fromListDraggedValues });
+    //   toList.values = [...toList.values, ...fromListDraggedValues];
+    //   // console.log({
+    //   //   ORIGINS: fromList.values.filter(v => v.name == e.target.children[0].id)
+    //   // });
+    //   fromList.values = fromList.values.filter(
+    //     v => v.name != e.target.children[0].id
+    //   );
+    // },
+    findList(name) {
+      return this.lists.find(l => l.name == name) || [];
+    },
     open() {
       this.$confirm(
         "This will permanently Reset  the lists. Continue?",
@@ -406,8 +551,8 @@ export default {
       console.log(this.lists);
       console.log("end");
     },
-    log() {
-      console.log(this.searchMain);
+    log(e) {
+      console.log({ e });
     },
     elIncludesSearchMain(name) {
       if (!this.searchMain) return true;
@@ -489,19 +634,21 @@ export default {
       return _.uniqBy(newArr, e => e.name);
     },
     onRowClick(payload) {
-      if (
-        this.groupedTags.listName &&
-        this.groupedTags.listName != payload.name
-      ) {
-        this.lists
-          .find(l => l.name == this.groupedTags.listName)
-          .values.map(e => {
-            e.checked = false;
-            return e;
-          });
-        this.groupedTags.values = [];
-      }
-      this.groupedTags.listName = payload.name;
+      if (payload.name) this.groupedTags.listName = payload.name;
+      // if (
+      //   this.groupedTags.listName &&
+      //   this.groupedTags.listName != payload.name
+      // ) {
+      //   this.lists
+      //     .find(l => l.name == this.groupedTags.listName)
+      //     .values.map(e => {
+      //       e.checked = false;
+      //       return e;
+      //     });
+      //   this.groupedTags.values = [];
+      // }
+      // // this.groupedTags.listName = payload.name;
+      // return console.log({ payload });
     },
     handleUnify() {
       this.form.title = "Handle Unify";
@@ -520,29 +667,55 @@ export default {
         console.log("delete");
 
         this.groupedTags.values.splice(index, 1);
-        if (!this.groupedTags.values.length) this.groupedTags.listName = "";
+        //if (!this.groupedTags.values.length) this.groupedTags.listName = "";
       }
+    },
+    extractingTags() {
+      let otherValues = this.findList(this.groupedTags.listName).values.filter(
+        v => v.name != this.form.name
+      );
+      console.log({ otherValues });
+      let extractedValues = this.findList(this.groupedTags.listName)
+        .values.filter(v => v.name == this.form.name)
+        .map(t => {
+          t.name = t.origin_name;
+
+          //alert(t.origin.name);
+          t.origin_name = "";
+          return t;
+        });
+      this.findList(this.groupedTags.listName).values = [
+        ...otherValues,
+        ...extractedValues
+      ];
+    },
+    movingTags() {
+      let toList = this.findList(this.selectModel);
+      let fromList = this.findList(this.groupedTagsListName);
+      console.log({ toListValues: toList.values });
+      console.log({ fromListValues: fromList.values });
+      let transfers = fromList.values.filter(
+        v => v.checked || this.dialogBoxes.includes(v.name)
+      );
+      transfers.forEach(transfer => {
+        transfer.checked = false;
+        toList.values.push(transfer);
+      });
+      fromList.values = _.difference(fromList.values, transfers);
+      this.groupedTags.listName = "";
+      this.groupedTags.values = [];
+      this.selectModel = "";
+      this.$alert(
+        "tags transfered from " + fromList.name + " to " + toList.name
+      );
     },
     onConfirmDialog() {
       this.dialogFormVisible = false;
+      if (this.placeHolder == "move tags") {
+        return this.movingTags();
+      }
       if (this.form.title == "Extract Tag origin names") {
-        alert(
-          this.lists
-            .find(l => l.name == this.groupedTags.listName)
-            .values.map(v => v.origin_name)
-            .join(",")
-        );
-        this.lists.find(
-          l => l.name == this.groupedTags.listName
-        ).values = this.lists
-          .find(l => l.name == this.groupedTags.listName)
-          .values.map(t => {
-            t.name = t.origin_name;
-
-            //alert(t.origin.name);
-            t.origin_name = "";
-            return t;
-          });
+        return this.extractingTags();
       }
       if (this.form.title == "Add new header") {
         return this.lists.push({
