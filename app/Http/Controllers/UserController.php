@@ -77,7 +77,7 @@ class UserController extends Controller
             $user->profile->keywords_ccm2_Ids =  $request->keywords;
             $user->profile->topics =  $request->topics;
             $user->profile->save();
-        return auth()->user()->with('flags','profile')
+        return auth()->user()->with('flags','profile','tags')
         ->where('id' , auth()->user()->id)
         ->get()->last();
         
@@ -99,5 +99,23 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function insertUserTags(Request $request) {
+
+        $user_id = auth()->user()->id; 
+        // $tag_ids = collect($request)->mapWithKeys(function($a ,) use($user_id){
+        //     return [ $user_id => ['tag_id' => $a['id']]];
+        // });
+        $attributes = collect($request->all())->map->id->toArray();
+        
+
+        auth()->user()->tags()->sync($attributes);
+         
+        //   foreach($tag_ids as $tag_id) {
+             
+        //   }
+
+         return auth()->user()->tags()->get();
     }
 }

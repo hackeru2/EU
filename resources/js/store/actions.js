@@ -44,6 +44,7 @@ export default {
         commit('setMe', me);
         console.log(axios.defaults.baseURL)
         if (me.profile.topics) commit('setMeTopics', me.profile.topics);
+        if (me.tags && me.tags.length) commit('setMeTags', me.tags);
 
 
     },
@@ -94,6 +95,11 @@ export default {
         // console.log({ tags })
         return tags;
     }
+    , async inserUserProfileTags({ state, commit, getters, dispatch }, data) {
 
+        let { data: tags } = await axios.post("insert-user-tags", data);
+        console.log({ data });
+
+    }
 
 }

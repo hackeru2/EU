@@ -1,4 +1,5 @@
 export default {
+    meTags: [],
     allProgrammes: [],
     mainProgrammes: [],
     updateFlags: [],

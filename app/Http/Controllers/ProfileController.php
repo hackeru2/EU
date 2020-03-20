@@ -88,4 +88,8 @@ class ProfileController extends Controller
     {
         //
     }
+    public function insertUserTags(Request $request) {
+
+        dd($request->all());
+    }
 }

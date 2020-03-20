@@ -1,299 +1,78 @@
 <template>
-  <el-row>
-    <!-- {{groupedTags}} -->
-    <el-col :span="4" :sm="6" :xs="6">
-      <el-aside
-        width="100%"
-        class="my-aside"
-        style="background-color: rgb(238, 241, 246); max-height:800px"
-      >
-        <el-card class="gradinent-list">
-          <h3>{{ listMainName | capitalize}}</h3>
-          <div>
-            <el-input
-              v-model="searchMain"
-              size="mini"
-              style="width : 100%"
-              placeholder="Search list"
-              prefix-icon="el-icon-search"
-            />
-          </div>
-        </el-card>
-        <draggable
-          :list="listMainValues"
-          class="list-group"
-          draggable=".item"
-          group="a"
-          :move="onMove"
-          @end="end"
+  <el-row style="min-height:80vh">
+    <el-button
+      style="position:fixed;left:5px;bottom:15px"
+      type="primary"
+      icon="el-icon-message"
+      circle
+      @click="onSave"
+    />
+    <el-button
+      style="position:fixed;right:5px;bottom:5px"
+      type="info"
+      icon="el-icon-message"
+      circle
+      @click="infoBtn = !infoBtn"
+    />
+    <el-card :style="infoCardStyle" style="position:fixed;right:5px;bottom:0;padding-top:20px">
+      <el-button
+        style="position:absolute;right:0;bottom:5px"
+        type="info"
+        icon="el-icon-message"
+        circle
+        @click="infoBtn = !infoBtn"
+      />
+
+      <div v-for="(item, index) in selectedExtract" :key="index">
+        <b>header :</b>
+        {{item.header}} ,
+        <b>name :</b>
+        {{item.name}} ,
+        <b class="text-info" v-if="item.origin_name">origin name :</b>
+        {{item.origin_name}}
+      </div>
+    </el-card>
+    <el-row class="mt-4">
+      <el-col :span="10" :offset="6">
+        <el-input v-model="query" placeholder="search" />
+      </el-col>
+    </el-row>
+    <div class="flex-container m-4">
+      <div v-for="(item, index) in mainListFilter" :key="index">
+        <div>
+          <h3 style="text-shadow: 1px 1px white;">{{item.name}}</h3>
+          <hr class="hr" />
+        </div>
+        <transition-group
+          name="staggered-fade"
+          tag="ul"
+          v-bind:css="false"
+          v-on:before-enter="beforeEnter"
+          v-on:enter="enter"
+          v-on:leave="leave"
         >
-          <!-- @start="onStart"
-          @choose="choose"-->
-          <div
-            v-show="elIncludesSearchMain(element.name)"
-            class="list-group-item item w3-theme-dark"
-            :class="`w3-theme-${(15 + main_i) % 15 }`"
-            v-for="(element , main_i) in listMainValues"
-            :key="element.id"
-          >{{ element.name }}</div>
-
-          <div
-            slot="footer"
-            class="btn-group list-group-item"
-            role="group"
-            aria-label="Basic example"
+          <li
+            v-for="value in unique(item.values)"
+            :class="{liSelected : selectedObj[value.name]}"
+            class="liClass"
+            @click="selected(value)"
+            :key="value.id"
           >
-            <!-- <button class="btn btn-secondary" @click="add2">Add</button>
-            <button class="btn btn-secondary" @click="replace2">Replace</button>-->
-          </div>
-        </draggable>
-      </el-aside>
-    </el-col>
-    <el-col :span="20" :sm="18" :xs="18">
-      <el-container style=" max-height:800px">
-        <el-main>
-          <!-- renameTag {{renameTag}} |||| groupedTags ---- {{groupedTags}} -->
-          <div style="position:sticky;top:0;z-index:1000;backgroundColor:#ff00003b;height:50px">
-            <el-input
-              v-model="search"
-              size="mini"
-              class="search-values"
-              placeholder="Type to search"
-              prefix-icon="el-icon-search"
-            />
-            <button class="btn btn-secondary float-left m-2" @click="addNewHeader">+ Add</button>
-            <button class="btn btn-secondary float-left m-2" @click="open">Reset all</button>
-
-            <!-- <div style="color:blue">{{findListNTag}}</div> -->
-            grouped tags : {{groupedTags}} | {{groupedTagsListName}}
-            <span
-              style="color:green"
-            >{{tagChildren}}</span>
-          </div>
-
-          <el-table @cell-mouse-enter="onRowClick" highlight-current-row :data="mainListFilter">
-            <!--@click.native="changeData"  -->
-            <!-- <el-table-column prop="date" label="Date" width="140"></el-table-column> -->
-            <el-table-column prop="name" label="Name" width="120" align="center">
-              <template slot-scope="scope">
-                <div class="sm-and-up">{{scope.row.name}}</div>
-                <div class="hidden-sm-and-up">
-                  <el-button
-                    size="mini"
-                    @click="handleEdit(scope.row.name ,scope.$index )"
-                  >Rename {{scope.row.name}}</el-button>
-                  <el-button
-                    size="mini"
-                    :type="scope.row.show ? 'primary' : 'danger'"
-                    style="margin:10px"
-                    @click="scope.row.show = !scope.row.show"
-                  >{{scope.row.show ? 'Hide' : 'Show' }}</el-button>
-                  <el-button
-                    :disabled="groupedTags.values.length <2 || groupedTags.listName!=scope.row.name"
-                    size="mini"
-                    @click="handleUnify"
-                  >Unify {{groupedTags.length}}</el-button>
-                  <el-button v-for="(item, index) in tagChildren" :key="index">{{item}}</el-button>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column class-name="values-col" prop="values" label="Values" align="center">
-              <template slot-scope="scope">
-                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="handleDelete(scope.$index, scope.row)"
-                >Delete</el-button>
-              </template>
-
-              <template slot-scope="scope" v-if="scope.row.show">
-                <!-- disabled : findListNTag -->
-                <draggable
-                  @remove="onRemove"
-                  :options="{animation:500 ,disabled : isDisabled}"
-                  id="first"
-                  :move="onMove"
-                  :data-source="scope.row.name"
-                  :list="scope.row.values"
-                  class="list-group"
-                  draggable=".item"
-                  group="a"
-                >
-                  <div
-                    @mouseleave="renameTag=''"
-                    @mouseover="onMouseoverTag(element) "
-                    :id="element.name"
-                    class="list-group-item item"
-                    style="margin:4px;border:1px solid aqua"
-                    v-for="(element , e_i) in uniqBy(scope.row.values)"
-                    :class="` w3-theme-${(15 + e_i+7) % 15 }`"
-                    :key="element.id"
-                  >
-                    <el-checkbox
-                      :disabled="groupedTags.listName != '' && groupedTags.listName!=scope.row.name"
-                      @change="onChangeCB"
-                      v-model="element.checked"
-                      style="float:left"
-                    ></el-checkbox>
-                    {{ element.name }}
-                    <div style="right: 0px;top:5px;position:absolute;">
-                      <transition-group name="el-fade-in-linear">
-                        <button
-                          v-if="renameTag==element.name"
-                          :key="1"
-                          class="btn btn-secondary mr-2"
-                          style="width:5vw;font-size:10px;padding: 0 0 3px 3px"
-                          @click="onRenameTag(scope.$index , e_i)"
-                        >Rename</button>
-                        <button
-                          :key="2"
-                          v-if="renameTag==element.name && element.origin_name"
-                          class="btn btn-secondary"
-                          style="width:5vw;font-size:10px;padding: 0 0 3px 3px"
-                          @click="onExtractTag(scope.$index , e_i)"
-                        >EXTRACT</button>
-                      </transition-group>
-                      <br />
-
-                      <!-- @click="add(scope.row)" -->
-                    </div>
-                  </div>
-
-                  <div
-                    v-if="!scope.row.values.length"
-                    slot="footer"
-                    class="btn-group list-group-item"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <!-- <button class="btn btn-secondary" @click="add(scope.row)">Add</button>
-                    <button class="btn btn-secondary" @click="replace(scope.row)">Replace</button>-->
-                    <el-card>Drag to create</el-card>
-                  </div>
-                </draggable>
-              </template>
-            </el-table-column>
-            <el-table-column label="Actions" class-name="hidden-xs-only" align="center">
-              <template slot="header">
-                <!-- <el-button size="mini" @click="handleEdit( )">Edit</el-button> -->
-              </template>
-              <template slot-scope="scope">
-                <div class="hidden-xs-only">
-                  <el-button-group>
-                    <template v-if="groupedTagsListName == scope.row.name">
-                      <el-button
-                        size="mini"
-                        type="success"
-                        v-for="(item, index) in tagChildren"
-                        :key="index"
-                      >{{item}}</el-button>
-                    </template>
-                    <el-button
-                      size="mini"
-                      @click="handleEdit(scope.row.name ,scope.$index )"
-                    >Rename {{scope.row.name}}</el-button>
-                    <el-button
-                      size="mini"
-                      :type="scope.row.show ? 'primary' : 'danger'"
-                      @click="scope.row.show = !scope.row.show"
-                    >{{scope.row.show ? 'Hide' : 'Show' }}</el-button>
-                    <el-button
-                      :disabled="groupedTags.values.length <2 || groupedTags.listName!=scope.row.name"
-                      size="mini"
-                      @click="handleUnify"
-                    >Unify {{groupedTags.length}}</el-button>
-
-                    <!-- <transition name="el-zoom-in-top">
-                      <el-select
-                        @destroyPopper="onDestroyPopper"
-                        size="mini"
-                        v-if="showSelect(scope.row.name)"
-                        v-model="selectModel"
-                        placeholder="Select"
-                        id="input__inner"
-                      >
-                        <el-option
-                          :disabled="item.name == groupedTagsListName || item.name == 'listMain'"
-                          v-for="(item , i) in options"
-                          :key="i"
-                          :label="item.name"
-                          :value="item.name"
-                        ></el-option>
-                      </el-select>
-                    </transition>
-                    <transition name="el-zoom-in-top">
-                      <el-button
-                        v-if="showMoveTagsButton(scope.row.name)"
-                        size="mini"
-                        @click="moveTags"
-                      >Move tag/s</el-button>
-                    </transition>-->
-                  </el-button-group>
-                </div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-main>
-      </el-container>
-
-      <el-dialog :title="form.title" :visible.sync="dialogFormVisible">
-        <el-form :model="form" @submit.native.prevent>
-          <el-form-item label label-width="0" v-if="placeHolder=='extract'">
-            <h3>EXTRACT {{form.name}}</h3>
-          </el-form-item>
-          <el-form-item label label-width="0" v-if="placeHolder=='move tags'">
-            <h3>Move tags to {{selectModel}} list.</h3>
-          </el-form-item>
-          <el-form-item v-if="placeHolder" label="Tags" label-width="200">
-            <el-badge
-              v-for="(item, gtvi) in dialogBoxes"
-              :key="gtvi"
-              is-dot
-              class="item"
-              style="margin-right:5px"
+            <transition
+              name="custom-classes-transition"
+              enter-active-class="animated flip"
+              leave-active-class="animated rotateOut"
             >
-              <el-button class="share-button" plain icon="el-icon-share" type="primary">{{item}}</el-button>
-            </el-badge>
-          </el-form-item>
-
-          <el-form-item
-            label
-            label-width="0"
-            v-if="placeHolder!='extract' && placeHolder!='move tags' "
-          >
-            <el-input v-model="form.name" :placeholder="placeHolder" autocomplete="off"></el-input>
-          </el-form-item>
-        </el-form>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button
-            type="primary"
-            @click="onConfirmDialog"
-          >{{placeHolder == 'extract' ? "Extract": 'Confirm'}}</el-button>
-        </span>
-      </el-dialog>
-      <el-card
-        style="z-index:100;position:fixed;bottom:10px;right:10px;padding:0;background-color:#ffffff6e"
-        :style="savePosition.style"
-      >
-        <div>
-          <i
-            style="cursor:pointer"
-            class="el-icon-caret-top"
-            @click="savePosition.style = 'bottom:420px;right:10px'"
-          ></i>
-        </div>
-        <el-button @click="onSave">SAVE</el-button>
-        <div>
-          <i
-            style="cursor:pointer"
-            class="el-icon-caret-bottom"
-            @click="savePosition.style = 'bottom:10px;right:10px'"
-          ></i>
-        </div>
-      </el-card>
-    </el-col>
+              <i
+                class="el-icon-circle-check text-success font-weight-bold"
+                v-if="selectedObj[value.name]"
+              />
+            </transition>
+            {{value.name}}
+          </li>
+        </transition-group>
+      </div>
+    </div>
   </el-row>
 </template>
 
@@ -307,6 +86,34 @@ export default {
   display: "Two list header slot",
   order: 14,
   computed: {
+    ...mapState(["meTags"]),
+    infoCardStyle() {
+      return this.infoBtn ? "margin-right:0 " : "margin-right:-1200px";
+    },
+    infoBtnStyle() {
+      return this.infoBtn ? "" : "position:fixed;right:0;top:80%";
+    },
+    allTagsGrouped() {
+      return _.groupBy(this.allTags, "name");
+    },
+    selectedExtract() {
+      let arr = [];
+      let sr = [...this.selectedArr];
+      sr.forEach(element => {
+        arr.push(...this.allTagsGrouped[element.name]);
+      });
+      return arr;
+    },
+    selectedObj() {
+      let sr = [...this.selectedArr];
+
+      return _.groupBy(sr, "name");
+    },
+    computedList(_this) {
+      return this.list.filter(function(item) {
+        return item.msg.toLowerCase().indexOf(_this.query.toLowerCase()) !== -1;
+      });
+    },
     options() {
       try {
         return this.lists.map(a => {
@@ -442,6 +249,10 @@ export default {
   },
   data() {
     return {
+      infoBtn: true,
+      show: "",
+      query: "",
+      selectedArr: [],
       search: "",
       isDisabled: false,
       selectModel: "",
@@ -472,12 +283,69 @@ export default {
       ]
     };
   },
-  // mounted() {
-  //   let gebi = document.getElementById("input__inner");
-  //   console.log(gebi);
-  //   console.log(($("#input__inner")[0].style.height = "38px"));
-  // },
+  mounted() {
+    setTimeout(() => {
+      this.selectedArr = this.meTags;
+    }, 1000);
+    // let gebi = document.getElementById("input__inner");
+    // console.log(gebi);
+    // console.log(($("#input__inner")[0].style.height = "38px"));
+  },
   methods: {
+    selected(value) {
+      console.log({ value, OBJ: this.selectedObj[value.name] });
+      if (!this.selectedObj[value.name]) this.selectedArr.push(value);
+      else
+        this.selectedArr = this.selectedArr.filter(
+          a => a.name != value.name || a.header != value.header
+        );
+
+      console.log(this.selectedArr);
+    },
+    liHover(e) {
+      console.log(e.target);
+      console.log(e.target.classList);
+      e.target.style = "color:white";
+    },
+    liLeave(e) {
+      console.log(e.target);
+      console.log(e.target.style);
+      e.target.style = "color:gray";
+    },
+    unique(arr) {
+      let uniq = _.uniqBy(arr, function(e) {
+        return e.name;
+      });
+      let _this = this;
+      return uniq.filter(function(item) {
+        return (
+          item.name.toLowerCase().indexOf(_this.query.toLowerCase()) !== -1
+        );
+      });
+    },
+    beforeEnter: function(el) {
+      el.style.opacity = 0;
+      el.style.height = 0;
+    },
+    enter: function(el, done) {
+      var delay = el.dataset.index * 150;
+      setTimeout(function() {
+        Velocity(el, { opacity: 1, height: "1.6em" }, { complete: done });
+      }, delay);
+    },
+    leave: function(el, done) {
+      var delay = el.dataset.index * 150;
+      setTimeout(function() {
+        Velocity(el, { opacity: 0, height: 0 }, { complete: done });
+      }, delay);
+    },
+    ...mapActions(["meAct"]),
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
     onDestroyPopper() {
       alert("345");
       this.selectModel = "";
@@ -629,20 +497,7 @@ export default {
       this.dialogFormVisible = true;
     },
     onSave() {
-      let LISTS = Object.values(this.lists)
-        .map(a => {
-          return a.values.map(b => {
-            b.header = a.name;
-            delete b["checked"];
-            delete b["id"];
-            b.origin_name = b.origin_name ? b.origin_name : "";
-            return b;
-          });
-        })
-        .filter(a => a.length);
-      console.log(LISTS);
-
-      this.insertTags(LISTS.flat());
+      this.inserUserProfileTags(this.selectedExtract);
       this.$notify({
         title: "List Saved!",
         message: "to the DB",
@@ -825,6 +680,7 @@ export default {
       this.groupedTags.listName = e.target.innerText;
     },
     ...mapActions([
+      "inserUserProfileTags",
       "getBigJsonAct",
       "getTags",
       "tagsUnique",
@@ -978,5 +834,52 @@ export default {
 }
 .el-table .cell {
   word-break: keep-all !important;
+}
+.flex-container {
+  border-radius: 40px;
+  display: flex;
+  flex-wrap: wrap;
+
+  background-color: DodgerBlue;
+}
+
+.flex-container > div {
+  border-radius: 20px;
+  box-shadow: 5px 5px 2px #aaaaaa;
+  background-color: #f1f1f1;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 10px;
+  text-align: center;
+  padding: 10px;
+  padding-right: 20px;
+  font-size: 1rem;
+}
+.flex-container > div:hover {
+  background-color: #f1f1f1;
+  background-color: #d2d8ffc5;
+  -webkit-transition: background-color 2000ms linear;
+  -ms-transition: background-color 2000ms linear;
+  transition: background-color 2000ms linear;
+}
+.hr {
+  width: 150% !important;
+  margin-top: 0 !important;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: -13px;
+}
+.liClass {
+  cursor: pointer;
+}
+
+.liClass:hover {
+  color: white;
+}
+.liClass:active,
+.liSelected {
+  font-weight: 900;
+  margin: 0px -5px 0px -5px;
 }
 </style>

@@ -1,3 +1,11 @@
+.spinner-span {
+  padding-top: 15px;
+    margin-left: -26px;
+    position: absolute;
+    animation: flash 2s  ;  
+    transition: all;  
+}
+
 .my-spinner {
   
     color: #994d4d;
@@ -142,5 +150,21 @@
     50% {
       opacity: 0.9;
       transform: scale(1.2);
+    }
+  }
+
+  @keyframes flash {
+    0% {
+       
+    }
+    0% {
+      opacity: 0.8;
+      color: white;
+      font-weight: 100;
+    }
+     100% {
+      opacity: 1;
+      color:navy;
+      font-weight: 1000;
     }
   }

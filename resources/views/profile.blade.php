@@ -22,11 +22,12 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/display.css">
     <link href="{{ asset('css/index.scss') }}" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     {{-- <link href="{{ asset('css/variables.scss') }}" rel="stylesheet">   --}}
     <!-- import JavaScript -->
 
     <title>Document</title>
- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
      
     

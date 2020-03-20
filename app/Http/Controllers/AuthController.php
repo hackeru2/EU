@@ -49,7 +49,7 @@ class AuthController extends Controller
 
          
         return  auth()->user()
-        ->where('id' , auth()->user()->id)->get()->last();
+        ->where('id' , auth()->user()->id)->get()->last()->load('tags');
     }
 
     /**

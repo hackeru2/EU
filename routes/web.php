@@ -76,9 +76,13 @@ Route::resource('programmes', 'ProgrammeController');
 Route::resource('tags', 'TagController');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::resource('profile', 'ProfileController');
+
 Route::resource('user', 'UserController');
+Route::post('insert-user-tags', 'UserController@insertUserTags');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::get('calls/{any?}', 'HomeController@profile')->name('profile');
+
+
 //Route::get('/profile', 'HomeController@profile')->name('profile');
 
 

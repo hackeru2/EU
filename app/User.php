@@ -48,6 +48,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Flag');
     }
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
     public function profileAndKeywords()
     {
         

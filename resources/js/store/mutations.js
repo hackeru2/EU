@@ -15,6 +15,11 @@ export default {
         localStorage.setItem("authUser", JSON.stringify(me));
 
     },
+    setMeTags(state, meTags) {
+
+        state.meTags = meTags;
+
+    },
     setKeywords(state, keywords) {
 
         state.keywords = keywords;

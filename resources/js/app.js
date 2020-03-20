@@ -39,11 +39,12 @@ vMyDirective.install = function install(_Vue) {
             console.log({ el, binding })
             let spinner = document.createElement('div')
             spinner.id = _uid
-            spinner.innerHTML = '<div class="my-spinner"></div>'
+            spinner.innerHTML = '<div><span class="spinner-span">Loading,<br> please wait</span><div class="my-spinner"></div></div>'
             spinner.style.display = binding.value ? 'block' : 'none'
             spinner.style['background-color'] = '#335c5e60';
             // spinner.style.color = 'red'
             // spinner.style.left = "49%";
+
             spinner.style.zIndex = 149;
             spinner.style['padding-top'] = "20%";
             // spinner.style.top = 0

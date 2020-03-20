@@ -5,6 +5,7 @@ import Carousel from '../components/Carousel';
 import Expretize from '../components/Expretize';
 import Keywords from '../components/Keywords';
 import KeywordsPortalTree from '../components/KeywordsPortalTree';
+import NewProfile from '../components/NewProfile';
 import Profile from '../components/Profile';
 import Programme from '../components/Programme';
 import ProgrammeTags from '../components/ProgrammeTags';
@@ -27,6 +28,11 @@ export default {
             path: '/profile',
             name: 'Profile',
             component: Profile
+        },
+        {
+            path: '/new-profile',
+            name: 'New Profile',
+            component: NewProfile
         },
         {
             path: '/calls/:id',
