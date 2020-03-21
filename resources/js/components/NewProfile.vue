@@ -3,14 +3,14 @@
     <el-button
       style="position:fixed;left:5px;bottom:15px"
       type="primary"
-      icon="el-icon-message"
+      icon="el-icon-left"
       circle
       @click="onSave"
     />
     <el-button
       style="position:fixed;right:5px;bottom:5px"
       type="info"
-      icon="el-icon-message"
+      icon="el-icon-left"
       circle
       @click="infoBtn = !infoBtn"
     />
@@ -18,7 +18,7 @@
       <el-button
         style="position:absolute;right:0;bottom:5px"
         type="info"
-        icon="el-icon-message"
+        icon="el-icon-right"
         circle
         @click="infoBtn = !infoBtn"
       />
@@ -881,5 +881,8 @@ export default {
 .liSelected {
   font-weight: 900;
   margin: 0px -5px 0px -5px;
+}
+ul {
+  list-style-type: none;
 }
 </style>
