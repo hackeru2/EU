@@ -247,7 +247,7 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    ...mapActions(["saveProfileAct", "meAct"]),
+    ...mapActions(["saveProfileAct"]),
     ...mapMutations(["setMe"]),
 
     saveProfile() {

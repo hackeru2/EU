@@ -1,28 +1,17 @@
 <template>
-  <el-row style="min-height:80vh">
+  <el-row style="min-height:85vh">
     <el-button
-      style="position:fixed;left:5px;bottom:15px"
-      type="primary"
-      icon="el-icon-left"
-      circle
-      @click="onSave"
-    />
-    <el-button
-      style="position:fixed;right:5px;bottom:5px"
+      style="position:fixed;right:5px;bottom:5px;z-index:100"
       type="info"
-      icon="el-icon-left"
+      icon="el-icon-info"
       circle
       @click="infoBtn = !infoBtn"
     />
-    <el-card :style="infoCardStyle" style="position:fixed;right:5px;bottom:0;padding-top:20px">
-      <el-button
-        style="position:absolute;right:0;bottom:5px"
-        type="info"
-        icon="el-icon-right"
-        circle
-        @click="infoBtn = !infoBtn"
-      />
-
+    <el-card
+      :style="infoCardStyle"
+      style="position:fixed;right:5px;bottom:0;padding-top:20px;max-height:70vh;overflow-y:auto"
+    >
+      <div slot="header">all tags with origin names</div>
       <div v-for="(item, index) in selectedExtract" :key="index">
         <b>header :</b>
         {{item.header}} ,
@@ -33,8 +22,19 @@
       </div>
     </el-card>
     <el-row class="mt-4">
+      <div style="margin-top: 15px;"></div>
       <el-col :span="10" :offset="6">
-        <el-input v-model="query" placeholder="search" />
+        <el-input v-model="query" placeholder="search" class="inline-input">
+          <template slot="append">
+            <el-button icon="el-icon-search" />
+            <el-button
+              @click="onSave"
+              style="margin-left:16px;background-color:DodgerBlue;color:white"
+              type="primary"
+              icon="el-icon-s-promotion"
+            />
+          </template>
+        </el-input>
       </el-col>
     </el-row>
     <div class="flex-container m-4">
@@ -108,11 +108,6 @@ export default {
       let sr = [...this.selectedArr];
 
       return _.groupBy(sr, "name");
-    },
-    computedList(_this) {
-      return this.list.filter(function(item) {
-        return item.msg.toLowerCase().indexOf(_this.query.toLowerCase()) !== -1;
-      });
     },
     options() {
       try {
@@ -249,7 +244,7 @@ export default {
   },
   data() {
     return {
-      infoBtn: true,
+      infoBtn: false,
       show: "",
       query: "",
       selectedArr: [],
@@ -313,11 +308,10 @@ export default {
       e.target.style = "color:gray";
     },
     unique(arr) {
-      let uniq = _.uniqBy(arr, function(e) {
-        return e.name;
-      });
       let _this = this;
-      return uniq.filter(function(item) {
+      return _.uniqBy(arr, function(e) {
+        return e.name;
+      }).filter(function(item) {
         return (
           item.name.toLowerCase().indexOf(_this.query.toLowerCase()) !== -1
         );

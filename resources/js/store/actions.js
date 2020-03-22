@@ -45,8 +45,14 @@ export default {
         console.log(axios.defaults.baseURL)
         if (me.profile.topics) commit('setMeTopics', me.profile.topics);
         if (me.tags && me.tags.length) commit('setMeTags', me.tags);
+        return me;
 
-
+    },
+    async meTagsAct({ state, getters, commit, dispatch }) {
+        let { data: me
+        } = await axios.get(`me`);
+        if (me.tags && me.tags.length) commit('setMeTags', me.tags);
+        return me;
     },
     async callProgram({ state, getters, commit, dispatch }) {
         let { data: callProgram

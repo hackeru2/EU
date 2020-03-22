@@ -23,10 +23,10 @@
             <!-- budgetOverviewJSONItem : -->
             <!-- <el-tag v-for="(tag,i_tag ) in o.tags" :key="i_tag">{{tag}}</el-tag> -->
             <el-tag
-              v-for="(kw,i_kw ) in o.keywords"
-              :effect="meKW.includes(kw) ? 'dark' : 'light'"
-              :key="i_kw"
-            >{{kw}}</el-tag>
+              v-for="(tag,i_tags ) in o.tags"
+              :effect="meTagsNames.includes(tag.toLowerCase()) ? 'dark' : 'light'"
+              :key="i_tags"
+            >{{tag}}</el-tag>
           </div>
           <span>Yummy hamburger</span>
           <div class="bottom clearfix">
@@ -61,6 +61,7 @@ export default {
   data() {
     return {
       meKW: [],
+      meTags: [],
       intersectionOptions: {
         root: null,
         rootMargin: "0px 0px 0px 0px",
@@ -104,6 +105,13 @@ export default {
     this.setGroupedKeyWords(this.kWordsGrouped);
   },
   computed: {
+    meTagsNames() {
+      return this.meTags.map(t =>
+        t.origin_name
+          ? t.origin_name.toLowerCase().trim()
+          : t.name.toLowerCase().trim()
+      );
+    },
     ...mapGetters(["authUser"]),
     flagsLengthFilterd() {
       return this.flagsLength.filter(fl => fl.flagsLength);
@@ -178,9 +186,11 @@ export default {
     //   console.log(t_details);
     // },
     ...mapMutations(["setGroupedKeyWords"]),
-    //...mapActions(["getTopicDetails"]),
+    ...mapActions(["meTagsAct"]),
 
     async getBigJson(meKW) {
+      let me = await this.meTagsAct();
+      this.meTags = me.tags;
       this.load = true;
       try {
         let { data: bigJson } = await axios.get("big-json");
@@ -201,24 +211,30 @@ export default {
             this.indetifiers.push(c.identifier.toLowerCase());
             c.score = 0;
             this.keywords.push(c.keywords);
-
             this.tags.push(c.tags); //
-            //if (c.tags) if (c.tags.includes("integration")) c.score += 5;
-            //let intersection = _.intersection(c.flags, this.meFlags);
+            let t_intersection = [];
+            let c_tags = [];
             let intersection = _.intersection(c.keywords, meKW);
-            console.log({ c_keywords: c.keywords, meKW });
-            // if (intersection)
-            //   this.flagsLength.push({
-            //     flags: c.flags,
-            //     flagsLength: intersection.length
-            //   });
+            if (c.tags && c.tags.length) {
+              t_intersection = _.intersection(
+                c.tags.map(t => t.toLowerCase().trim()),
+                this.meTagsNames
+              );
+            }
+            //console.log({ c_keywords: c.keywords, meKW });
             if (intersection)
               this.keywords.push({
                 keywords: c.flags,
                 keywordsLength: intersection.length
               });
+            // if (intersection)
+            // this.keywords.push({
+            //   keywords: c.flags,
+            //   keywordsLength: intersection.length
+            // });
+
             try {
-              c.score = intersection.length * 5;
+              c.score = t_intersection.length * 5;
             } catch (error) {
               c.score = 0;
             }
@@ -232,7 +248,8 @@ export default {
         localStorage.setItem("calls", JSON.stringify(bigJson));
         this.calls = _.orderBy(bigJson, "score", "desc");
       } catch (error) {
-        window.location.reload();
+        //window.location.reload();
+        throw error;
       }
     }
   }

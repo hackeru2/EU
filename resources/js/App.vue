@@ -78,6 +78,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import { Slide } from "vue-burger-menu"; // import the CSS transitions you wish to use, in this case we are using `Slide`
 
 export default {
+  props: ["me"],
   data() {
     const item = {
       date: "2016-05-02",
@@ -97,13 +98,12 @@ export default {
     this.$store.dispatch("meAct");
   },
   components: { Slide },
-  created() {},
   computed: {
     elContainerStyle() {
       if (this.$route.name == "ProgrammeTags") {
         return "overflow-y:hidden";
       } else {
-        return "height:90vh";
+        return "height:95vh";
       }
     },
     ...mapState(["meKeywords"]),
