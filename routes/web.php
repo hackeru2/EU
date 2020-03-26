@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
- 
+Route::resource('/call', 'CallController'); 
 Route::get('/pay' , 'PayOrderController@store');
 Route::get('/channels' , 'ChannelController@index');
 Route::get('posts/create' , 'PostController@create');
@@ -78,6 +78,7 @@ Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::resource('profile', 'ProfileController');
 
 Route::resource('user', 'UserController');
+
 Route::post('insert-user-tags', 'UserController@insertUserTags');
 Route::get('/{any?}', 'HomeController@profile')->name('profile');
 Route::get('calls/{any?}', 'HomeController@profile')->name('profile');

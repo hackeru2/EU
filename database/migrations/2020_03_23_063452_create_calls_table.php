@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TagUser extends Migration
+class CreateCallsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class TagUser extends Migration
      */
     public function up()
     {
-         Schema::create('tag_user', function (Blueprint $table) {
+        Schema::create('calls', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('tag_id');
+            $table->string('identifier');
+            $table->string('new_tags');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -29,6 +28,6 @@ class TagUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_user');   
-        }
+        Schema::dropIfExists('calls');
+    }
 }

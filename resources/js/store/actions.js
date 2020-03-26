@@ -106,6 +106,13 @@ export default {
         let { data: tags } = await axios.post("insert-user-tags", data);
         console.log({ data });
 
+    },
+    async saveTagAct({ state, commit, getters, dispatch }, payload) {
+
+        let { data: tags } = await axios.post("call", payload);
+        console.log({ tags });
+
     }
+
 
 }

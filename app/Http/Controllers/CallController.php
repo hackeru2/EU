@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
+use App\Call;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
-class ProfileController extends Controller
+
+class CallController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return ['hello index'];
     }
 
     /**
@@ -35,16 +38,32 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        try{
+                
+            $call =  Call::where('identifier', '=', $request->identifier)->firstOrCreate(
+
+            ['identifier' => $request->identifier , 'new_tags' => $request->newTag]);
+            return $call;
+        }
+        catch (QueryException  $e){
+            dd(ColumnNameExists($e));
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062)
+            
+            dd('// houston, we have a duplicate entry problem');
+        
+        }
+
+
+        }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show(Call $call)
     {
         //
     }
@@ -52,10 +71,10 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
+    public function edit(Call $call)
     {
         //
     }
@@ -64,29 +83,22 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Profile  $profile
+     * @param  \App\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request  ) //Profile $profile
+    public function update(Request $request, Call $call)
     {
         //
-        return $request->all();
-        $profile  = auth()->user()->profile()->first();
-        $experties =  collect($request->experties)->filter();
-        $profile->experties = $experties;
-        $profile->save();
-        return $profile;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Call  $call
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profile $profile)
+    public function destroy(Call $call)
     {
         //
     }
-    
 }

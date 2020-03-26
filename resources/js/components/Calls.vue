@@ -27,6 +27,20 @@
               :effect="meTagsNames.includes(tag.toLowerCase()) ? 'dark' : 'light'"
               :key="i_tags"
             >{{tag}}</el-tag>
+            <el-input
+              class="input-new-tag"
+              v-if="inputVisible == callID(o) "
+              v-model="inputValue"
+              :ref="callID(o)"
+              size="mini"
+              @keyup.enter.native="handleInputConfirm(callID(o))"
+              @blur="handleInputConfirm(callID(o))"
+            ></el-input>
+            <el-button
+              class="button-new-tag"
+              size="small"
+              @click="(e) => {showInput(callID(o),e)}"
+            >+ New Tag</el-button>
           </div>
           <span>Yummy hamburger</span>
           <div class="bottom clearfix">
@@ -60,6 +74,8 @@ export default {
   components: { Budget },
   data() {
     return {
+      inputVisible: false,
+      inputValue: "",
       meKW: [],
       meTags: [],
       intersectionOptions: {
@@ -182,6 +198,27 @@ export default {
   },
 
   methods: {
+    callID(call) {
+      return call.identifier.toLowerCase();
+    },
+    showInput(identifier, e) {
+      this.inputVisible = identifier;
+      return console.log(e);
+      // this.$nextTick(_ => {
+      //   this.$refs[identifier].$refs.input.focus();
+      // });
+    },
+
+    handleInputConfirm(identifier) {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        console.log({ identifier });
+        console.log(this.calls.find(o => this.callID(o) == identifier));
+        //.tags.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = "";
+    },
     // getTD(t_details) {
     //   console.log(t_details);
     // },
@@ -208,7 +245,7 @@ export default {
           })
           .map(c => {
             console.log({ c });
-            this.indetifiers.push(c.identifier.toLowerCase());
+            this.indetifiers.push(this.callID(c));
             c.score = 0;
             this.keywords.push(c.keywords);
             this.tags.push(c.tags); //
@@ -325,5 +362,17 @@ body > .el-container {
 .score-style {
   width: 120px;
   float: left;
+}
+.button-new-tag {
+  margin-left: 10px;
+  height: 32px;
+  line-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.input-new-tag {
+  width: 90px;
+  margin-left: 10px;
+  vertical-align: bottom;
 }
 </style>

@@ -38,11 +38,12 @@ class HomeController extends Controller
      
     public function getBigJson()
     {
-        
+        set_time_limit(300);
+
        // $value = Cache::forget('big_json');
-        $value = Cache::remember('big_json', 5000 , function () {
+        $value = Cache::remember('big_json', 10000 , function () {
             $client = new Client(['base_uri' => 'https://ec.europa.eu/info/funding-tenders/opportunities/data/referenceData/grantsTenders.json?lang=en']);
-            $res =   $client->request('GET', '');
+            $res =   $client->request('GET', '' ,  [ 'timeout' => 300]);
             return  head(head(json_decode($res->getBody() , 1)));
               
         });

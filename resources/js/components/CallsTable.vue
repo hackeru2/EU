@@ -1,14 +1,22 @@
 <template>
   <el-row :gutter="20" v-load="load">
     <!-- {{callsFilterSearch}} -->
-    <el-collapse v-model="activeNames" @change="handleChangeCollapse">
-      <el-collapse-item title="Programmes" name="1">
-        <el-card>
-          <el-checkbox-group v-model="checkboxGroup1" @change="getBigJson(meKW)">
+    <el-collapse
+      v-model="activeNames"
+      @change="handleChangeCollapse"
+      style="position:sticky;top:0;z-index:100"
+    >
+      <el-collapse-item
+        title="Programmes"
+        name="1"
+        style="max-height:400px;overflow:auto;position:sticky;top:0"
+      >
+        <el-card style="margin-bottom: 60px !important;">
+          <el-checkbox-group v-model="programmesSelected" @change="getBigJson(meKW)">
             <!-- @change="log" -->
+            <!-- :checked="true" -->
             <el-checkbox-button
               class="white-space-n"
-              :checked="true"
               v-for="(item, index) in mainProgrammes"
               :label="item.description"
               :key="index"
@@ -16,6 +24,18 @@
             <!--  -->
           </el-checkbox-group>
         </el-card>
+        <div class="my-pagination card">
+          <span class="demonstration">All combined</span>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage"
+            :page-sizes="[25, 50 ,100, 200, 300, 400]"
+            :page-size="25"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          ></el-pagination>
+        </div>
       </el-collapse-item>
       <el-collapse-item title="Tags" name="2">
         <el-checkbox-group v-model="tagList">
@@ -23,19 +43,6 @@
         </el-checkbox-group>
       </el-collapse-item>
     </el-collapse>
-
-    <div class="block">
-      <span class="demonstration">All combined</span>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage"
-        :page-sizes="[25, 50 ,100, 200, 300, 400]"
-        :page-size="25"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      ></el-pagination>
-    </div>
 
     <el-table :data="callsFilterSearchChunck[currentPage-1]" style="width: 100%" border>
       <el-table-column prop="title" label="CALL TABLE" style="width: 100%">
@@ -49,10 +56,19 @@
           >{{scope.row.title}}</div>
 
           <div style="align-text:center">
-            <el-table :data="[scope.row]" style="width: 100%" border>
+            <el-table :data="[scope.row]" style="width :inherit" border>
               <el-table-column prop="identifier" label="Identifier" width="90"></el-table-column>
               <el-table-column prop="tags" label="tags">
                 <template slot-scope="scope" v-if="scope.row.tags">
+                  <transition name="el-zoom-in-top">
+                    <el-alert
+                      style="position:absolute;top:inherit;z-index:10000;margin-top:-20px"
+                      v-if="showTagAdd == 'show-'+callID(scope) && success"
+                      title="New tag added !"
+                      type="success"
+                      :closable="false"
+                    ></el-alert>
+                  </transition>
                   <el-badge
                     style="white-space:normal !important;height:inherit;margin:10px"
                     v-for="(item, i ) in scope.row.tags"
@@ -63,6 +79,42 @@
                   >
                     <el-button style="font-size:10px" size="mini">{{item}}</el-button>
                   </el-badge>
+                  <el-badge
+                    style="white-space:normal !important;height:inherit;margin:10px"
+                    v-for="(item, i ) in newTags[callID(scope)]"
+                    :key="i+123"
+                    :type="typeTags[((scope.row.tags.length+i)  % 5)]"
+                    :value="scope.row.tags.length+i"
+                    @click.native="toggleTag"
+                  >
+                    <el-button
+                      class="purple-button"
+                      plain
+                      style="font-size:10px"
+                      size="mini"
+                    >{{item}}</el-button>
+                  </el-badge>
+                  <transition name="slide-fade" mode="out-in">
+                    <el-badge
+                      style="margin:10px"
+                      v-if="showTagAdd != 'show-'+callID(scope)"
+                      value="+"
+                      class="item"
+                      @click.native="showTagAdd = 'show-'+callID(scope)"
+                    >
+                      <el-button @click="focusInput(callID(scope))" type="primary" size="mini">ADD</el-button>
+                    </el-badge>
+                    <el-input
+                      style="max-width:30%;margin:10px"
+                      placeholder="add Tag"
+                      v-model="newTag"
+                      :ref="callID(scope)+'-input'"
+                      @blur="saveNewTag(callID(scope))"
+                      @keyup.enter.native="saveNewTag(callID(scope))"
+                      size="mini"
+                      v-else
+                    ></el-input>
+                  </transition>
                 </template>
               </el-table-column>
               <el-table-column prop="keywords" label="Keywords">
@@ -81,6 +133,7 @@
                   <el-tag
                     v-for="(item , tag_i) in mapPD(scope.row.programmeDivision)"
                     :key="tag_i"
+                    :class="{programmeIncluded : programmesSelected.includes(item)}"
                     :type="typeTags[(tag_i % 5)  ]"
                     style="white-space:normal !important;height:inherit"
                     effect="light"
@@ -93,10 +146,10 @@
                     type="primary"
                     plain
                     style="width:100%"
-                    @click="goto('../calls/'+scope.row.identifier.toLowerCase())"
+                    @click="goto('../calls/'+callID(scope).toLowerCase())"
                   >
                     SHOW
-                    <!-- <router-link :to="`calls/${scope.row.identifier.toLowerCase()}`">Show</router-link> -->
+                    <!-- <router-link :to="`calls/${callID(scope).toLowerCase()}`">Show</router-link> -->
                   </el-button>
                   {{callLinksWP(scope.row.workProgrammepart)}}
                   <br />
@@ -122,11 +175,15 @@ export default {
   components: { Budget },
   data() {
     return {
+      success: false,
+      newTags: {},
+      showTagAdd: true,
+      newTag: "",
       search: "",
-      activeNames: ["1"],
+      activeNames: [], // ["1"]
       tagList: [],
       excluded: {},
-      checkboxGroup1: [
+      programmesSelected: [
         // "JRC direct actions",
         // "Excellent Science",
         // "Science with and for Society"
@@ -177,7 +234,7 @@ export default {
     this.getBigJson(this.meKW);
     //}
   },
-
+  destroyed() {},
   mounted() {
     // this.$nextTick(() => {
     //   this.calls = Object.values(this.calls).map(c => {
@@ -190,12 +247,31 @@ export default {
     this.setGroupedKeyWords(this.kWordsGrouped);
   },
   computed: {
+    callsFilterSearchSelected() {
+      if (!this.programmesSelected.length) return this.callsFilterSearch;
+      return this.callsFilterSearch.filter(
+        call =>
+          _.intersection(
+            this.programmesSelected,
+            call.programmeDivision.map(pd => pd.description)
+          ).length
+      );
+    },
+    programmeDivisionArr() {
+      try {
+        return this.calls.map(c =>
+          c.programmeDivision.map(pd => pd.description)
+        ); //programmDivisionArray
+      } catch (e) {
+        return e;
+      }
+    },
     total() {
-      return _.flatten(this.callsFilterSearch).length;
+      return _.flatten(this.callsFilterSearchSelected).length;
     },
     callsFilterSearchChunck() {
       try {
-        return _.chunk(this.callsFilterSearch, 20);
+        return _.chunk(this.callsFilterSearchSelected, 20);
       } catch (e) {
         return e;
       }
@@ -298,6 +374,27 @@ export default {
   },
 
   methods: {
+    callID(scope) {
+      return scope.row.identifier.toLowerCase();
+    },
+    saveNewTag(identifier) {
+      if (this.newTag) {
+        if (!this.newTags[identifier]) this.newTags[identifier] = [this.newTag];
+        else this.newTags[identifier].push(this.newTag);
+        this.success = true;
+      }
+      console.log(this.newTags);
+      setTimeout(() => {
+        this.success = false;
+        this.showTagAdd = false;
+      }, 1000);
+      this.saveTagAct({ identifier, newTag: this.newTag });
+    },
+    focusInput(identifier) {
+      setTimeout(() => {
+        console.log(this.$refs[identifier + "-input"].$refs.input.focus());
+      }, 500);
+    },
     toggleTag(tag) {
       tag = tag.target.textContent;
       if (this.tagList.includes(tag))
@@ -364,7 +461,7 @@ export default {
     //   console.log(t_details);
     // },
     ...mapMutations(["setGroupedKeyWords", "setMCalls"]),
-    ...mapActions(["getTopicDetails", "callProgram"]),
+    ...mapActions(["getTopicDetails", "callProgram", "saveTagAct"]),
 
     async getBigJson(meKW) {
       //   this.load = true;
@@ -380,13 +477,13 @@ export default {
 
             //***************Toggle Button***********//
 
-            let pda = c.programmeDivision.map(pd => pd.description); //programmDivisionArray
-            let mpd = this.mainProgrammes.map(mp => mp.description); // mainProgrammesDescription
-            let iUSP = _.intersection(pda, this.checkboxGroup1); //intersection-user-selected-programme
-            //console.log({ checkboxGroup1 });
-            let intersectionToggle = this.programmToggle
-              ? ["hasIntersection"]
-              : _.intersection(pda, mpd);
+            // let pda = c.programmeDivision.map(pd => pd.description); //programmDivisionArray
+            // let mpd = this.mainProgrammes.map(mp => mp.description); // mainProgrammesDescription
+            // let iUSP = _.intersection(pda, this.programmesSelected); //intersection-user-selected-programme
+            // //console.log({ programmesSelected });
+            // let intersectionToggle = this.programmToggle
+            //   ? ["hasIntersection"]
+            //   : _.intersection(pda, mpd);
 
             //END***************Toggle Button***********//
 
@@ -399,39 +496,26 @@ export default {
             // console.log({ intersectionTag });
             return (
               c.status.abbreviation != "Closed" &&
-              c.status.description != "Closed" &&
-              intersectionToggle.length &&
-              iUSP.length &&
-              intersectionTag.length
+              c.status.description != "Closed"
+              // intersectionToggle.length &&
+              // iUSP.length &&
+              // intersectionTag.length
             );
           })
           .map(c => {
-            //console.log({ c });
-
             this.indetifiers.push(c.identifier.toLowerCase());
             c.score = 0;
             this.keywords.push(c.keywords);
 
             this.tags.push(c.tags); //
-            //if (c.tags) if (c.tags.includes("integration")) c.score += 5;
-            //let intersection = _.intersection(c.flags, this.meFlags);
+
             let intersection = _.intersection(c.keywords, meKW);
-            //console.log({ c_keywords: c.keywords, meKW });
-            // if (intersection)
-            //   this.flagsLength.push({
-            //     flags: c.flags,
-            //     flagsLength: intersection.length
-            //   });
+
             if (intersection)
               this.keywords.push({
                 keywords: c.flags,
                 keywordsLength: intersection.length
               });
-            try {
-              c.score = intersection.length * 5;
-            } catch (error) {
-              c.score = 0;
-            }
             return c;
           });
         // bigJson = bigJson.filter(function(a) {
@@ -530,5 +614,50 @@ body > .el-container {
 }
 .el-collapse-item__content {
   background-color: #b3b3b32a;
+}
+.slide-fade-enter-active {
+  transition: all 0.1s;
+}
+.slide-fade-leave-active {
+  transition: all 0.1s ease;
+}
+.slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(5px);
+  opacity: 0;
+}
+.slide-fade-enter
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+button.purple-button {
+  background-color: #9a9ae980;
+  color: #1818ff;
+  border-color: #1818ff;
+}
+button.purple-button:hover {
+  background-color: #1818ff !important;
+  color: white !important;
+  border: 1px solid;
+  border-color: #ddddffe5 !important;
+}
+.el-table__empty-block {
+  display: none;
+}
+.my-pagination {
+  background-color: #f4f4f4;
+  position: fixed;
+  width: -webkit-fill-available;
+  /* margin: 0 0px 0 15px; */
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  padding: 6px;
+  top: 384px !important;
+  z-index: 100;
+}
+.programmeIncluded {
+  font-weight: 1000;
+
+  outline-style: outset;
 }
 </style>

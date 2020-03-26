@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        require_once __DIR__ . '/../Http/helpers.php';
+
         //bind
         $this->app->singleton(PaymentGatewayContract::class,
         function($app){
@@ -49,4 +51,5 @@ class AppServiceProvider extends ServiceProvider
         #3.
           View::composer('partials.channels.*',ChannelsComposer::class );
     }
+    
 }

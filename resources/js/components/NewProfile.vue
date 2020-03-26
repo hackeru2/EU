@@ -1,5 +1,5 @@
 <template>
-  <el-row style="min-height:85vh">
+  <el-row style="min-height:85vh" v-load="loading">
     <el-button
       style="position:fixed;right:5px;bottom:5px;z-index:100"
       type="info"
@@ -97,12 +97,16 @@ export default {
       return _.groupBy(this.allTags, "name");
     },
     selectedExtract() {
-      let arr = [];
-      let sr = [...this.selectedArr];
-      sr.forEach(element => {
-        arr.push(...this.allTagsGrouped[element.name]);
-      });
-      return arr;
+      try {
+        let arr = [];
+        let sr = [...this.selectedArr];
+        sr.forEach(element => {
+          arr.push(...this.allTagsGrouped[element.name]);
+        });
+        return arr;
+      } catch (e) {
+        return [];
+      }
     },
     selectedObj() {
       let sr = [...this.selectedArr];
@@ -244,6 +248,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       infoBtn: false,
       show: "",
       query: "",
@@ -281,6 +286,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.selectedArr = this.meTags;
+      this.loading = false;
     }, 1000);
     // let gebi = document.getElementById("input__inner");
     // console.log(gebi);
