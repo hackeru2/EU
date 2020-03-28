@@ -77,7 +77,9 @@
         <!-- {{isCollapse}} -->
       </el-header>
       <el-main>
-        <router-view :programmToggle="programmToggle"></router-view>
+        <transition name="slide-fade" mode="out-in">
+          <router-view :programmToggle="programmToggle"></router-view>
+        </transition>
       </el-main>
     </el-container>
   </el-container>
@@ -191,5 +193,27 @@ export default {
 }
 .el-icon-arrow-down {
   font-size: 12px;
+}
+.fade-enter-active {
+  transition: opacity 0.25s ease;
+}
+
+.fade-leave {
+}
+
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+  opacity: 0;
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease-in-out;
+}
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(-100px);
+  opacity: 0;
 }
 </style>

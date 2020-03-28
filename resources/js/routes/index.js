@@ -61,11 +61,6 @@ export default {
             component: Programme
         },
         {
-            path: '/programme/new',
-            name: 'Programme',
-            component: Programme
-        },
-        {
             path: '/Keywords',
             name: 'Keywords',
             component: Keywords
