@@ -15,6 +15,13 @@ export default {
         localStorage.setItem("authUser", JSON.stringify(me));
 
     },
+    setSubjectTitle(state, subjectTitle) {
+        state.subjectTitle = subjectTitle;
+    },
+    setSubjects(state, subjects) {
+        if (!subjects) state.subjects = [];
+        else state.subjects = subjects;
+    },
     setMeTags(state, meTags) {
 
         state.meTags = meTags;

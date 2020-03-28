@@ -307,6 +307,10 @@ export default {
   display: "Two list header slot",
   order: 14,
   computed: {
+    subjectHeadersFlat() {
+      return this.subjects.map(a => a.headers).flat();
+    },
+    ...mapState(["subjects"]),
     options() {
       try {
         return this.lists.map(a => {
@@ -358,6 +362,7 @@ export default {
     mainListFilter() {
       try {
         return this.lists
+          .filter(l => this.hasSubject(l.name))
           .filter(l => l.name != this.listMainName)
           .filter(data =>
             data.name.toLowerCase().includes(this.search.toLowerCase())
@@ -415,6 +420,7 @@ export default {
     }
   },
   async created() {
+    await this.getSubjects();
     let allTags = "";
     let DBTAGS = await this.Tags();
     console.log({ DBTAGS });
@@ -478,8 +484,22 @@ export default {
   //   console.log(($("#input__inner")[0].style.height = "38px"));
   // },
   methods: {
+    hasSubject(listName) {
+      if (
+        this.$route.name == "ProgrammeTagsNew" &&
+        !this.subjects
+          .map(a => a.headers)
+          .flat()
+          .includes(listName)
+      )
+        return true;
+      else if (
+        this.$route.name == "ProgrammeTags" &&
+        this.subjectHeadersFlat.includes(listName)
+      )
+        return true;
+    },
     onDestroyPopper() {
-      alert("345");
       this.selectModel = "";
     },
     moveTags() {
@@ -825,6 +845,7 @@ export default {
       this.groupedTags.listName = e.target.innerText;
     },
     ...mapActions([
+      "getSubjects",
       "getBigJsonAct",
       "getTags",
       "tagsUnique",

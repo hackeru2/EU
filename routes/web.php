@@ -71,6 +71,7 @@ Route::get('/big-json', 'HomeController@getBigJson') ;
 Route::get('/get-topic-details/{identifier}', 'HomeController@getTopicDetails') ;
 Route::get('/me', 'AuthController@show') ;
 Route::resource('flag', 'FlagController');
+Route::resource('subject', 'SubjectController');
 Route::resource('keywords', 'KeywordController');
 Route::resource('programmes', 'ProgrammeController');
 Route::resource('tags', 'TagController');

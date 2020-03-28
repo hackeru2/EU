@@ -1,4 +1,6 @@
 export default {
+    subjects: [],
+    subjectTitle: 'Security',
     meTags: [],
     allProgrammes: [],
     mainProgrammes: [],

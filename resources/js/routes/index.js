@@ -9,11 +9,17 @@ import NewProfile from '../components/NewProfile';
 import Profile from '../components/Profile';
 import Programme from '../components/Programme';
 import ProgrammeTags from '../components/ProgrammeTags';
+import Subjects from '../components/Subjects';
 
 
 export default {
     mode: 'history',
     routes: [
+        {
+            path: '/subjects',
+            name: 'Subjects',
+            component: Subjects
+        },
         {
             path: '/expretize',
             name: 'Expretize',
@@ -55,6 +61,11 @@ export default {
             component: Programme
         },
         {
+            path: '/programme/new',
+            name: 'Programme',
+            component: Programme
+        },
+        {
             path: '/Keywords',
             name: 'Keywords',
             component: Keywords
@@ -65,10 +76,16 @@ export default {
             component: KeywordsPortalTree
         },
         {
+            path: '/programme-tags-new',
+            name: 'ProgrammeTagsNew',
+            component: ProgrammeTags
+        },
+        {
             path: '/programme-tags',
             name: 'ProgrammeTags',
             component: ProgrammeTags
         },
+
         // {
         //     // will match everything
         //     name: 'Call',

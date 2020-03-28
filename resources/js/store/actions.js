@@ -106,13 +106,22 @@ export default {
         let { data: tags } = await axios.post("insert-user-tags", data);
         console.log({ data });
 
-    },
-    async saveTagAct({ state, commit, getters, dispatch }, payload) {
+    }
+    , async saveTagAct({ state, commit, getters, dispatch }, payload) {
 
         let { data: tags } = await axios.post("call", payload);
         console.log({ tags });
 
+    },
+    async getSubjects({ state, commit }) {
+        let { data: subjects } = await axios.get('subject');
+        commit('setSubjects', subjects);
+        return subjects;
+    },
+    async pushNewHeader({ state, commit }, payload) {
+
+        let { data: subjects } = await axios.post('subject', payload);
+        commit('setSubjects', subjects);
+        return subjects;
     }
-
-
 }

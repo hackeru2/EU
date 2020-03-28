@@ -609,8 +609,9 @@ body > .el-container {
 .white-space-n > span {
   white-space: normal !important;
   max-width: 500px;
+  margin: 0;
+  padding: 2px;
   line-height: 20px;
-  min-height: 100px;
 }
 .el-collapse-item__content {
   background-color: #b3b3b32a;
@@ -659,5 +660,9 @@ button.purple-button:hover {
   font-weight: 1000;
 
   outline-style: outset;
+}
+label.el-checkbox-button {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }
 </style>

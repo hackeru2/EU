@@ -4,6 +4,7 @@
       <router-link to="/keywords">keywords</router-link>
       <router-link to="/calls">Calls</router-link>
       <router-link to="/calls-table">Table</router-link>
+
       <router-link to="/profile">Profile</router-link>
     </Slide>
 
@@ -26,9 +27,30 @@
           <el-divider direction="vertical"></el-divider>
           <router-link to="/profile">Profile</router-link>
           <el-divider direction="vertical"></el-divider>
-          <router-link to="/programme-tags">Programme tags</router-link>
-          <el-divider direction="vertical"></el-divider>
+          <!-- <router-link to="/programme-tags">Programme tags</router-link> -->
+          <!-- <el-divider direction="vertical"></el-divider> -->
           <router-link to="/new-profile">New Profile</router-link>
+          <el-divider direction="vertical"></el-divider>
+          <el-dropdown @command="SubjectDropdownChange">
+            <span class="el-dropdown-link">
+              <router-link to="/programme-tags">Programme</router-link>
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+
+            <el-dropdown-menu slot="dropdown" :disabled="$route.name=='Subjects'">
+              <router-link to="/programme-tags">
+                <el-dropdown-item command="Security">Security</el-dropdown-item>
+              </router-link>
+              <router-link to="/programme-tags-new">
+                <el-dropdown-item command="New1">New 1</el-dropdown-item>
+              </router-link>
+              <el-dropdown-item disabled>New 2</el-dropdown-item>
+              <el-dropdown-item disabled>New 3</el-dropdown-item>
+              <router-link to="/subjects">
+                <el-dropdown-item divided command="Edit">Edit</el-dropdown-item>
+              </router-link>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
         <el-dropdown style="cursor:pointer">
           <i class="el-icon-setting" style="margin-right: 15px"></i>
@@ -74,7 +96,7 @@
 </style>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 import { Slide } from "vue-burger-menu"; // import the CSS transitions you wish to use, in this case we are using `Slide`
 
 export default {
@@ -110,6 +132,12 @@ export default {
     ...mapGetters(["authUser"])
   },
   methods: {
+    ...mapMutations(["setSubjectTitle"]),
+    SubjectDropdownChange(subjectHeader) {
+      if (subjectHeader == "Edit") return this.$message("Edit Subjects");
+      this.$message("Change subject to  " + subjectHeader);
+      this.setSubjectTitle(subjectHeader);
+    },
     ...mapActions(["meAct"]),
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -149,5 +177,19 @@ export default {
   left: 12px;
   top: 16px;
   cursor: pointer;
+}
+
+.el-dropdown-link {
+  font-size: 12px !important;
+  cursor: pointer;
+  color: #3490dc;
+}
+.el-dropdown-link:hover {
+  font-size: 12px !important;
+  cursor: pointer;
+  color: #409eff;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
 }
 </style>
