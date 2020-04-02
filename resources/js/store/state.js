@@ -1,4 +1,5 @@
 export default {
+    bigJson: [],
     subjects: [],
     subjectTitle: 'Security',
     meTags: [],

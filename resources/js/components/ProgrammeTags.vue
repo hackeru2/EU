@@ -1,5 +1,17 @@
 <template>
   <el-row>
+    <el-card
+      :class="cardProgrammeClass"
+      body-style="width:400px;border-right:10px solid gray;padding:30px;overflow:auto;max-height:1000px"
+    >
+      <div slot="header">
+        <h5>{{cardOfProgrammes.name}}</h5>
+        <el-button type="text" class="close_btn" @click="cardOfProgrammes.show = false">X</el-button>
+      </div>
+      <!-- <el-tag class="d-flex flex-wrap bd-highlight mb-3"> -->
+      <el-tag v-for="(item, index)  in cardOfProgrammes.values" :key="index">{{item}}</el-tag>
+      <!-- </div> -->
+    </el-card>
     <!-- {{groupedTags}} -->
     <el-col :span="4" :sm="6" :xs="6">
       <el-aside
@@ -30,6 +42,7 @@
           <!-- @start="onStart"
           @choose="choose"-->
           <div
+            @click="onClickTag(element)"
             v-show="elIncludesSearchMain(element.name)"
             class="list-group-item item w3-theme-dark"
             :class="`w3-theme-${(15 + main_i) % 15 }`"
@@ -111,7 +124,7 @@
                 <!-- disabled : findListNTag -->
                 <draggable
                   @remove="onRemove"
-                  :options="{animation:500 ,disabled : isDisabled}"
+                  :options="{disabled : isDisabled}"
                   id="first"
                   :move="onMove"
                   :data-source="scope.row.name"
@@ -121,6 +134,7 @@
                   group="a"
                 >
                   <div
+                    @click="onClickTag(element)"
                     @mouseleave="renameTag=''"
                     @mouseover="onMouseoverTag(element) "
                     :id="element.name"
@@ -301,16 +315,34 @@
 import draggable from "vuedraggable";
 import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 
-let id = 1;
 export default {
   name: "two-list-headerslots",
   display: "Two list header slot",
   order: 14,
   computed: {
+    cardProgrammeClass() {
+      return this.cardOfProgrammes.show
+        ? "card-of-Programmes card-of-programmes-show"
+        : "card-of-programmes";
+    },
+    bigJsonProgramme() {
+      try {
+        return _.mapValues(_.groupBy(this.bigJson, "tags"), function(o) {
+          return o[0].programmeDivision.map(a => a.description);
+        });
+      } catch (error) {
+        throw error;
+      }
+    },
+    bigJsonProgrammeKeys() {
+      try {
+        return Object.keys(this.bigJsonProgramme);
+      } catch (error) {}
+    },
     subjectHeadersFlat() {
       return this.subjects.map(a => a.headers).flat();
     },
-    ...mapState(["subjects"]),
+    ...mapState(["subjects", "bigJson"]),
     options() {
       try {
         return this.lists.map(a => {
@@ -420,6 +452,7 @@ export default {
     }
   },
   async created() {
+    this.getBigJsonAct();
     await this.getSubjects();
     let allTags = "";
     let DBTAGS = await this.Tags();
@@ -448,6 +481,7 @@ export default {
   },
   data() {
     return {
+      cardOfProgrammes: { show: false, values: [], name: "" },
       search: "",
       isDisabled: false,
       selectModel: "",
@@ -484,6 +518,25 @@ export default {
   //   console.log(($("#input__inner")[0].style.height = "38px"));
   // },
   methods: {
+    async onClickTag({ name, origin_name }) {
+      this.cardOfProgrammes.show = !this.cardOfProgrammes.show;
+      this.cardOfProgrammes.name = name;
+      if (!this.cardOfProgrammes.show) {
+        return setTimeout(() => {
+          this.onClickTag({ name, origin_name });
+        }, 1000);
+      }
+      let p_array = this.bigJsonProgrammeKeys.filter(
+        tagsString =>
+          tagsString.includes(name) || tagsString.includes(origin_name)
+      );
+      console.log(p_array[0]);
+      console.log(this.bigJsonProgramme);
+      p_array = Object.values(_.pick(this.bigJsonProgramme, p_array));
+      p_array = p_array.flat();
+      this.cardOfProgrammes.values = _.uniq(p_array);
+      return console.log(p_array);
+    },
     hasSubject(listName) {
       if (
         this.$route.name == "ProgrammeTagsNew" &&
@@ -999,5 +1052,42 @@ export default {
 }
 .el-table .cell {
   word-break: keep-all !important;
+}
+.list-group-item.item {
+  transition: all 0.2s;
+}
+.list-group-item.item:hover {
+  font-weight: bold;
+
+  font-size: 15px;
+  text-shadow: 0.5px 0.5px #40ff90;
+
+  /* background: rgba(
+    76,
+    175,
+    80,
+    0.3
+  ) !important;   */
+}
+.card-of-programmes {
+  z-index: 10000 !important;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  right: 400px;
+  z-index: 100;
+  margin-right: -800px;
+}
+.card-of-programmes-show {
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 10000 !important;
+}
+.close_btn {
+  position: absolute;
+  right: 15px;
+  top: 8px;
 }
 </style>

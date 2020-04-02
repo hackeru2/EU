@@ -122,6 +122,9 @@ export default {
     ,
     setMainProgrammes(state, programmes) {
         state.mainProgrammes = programmes
+    },
+    setBigJson(state, bigJson) {
+        state.bigJson = bigJson;
     }
 
 }

@@ -32,6 +32,8 @@ window.axios.interceptors.response.use((response) => {
 }, (error) => {
     console.log("axios error")
     console.log({ error });
+    alert("please login again")
+    window.location.reload();
     if (error.response && error.response.data) {
         return Promise.reject(error.response.data);
     }

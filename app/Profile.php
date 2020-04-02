@@ -13,8 +13,5 @@ class Profile extends Model
         return $this->hasOne('App\User');
     }
 
-    public function setKeywords_ccm2_IdsAttribue(){
-
-         
-    }
+     
 }

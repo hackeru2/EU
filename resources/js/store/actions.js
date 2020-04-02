@@ -43,7 +43,7 @@ export default {
         } = await axios.get(`me`);
         commit('setMe', me);
         console.log(axios.defaults.baseURL)
-        if (me.profile.topics) commit('setMeTopics', me.profile.topics);
+        //  if (me.profile.topics) commit('setMeTopics', me.profile.topics);
         if (me.tags && me.tags.length) commit('setMeTags', me.tags);
         return me;
 
@@ -75,9 +75,9 @@ export default {
                 await commit('setMeKeywords', getters.authUser.profile.keywords_ccm2_Ids);
 
     },
-    async getBigJsonAct() {
+    async getBigJsonAct({ state, commit }) {
         let { data: bigJson } = await axios.get("big-json");
-
+        commit('setBigJson', bigJson);
         return bigJson;
     },
     async getTags({ dispatch }) {
