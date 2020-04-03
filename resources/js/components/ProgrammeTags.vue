@@ -9,7 +9,11 @@
         <el-button type="text" class="close_btn" @click="cardOfProgrammes.show = false">X</el-button>
       </div>
       <!-- <el-tag class="d-flex flex-wrap bd-highlight mb-3"> -->
-      <el-tag v-for="(item, index)  in cardOfProgrammes.values" :key="index">{{item}}</el-tag>
+      <el-tag
+        v-for="(item, index)  in cardOfProgrammes.values"
+        :type="mainProgDesc.includes(item) ? 'warning' : info"
+        :key="index"
+      >{{item}}</el-tag>
       <!-- </div> -->
     </el-card>
     <!-- {{groupedTags}} -->
@@ -320,6 +324,11 @@ export default {
   display: "Two list header slot",
   order: 14,
   computed: {
+    mainProgDesc() {
+      try {
+        return this.mainProgrammes.map(a => a.description);
+      } catch (error) {}
+    },
     cardProgrammeClass() {
       return this.cardOfProgrammes.show
         ? "card-of-Programmes card-of-programmes-show"
@@ -342,7 +351,7 @@ export default {
     subjectHeadersFlat() {
       return this.subjects.map(a => a.headers).flat();
     },
-    ...mapState(["subjects", "bigJson"]),
+    ...mapState(["subjects", "bigJson", "mainProgrammes"]),
     options() {
       try {
         return this.lists.map(a => {
@@ -452,6 +461,7 @@ export default {
     }
   },
   async created() {
+    this.callProgram();
     this.getBigJsonAct();
     await this.getSubjects();
     let allTags = "";
@@ -898,6 +908,7 @@ export default {
       this.groupedTags.listName = e.target.innerText;
     },
     ...mapActions([
+      "callProgram",
       "getSubjects",
       "getBigJsonAct",
       "getTags",
