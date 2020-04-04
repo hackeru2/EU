@@ -82,7 +82,7 @@ import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 
 let id = 1;
 export default {
-  name: "two-list-headerslots",
+  name: "NEWPROFILE",
   display: "Two list header slot",
   order: 14,
   computed: {
@@ -285,7 +285,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.selectedArr = this.meTags;
+      this.selectedArr = this.meTags.filter(t => t.header != "listMain");
       this.loading = false;
     }, 1000);
     // let gebi = document.getElementById("input__inner");
