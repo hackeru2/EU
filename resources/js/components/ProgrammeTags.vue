@@ -11,7 +11,7 @@
       <!-- <el-tag class="d-flex flex-wrap bd-highlight mb-3"> -->
       <el-tag
         v-for="(item, index)  in cardOfProgrammes.values"
-        :type="mainProgDesc.includes(item) ? 'warning' : info"
+        :type="mainProgDesc.includes(item) ? 'warning' : 'info'"
         :key="index"
       >{{item}}</el-tag>
       <!-- </div> -->
@@ -336,9 +336,19 @@ export default {
     },
     bigJsonProgramme() {
       try {
-        return _.mapValues(_.groupBy(this.bigJson, "tags"), function(o) {
-          return o[0].programmeDivision.map(a => a.description);
-        });
+        return _.mapValues(
+          _.groupBy(
+            this.bigJson.filter(
+              c =>
+                c.status.abbreviation != "Closed" &&
+                c.status.description != "Closed"
+            ),
+            "tags"
+          ),
+          function(o) {
+            return o[0].programmeDivision.map(a => a.description);
+          }
+        );
       } catch (error) {
         throw error;
       }
@@ -536,9 +546,12 @@ export default {
           this.onClickTag({ name, origin_name });
         }, 1000);
       }
+      console.log({ name, origin_name, D_BOXES: this.dialogBoxes });
       let p_array = this.bigJsonProgrammeKeys.filter(
         tagsString =>
-          tagsString.includes(name) || tagsString.includes(origin_name)
+          tagsString.includes(name) ||
+          tagsString.includes(origin_name) ||
+          _.intersection(this.dialogBoxes, tagsString.split(","))
       );
       console.log(p_array[0]);
       console.log(this.bigJsonProgramme);
