@@ -329,6 +329,11 @@ export default {
         return this.mainProgrammes.map(a => a.description);
       } catch (error) {}
     },
+    mainYellowProgDesc() {
+      try {
+        return this.mainProgDesc;
+      } catch (error) {}
+    },
     cardProgrammeClass() {
       return this.cardOfProgrammes.show
         ? "card-of-Programmes card-of-programmes-show"
