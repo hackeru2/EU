@@ -59,7 +59,7 @@ export default {
         } = await axios.get(`programmes`);
         commit('setAllProgrammes', callProgram.all);
 
-        commit('setMainProgrammes', callProgram.level2.filter(cp => cp.parent != 50 && cp.parent != 314));
+        commit('setMainProgrammes', callProgram.level2.filter(cp => cp.parent != 314));
         console.log(state.mainProgrammes)
         // console.log(axios.defaults.baseURL)
         // if (me.profile.topics) commit('setMeTopics', me.profile.topics);

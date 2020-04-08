@@ -83,8 +83,8 @@
 
             <!-- <div style="color:blue">{{findListNTag}}</div> -->
             <!-- grouped tags : {{groupedTags}} | {{groupedTagsListName}} -->
-            dialogBoxes : {{dialogBoxes}}
-            <span style="color:green">{{tagChildren}}</span>
+            <b style="outline:1px white">dialogBoxes : {{dialogBoxes}}</b>
+            <!-- <span style="color:green">{{tagChildren}}</span> -->
           </div>
 
           <el-table @cell-mouse-enter="onRowClick" highlight-current-row :data="mainListFilter">
@@ -555,8 +555,7 @@ export default {
         tagsString =>
           tagsString.includes(name) ||
           tagsString.includes(origin_name) ||
-          (origin_name &&
-            _.intersection(this.dialogBoxes, tagsString.split(",")).length)
+          _.intersection(this.tagChildren, tagsString.split(",")).length
       );
       console.log(p_array[0]);
       console.log(this.bigJsonProgramme);
