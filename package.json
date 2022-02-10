@@ -28,7 +28,7 @@
     "dependencies": {
         "element-ui": "^2.13.0",
         "loader": "^2.1.1",
-        "node-sass": "^4.13.0",
+        "node-sass": "^7.0.0",
         "vue-burger-menu": "^2.0.3",
         "vue-drag-resize": "^1.3.2",
         "vue-draggable": "^2.0.6",
